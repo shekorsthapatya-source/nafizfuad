@@ -17,8 +17,18 @@ import bhuiyanInterior from "@/assets/bhuiyan-nibash-interior.jpg";
 import bhuiyanElevations from "@/assets/bhuiyan-elevations.jpg";
 import bhuiyanDining from "@/assets/bhuiyan-dining.jpg";
 import bhuiyanConstruction from "@/assets/bhuiyan-construction.jpg";
+import bhuiyanLivingSpace from "@/assets/bhuiyan-living-space.jpg";
+import bhuiyanHangingStair from "@/assets/bhuiyan-hanging-stair.jpg";
+import bhuiyanDining2 from "@/assets/bhuiyan-dining-2.jpg";
+import bhuiyanWindowView from "@/assets/bhuiyan-window-view.jpg";
+import bhuiyanDining3 from "@/assets/bhuiyan-dining-3.jpg";
+import bhuiyanDining4 from "@/assets/bhuiyan-dining-4.jpg";
+import bhuiyanArchway from "@/assets/bhuiyan-archway.jpg";
+import bhuiyanArchway2 from "@/assets/bhuiyan-archway-2.jpg";
 import mosqueDetail from "@/assets/mosque-detail.jpg";
 import mosqueViews from "@/assets/mosque-views.jpg";
+import mosqueExterior from "@/assets/mosque-exterior.jpg";
+import mosquePrayer from "@/assets/mosque-prayer.jpg";
 import chakuliDetail from "@/assets/chakuli-detail.jpg";
 import eidgahDetail from "@/assets/eidgah-detail.jpg";
 import eidgahConstruction from "@/assets/eidgah-construction.jpg";
@@ -34,7 +44,13 @@ const projects = [
     year: "2023",
     category: "Residential",
     image: projectScreenOfLife,
-    gallery: [screenOfLifeArchway, screenSittingGarden, screenCourtyard, screenOfLifeDetail, screenOfLifeEnd],
+    gallery: [
+      { src: screenOfLifeArchway, caption: "Archway Entry" },
+      { src: screenSittingGarden, caption: "Sitting Garden" },
+      { src: screenCourtyard, caption: "Courtyard" },
+      { src: screenOfLifeDetail, caption: "Screen Detail" },
+      { src: screenOfLifeEnd, caption: "End View" },
+    ],
   },
   {
     title: "Bhuiyan Nibash",
@@ -44,7 +60,20 @@ const projects = [
     year: "2024",
     category: "Residential",
     image: projectBhuiyanNibash,
-    gallery: [bhuiyanConstruction, bhuiyanInterior, bhuiyanDining, bhuiyanElevations],
+    gallery: [
+      { src: bhuiyanLivingSpace, caption: "Living Space" },
+      { src: bhuiyanHangingStair, caption: "Hanging Stair" },
+      { src: bhuiyanArchway, caption: "Archway — The Main Entry" },
+      { src: bhuiyanArchway2, caption: "Brick Archway Details" },
+      { src: bhuiyanDining2, caption: "Dining Space" },
+      { src: bhuiyanWindowView, caption: "Window View" },
+      { src: bhuiyanDining3, caption: "Dining Space" },
+      { src: bhuiyanDining4, caption: "Dining & Living" },
+      { src: bhuiyanInterior, caption: "Interior" },
+      { src: bhuiyanDining, caption: "Dining" },
+      { src: bhuiyanConstruction, caption: "Construction" },
+      { src: bhuiyanElevations, caption: "Elevations" },
+    ],
   },
   {
     title: "Muslim Mosque",
@@ -54,7 +83,12 @@ const projects = [
     year: "2024",
     category: "Religious",
     image: projectMuslimMosque,
-    gallery: [mosqueDetail, mosqueViews],
+    gallery: [
+      { src: mosqueExterior, caption: "Exterior Visualization" },
+      { src: mosquePrayer, caption: "Prayer Space" },
+      { src: mosqueDetail, caption: "Detail" },
+      { src: mosqueViews, caption: "Views" },
+    ],
   },
   {
     title: "Shahi Eid-gah",
@@ -64,7 +98,10 @@ const projects = [
     year: "2023",
     category: "Religious",
     image: projectShahiEidgah,
-    gallery: [eidgahDetail, eidgahConstruction],
+    gallery: [
+      { src: eidgahDetail, caption: "Floor Detail" },
+      { src: eidgahConstruction, caption: "Construction" },
+    ],
   },
   {
     title: "Chakuli Renovation",
@@ -74,7 +111,9 @@ const projects = [
     year: "2023",
     category: "Cultural",
     image: projectChakuliRenovation,
-    gallery: [chakuliDetail],
+    gallery: [
+      { src: chakuliDetail, caption: "Detail" },
+    ],
   },
 ];
 
