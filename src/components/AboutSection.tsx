@@ -5,15 +5,31 @@ const AboutSection = () => {
   return (
     <section id="about" className="py-24 lg:py-32">
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="max-w-2xl mx-auto">
-          {/* Image */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* Portrait Image - large, editorial style like reference site */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="relative"
+          >
+            <div className="aspect-[3/4] w-full overflow-hidden">
+              <img
+                src={nafizAbout}
+                alt="Md. Nafiz Fuad"
+                className="w-full h-full object-cover grayscale"
+              />
+            </div>
+          </motion.div>
 
           {/* Content */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.2 }}
+            className="lg:pt-8"
           >
             <p className="text-sm text-muted-foreground mb-1">Hi, I am</p>
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-1">
@@ -23,15 +39,16 @@ const AboutSection = () => {
 
             <div className="space-y-4 text-muted-foreground leading-relaxed text-sm">
               <p>
-                In my previous role, I worked with designing team as well as led drafting team
-                in executing detailed architectural plans and overseeing the implementation of
-                produced designs on site. My hands-on experience with modern design & render
-                softwares has enabled me to create cutting-edge designs that blend functionality
-                with aesthetics seamlessly.
+                My journey in architecture is defined by a commitment to creating spaces that
+                don't just exist but resonate. I believe in the power of humble materials and
+                thoughtful craftsmanship to tell stories of light, shadow, and human connection.
               </p>
               <p>
-                My passion for creating spaces that inspire and resonate with clients' visions
-                drives me to continuously push boundaries in architectural design.
+                With a background working alongside visionary teams at Chinta Sthapatya and
+                Dream House Builders, I've honed a hands-on approach that bridges the gap
+                between digital precision and on-site implementation. My work is a continuous
+                exploration of how Bengali cultural heritage can be distilled into minimal,
+                contemporary forms.
               </p>
             </div>
 
