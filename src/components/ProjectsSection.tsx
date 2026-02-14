@@ -11,11 +11,17 @@ import projectChakuliRenovation from "@/assets/project-chakuli-renovation.jpg";
 import screenOfLifeDetail from "@/assets/screen-of-life-detail.jpg";
 import screenOfLifeArchway from "@/assets/screen-of-life-archway.jpg";
 import screenOfLifeEnd from "@/assets/screen-of-life-end.jpg";
+import screenSittingGarden from "@/assets/screen-sitting-garden.jpg";
+import screenCourtyard from "@/assets/screen-courtyard.jpg";
 import bhuiyanInterior from "@/assets/bhuiyan-nibash-interior.jpg";
 import bhuiyanElevations from "@/assets/bhuiyan-elevations.jpg";
+import bhuiyanDining from "@/assets/bhuiyan-dining.jpg";
+import bhuiyanConstruction from "@/assets/bhuiyan-construction.jpg";
 import mosqueDetail from "@/assets/mosque-detail.jpg";
 import mosqueViews from "@/assets/mosque-views.jpg";
 import chakuliDetail from "@/assets/chakuli-detail.jpg";
+import eidgahDetail from "@/assets/eidgah-detail.jpg";
+import eidgahConstruction from "@/assets/eidgah-construction.jpg";
 
 const categories = ["All", "Residential", "Cultural", "Religious"];
 
@@ -28,7 +34,7 @@ const projects = [
     year: "2023",
     category: "Residential",
     image: projectScreenOfLife,
-    gallery: [screenOfLifeArchway, screenOfLifeDetail, screenOfLifeEnd],
+    gallery: [screenOfLifeArchway, screenSittingGarden, screenCourtyard, screenOfLifeDetail, screenOfLifeEnd],
   },
   {
     title: "Bhuiyan Nibash",
@@ -38,7 +44,7 @@ const projects = [
     year: "2024",
     category: "Residential",
     image: projectBhuiyanNibash,
-    gallery: [bhuiyanInterior, bhuiyanElevations],
+    gallery: [bhuiyanConstruction, bhuiyanInterior, bhuiyanDining, bhuiyanElevations],
   },
   {
     title: "Muslim Mosque",
@@ -53,10 +59,12 @@ const projects = [
   {
     title: "Shahi Eid-gah",
     description: "Jay-namaz design with brick and concrete, featuring modular holes for temporary shading solutions.",
+    longDescription: "I designed this floor as 'Jay-namaz' with brick and concrete and gave some holes for bamboos to make temporary shadings on occasions. And made sure wastage as less as possible.",
     location: "Flooring Design",
     year: "2023",
     category: "Religious",
     image: projectShahiEidgah,
+    gallery: [eidgahDetail, eidgahConstruction],
   },
   {
     title: "Chakuli Renovation",
