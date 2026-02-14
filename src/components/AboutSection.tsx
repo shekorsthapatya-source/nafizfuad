@@ -5,23 +5,8 @@ const AboutSection = () => {
   return (
     <section id="about" className="py-24 lg:py-32">
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-2xl mx-auto">
           {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-            className="relative flex justify-center"
-          >
-            <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden mx-auto lg:mx-0">
-              <img
-                src={nafizAbout}
-                alt="Md. Nafiz Fuad"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </motion.div>
 
           {/* Content */}
           <motion.div
