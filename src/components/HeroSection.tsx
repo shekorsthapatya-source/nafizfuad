@@ -9,7 +9,7 @@ const HeroSection = () => {
         <img
           src={portfolioCover}
           alt="Portfolio cover - brick architecture"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover hidden md:block"
         />
         <div className="absolute inset-0 bg-background md:bg-transparent md:bg-gradient-to-b md:from-background/70 md:via-background/40 md:to-background/80" />
       </div>
