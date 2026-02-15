@@ -6,15 +6,15 @@ const HeroSection = () => {
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       {/* Background image */}
       <div className="absolute inset-0">
-        {/* Mobile: subtle warm gradient instead of image */}
-        <div className="block md:hidden absolute inset-0 bg-gradient-to-b from-[hsl(30,15%,92%)] via-background to-[hsl(30,10%,88%)]" />
+        {/* Mobile/Tablet: subtle warm gradient instead of image */}
+        <div className="block lg:hidden absolute inset-0 bg-gradient-to-b from-[hsl(30,15%,92%)] via-background to-[hsl(30,10%,88%)]" />
         {/* Desktop: full image with overlay */}
         <img
           src={portfolioCover}
           alt="Portfolio cover - brick architecture"
-          className="w-full h-full object-cover hidden md:block"
+          className="w-full h-full object-cover hidden lg:block"
         />
-        <div className="hidden md:block absolute inset-0 bg-gradient-to-b from-background/85 via-background/60 to-background/85" />
+        <div className="hidden lg:block absolute inset-0 bg-gradient-to-b from-background/90 via-background/70 to-background/90" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6 lg:px-12 text-center">
