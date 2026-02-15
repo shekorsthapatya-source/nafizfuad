@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import nafizLogo from "@/assets/nafiz-logo.png";
 
 const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
   const [phase, setPhase] = useState(0);
@@ -22,22 +21,6 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
           className="fixed inset-0 z-[100] flex items-center justify-center bg-background"
         >
           <div className="relative flex flex-col items-center">
-            {/* Animated Logo */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.6, rotate: -10 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-8"
-            >
-              <motion.img
-                src={nafizLogo}
-                alt="Nafiz Fuad Logo"
-                className="w-20 h-20 md:w-28 md:h-28"
-                animate={phase >= 1 ? { scale: [1, 1.05, 1] } : {}}
-                transition={{ duration: 1.2, ease: "easeInOut" }}
-              />
-            </motion.div>
-
             {/* Logo box */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
