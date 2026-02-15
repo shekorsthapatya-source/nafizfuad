@@ -16,7 +16,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
-        <a href="/" onClick={(e) => { if (window.location.pathname === '/') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }} className="font-display text-xl tracking-widest cursor-pointer">
+        <a href="/" onClick={(e) => { if (window.location.pathname === '/') { e.preventDefault(); window.location.reload(); } }} className="font-display text-xl tracking-widest cursor-pointer">
           <span className="font-light">NAFIZ</span>{" "}
           <span className="font-semibold">FUAD</span>
         </a>
