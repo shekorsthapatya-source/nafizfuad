@@ -16,9 +16,9 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
-        <a href="/" onClick={(e) => { e.preventDefault(); if (window.location.pathname === '/') { window.location.reload(); } else { window.location.href = '/'; } }} className="font-display text-xl tracking-widest cursor-pointer">
-          <span className="font-light">NAFIZ</span>{" "}
-          <span className="font-semibold">FUAD</span>
+        <a href="/" onClick={(e) => { e.preventDefault(); if (window.location.pathname === '/') { window.location.reload(); } else { window.location.href = '/'; } }} className="font-display text-xl tracking-widest cursor-pointer group">
+          <span className="font-light transition-opacity duration-300 group-hover:opacity-70">NAFIZ</span>{" "}
+          <span className="font-semibold transition-opacity duration-300 group-hover:opacity-70">FUAD</span>
         </a>
 
         {/* Desktop */}
