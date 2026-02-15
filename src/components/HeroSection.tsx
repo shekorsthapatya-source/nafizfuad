@@ -11,7 +11,7 @@ const HeroSection = () => {
           alt="Portfolio cover - brick architecture"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/70 to-background/90 md:from-background/70 md:via-background/40 md:to-background/80" />
+        <div className="absolute inset-0 bg-background md:bg-transparent md:bg-gradient-to-b md:from-background/70 md:via-background/40 md:to-background/80" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6 lg:px-12 text-center">
