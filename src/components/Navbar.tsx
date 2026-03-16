@@ -87,10 +87,10 @@ const Navbar = () => {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className={`text-xs tracking-widest uppercase px-6 py-2 block transition-all duration-300 ${
+                    className={`text-xs tracking-widest uppercase px-6 py-2 block transition-all duration-300 ease-in-out ${
                       activeSection === link.href
                         ? "bg-foreground text-background"
-                        : "text-muted-foreground hover:text-foreground"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
                     }`}
                     onClick={() => setIsOpen(false)}
                   >
