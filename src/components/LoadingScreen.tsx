@@ -40,7 +40,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
                 initial={{ scaleY: 0 }}
                 animate={{ scaleY: phase >= 1 ? 1 : 0 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className="absolute top-0 left-0 h-6 w-px bg-accent origin-top"
+                className="absolute top-0 left-0 h-6 w-px bg-white/30 origin-top"
               />
               <motion.span
                 initial={{ scaleX: 0 }}
