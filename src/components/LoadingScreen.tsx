@@ -78,7 +78,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: phase >= 2 ? 1 : 0 }}
               transition={{ duration: 0.5 }}
-              className="mt-6 text-xs tracking-[0.3em] uppercase text-muted-foreground"
+              className="mt-6 text-xs tracking-[0.3em] uppercase text-white/40"
             >
               Md. Nafiz Fuad | designer
             </motion.p>
