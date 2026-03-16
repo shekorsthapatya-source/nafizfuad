@@ -27,7 +27,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: phase >= 1 ? 1 : 0, y: phase >= 1 ? 0 : 20 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="border border-border p-8 md:p-12 relative"
+              className="border border-white/15 p-8 md:p-12 relative"
             >
               {/* Corner accents */}
               <motion.span
