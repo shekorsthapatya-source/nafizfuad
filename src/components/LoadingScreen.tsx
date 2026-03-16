@@ -59,7 +59,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: phase >= 1 ? 1 : 0, y: phase >= 1 ? 0 : 10 }}
                 transition={{ delay: 0.1, duration: 0.5 }}
-                className="font-display text-2xl md:text-3xl tracking-[0.25em] text-foreground"
+                className="font-display text-2xl md:text-3xl tracking-[0.25em] text-white"
               >
                 <span className="font-light">NAFIZ</span>{" "}
                 <span className="font-semibold">FUAD</span>
