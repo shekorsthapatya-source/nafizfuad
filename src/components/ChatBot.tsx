@@ -121,7 +121,7 @@ const ChatBot = () => {
             <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3">
               {messages.length === 0 && (
                 <p className="text-xs text-muted-foreground text-center mt-8">
-                  Hi! Ask me anything about Nafiz Fuad's architecture work.
+                  Hi, I'm Nafiz Fuad's assistant. Would you like to see his latest Architectural projects?
                 </p>
               )}
               {messages.map((msg, i) => (
