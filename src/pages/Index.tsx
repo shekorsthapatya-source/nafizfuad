@@ -7,6 +7,7 @@ import ServicesSection from "@/components/ServicesSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import ChatBot from "@/components/ChatBot";
+import ScrollToTop from "@/components/ScrollToTop";
 import LoadingScreen from "@/components/LoadingScreen";
 
 const Index = () => {
