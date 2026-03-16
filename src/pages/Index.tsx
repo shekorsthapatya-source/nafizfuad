@@ -20,7 +20,7 @@ const Index = () => {
   return (
     <>
       {loading && <LoadingScreen onComplete={handleLoadingComplete} />}
-      <div className={`min-h-screen bg-background ${loading ? "overflow-hidden h-screen" : ""}`}>
+      <div id="main-content" className={`min-h-screen bg-background ${loading ? "overflow-hidden h-screen" : ""}`}>
         <Navbar />
         <HeroSection />
         <AboutSection />
