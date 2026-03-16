@@ -69,7 +69,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: phase >= 1 ? 1 : 0 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
-                className="h-px bg-accent mt-4 origin-center"
+                className="h-px bg-white/20 mt-4 origin-center"
               />
             </motion.div>
 
