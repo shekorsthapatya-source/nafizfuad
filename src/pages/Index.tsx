@@ -29,6 +29,7 @@ const Index = () => {
         <ContactSection />
         <Footer />
         <ChatBot />
+        <ScrollToTop />
       </div>
     </>
   );
