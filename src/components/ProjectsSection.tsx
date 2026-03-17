@@ -119,10 +119,10 @@ const projects = [
     ],
   },
   {
-    title: "Bhuiyan Nibash Interior",
+    title: "Sage & Saffron",
     description: "Vibrant interior design featuring bold color palettes, curated art walls, and warm material textures.",
-    longDescription: "The interior of Bhuiyan Nibash showcases a bold yet harmonious design language — sage green walls paired with burnt orange upholstery, curated gallery walls, and rich wood louver screens. Each room balances warmth and artistic expression, creating spaces that feel both lived-in and gallery-worthy.",
-    location: "Rangpur, Bangladesh",
+    longDescription: "This residential interior project explores the intersection of vibrant color theory and minimalist structure. By pairing deep sage green surfaces with high-saturation orange accents, the space achieves a balanced energy that is both calming and stimulating. The design features a curated gallery wall and custom wooden millwork, emphasizing a \"refined-maximalist\" aesthetic for modern urban living.",
+    location: "Dhaka, Bangladesh",
     year: "2024",
     category: "Interior",
     image: interiorLiving1,
