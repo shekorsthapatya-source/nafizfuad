@@ -132,6 +132,16 @@ const projects = [
       { src: interiorBedroom, caption: "Bedroom" },
     ],
   },
+  {
+    title: "Bangladesh Betar Directors Chamber",
+    description: "Interior design exploring verticality and light to maximize a narrow executive space with reflective glass and continuous wall features.",
+    longDescription: "This interior project explores the use of verticality and light to maximize a narrow executive space. By integrating reflective glass elements and a continuous wall feature, the design creates a sense of depth and transparency. The furniture selection focuses on ergonomics and classic executive styling, ensuring the space serves as both a private workstation and a professional reception area. The vertical wall battens on the right draw the eye upward, making the ceiling feel higher. Since it's designed for a radio station, the materials—wood, fabric sofa, and textured flooring—were chosen to suggest a soft acoustic environment appropriate for a broadcaster. The contrast between the dark wooden doors and desk against bright white walls creates a clean-cut, professional look.",
+    location: "Bangladesh Betar, Sayed Mahbub Morshed Rd, Dhaka 1207",
+    year: "2026",
+    category: "Interior",
+    image: betarChamber,
+    gallery: [],
+  },
 ];
 
 const ProjectsSection = () => {
