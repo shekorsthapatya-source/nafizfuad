@@ -62,12 +62,22 @@ const HeroSection = () => {
         >
           <a
             href="#projects"
+            onClick={(e) => {
+              e.preventDefault();
+              const target = document.getElementById("projects");
+              if (target) target.scrollIntoView({ behavior: "smooth" });
+            }}
             className="px-7 py-2.5 border border-white/20 text-white/80 text-[11px] tracking-[0.3em] uppercase font-hero font-light hover:bg-white/5 hover:border-white/40 transition-all duration-500"
           >
             View Works
           </a>
           <a
             href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              const target = document.getElementById("contact");
+              if (target) target.scrollIntoView({ behavior: "smooth" });
+            }}
             className="px-7 py-2.5 border border-white/10 text-white/50 text-[11px] tracking-[0.3em] uppercase font-hero font-light hover:text-white/80 hover:border-white/30 transition-all duration-500"
           >
             Inquiry
