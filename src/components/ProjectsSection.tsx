@@ -32,8 +32,11 @@ import mosquePrayer from "@/assets/mosque-prayer.jpg";
 import chakuliDetail from "@/assets/chakuli-detail.jpg";
 import eidgahDetail from "@/assets/eidgah-detail.jpg";
 import eidgahConstruction from "@/assets/eidgah-construction.jpg";
+import interiorLiving1 from "@/assets/interior-living-1.jpg";
+import interiorLiving2 from "@/assets/interior-living-2.jpg";
+import interiorBedroom from "@/assets/interior-bedroom.jpg";
 
-const categories = ["All", "Residential", "Cultural", "Religious"];
+const categories = ["All", "Residential", "Cultural", "Religious", "Interior"];
 
 const projects = [
   {
@@ -113,6 +116,20 @@ const projects = [
     image: projectChakuliRenovation,
     gallery: [
       { src: chakuliDetail, caption: "Detail" },
+    ],
+  },
+  {
+    title: "Bhuiyan Nibash Interior",
+    description: "Vibrant interior design featuring bold color palettes, curated art walls, and warm material textures.",
+    longDescription: "The interior of Bhuiyan Nibash showcases a bold yet harmonious design language — sage green walls paired with burnt orange upholstery, curated gallery walls, and rich wood louver screens. Each room balances warmth and artistic expression, creating spaces that feel both lived-in and gallery-worthy.",
+    location: "Rangpur, Bangladesh",
+    year: "2024",
+    category: "Interior",
+    image: interiorLiving1,
+    gallery: [
+      { src: interiorLiving1, caption: "Living Room — Gallery Wall" },
+      { src: interiorLiving2, caption: "Living Area — Full View" },
+      { src: interiorBedroom, caption: "Bedroom" },
     ],
   },
 ];
