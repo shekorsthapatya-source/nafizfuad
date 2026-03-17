@@ -96,7 +96,7 @@ const ChatBot = () => {
       <button
         onClick={() => setOpen(!open)}
         className="fixed z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:bg-primary/90 transition-colors"
-        style={{ bottom: '20px', left: '20px' }}
+        style={{ bottom: '20px', right: '20px' }}
         aria-label="Toggle chat"
       >
         {open ? <X size={22} /> : <MessageCircle size={22} />}
