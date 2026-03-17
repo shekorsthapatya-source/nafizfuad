@@ -106,12 +106,12 @@ const ChatBot = () => {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 30 }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
             className="fixed z-50 w-[360px] max-w-[calc(100vw-2rem)] h-[500px] max-h-[70vh] bg-background border border-border rounded-lg shadow-2xl flex flex-col overflow-hidden"
-            style={{ bottom: '84px', left: '20px' }}
+            style={{ bottom: '20px', right: '20px' }}
           >
             {/* Header */}
             <div className="px-4 py-3 border-b border-border bg-secondary/50">
