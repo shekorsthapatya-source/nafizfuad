@@ -60,7 +60,7 @@ const projects = [
     description: "A cooler space design featuring 10\" walls, blending traditional materiality with modern thermal comfort.",
     longDescription: "Bhuiyan Nibash's property and attributes like 10\" wall and its construction method made it a cooler space. Always up to 6° cooler than outside temperature. A place like Dhaka, where weather is always extreme, this kind of attributes are required for sure.",
     location: "Dhaka, Bangladesh",
-    year: "2024",
+    year: "2026",
     category: "Residential",
     image: projectBhuiyanNibash,
     gallery: [
@@ -83,7 +83,7 @@ const projects = [
     description: "A place for finding peace and communicating with the creator through thoughtful minimalist visualisation.",
     longDescription: "A mosque is a place for finding peace and communicating with the creator. I tried to create that feeling in these visualisations. The design explores the interplay of brick, light, and open space to evoke a sense of spiritual tranquility.",
     location: "Visualisation",
-    year: "2024",
+    year: "2026",
     category: "Religious",
     image: projectMuslimMosque,
     gallery: [
@@ -123,7 +123,7 @@ const projects = [
     description: "Vibrant interior design featuring bold color palettes, curated art walls, and warm material textures.",
     longDescription: "This residential interior project explores the intersection of vibrant color theory and minimalist structure. By pairing deep sage green surfaces with high-saturation orange accents, the space achieves a balanced energy that is both calming and stimulating. The design features a curated gallery wall and custom wooden millwork, emphasizing a \"refined-maximalist\" aesthetic for modern urban living.",
     location: "Dhaka, Bangladesh",
-    year: "2024",
+    year: "2026",
     category: "Interior",
     image: interiorLiving1,
     gallery: [
