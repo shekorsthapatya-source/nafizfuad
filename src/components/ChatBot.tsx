@@ -111,7 +111,7 @@ const ChatBot = () => {
             exit={{ opacity: 0, y: 30 }}
             transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
             className="fixed z-50 w-[360px] max-w-[calc(100vw-2rem)] h-[500px] max-h-[70vh] bg-background border border-border rounded-lg shadow-2xl flex flex-col overflow-hidden"
-            style={{ bottom: '20px', right: '20px' }}
+            style={{ bottom: '84px', right: '20px' }}
           >
             {/* Header */}
             <div className="px-4 py-3 border-b border-border bg-secondary/50">
