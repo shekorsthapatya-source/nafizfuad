@@ -60,7 +60,7 @@ const projects = [
     description: "A cooler space design featuring 10\" walls, blending traditional materiality with modern thermal comfort.",
     longDescription: "Bhuiyan Nibash's property and attributes like 10\" wall and its construction method made it a cooler space. Always up to 6° cooler than outside temperature. A place like Dhaka, where weather is always extreme, this kind of attributes are required for sure.",
     location: "Dhaka, Bangladesh",
-    year: "2024",
+    year: "2026",
     category: "Residential",
     image: projectBhuiyanNibash,
     gallery: [
