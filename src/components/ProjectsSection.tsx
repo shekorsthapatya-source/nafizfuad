@@ -127,7 +127,6 @@ const projects = [
     category: "Interior",
     image: interiorLiving1,
     gallery: [
-      { src: interiorLiving1, caption: "Living Room — Gallery Wall" },
       { src: interiorLiving2, caption: "Living Area — Full View" },
       { src: interiorBedroom, caption: "Bedroom" },
     ],
