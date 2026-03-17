@@ -118,6 +118,20 @@ const projects = [
       { src: chakuliDetail, caption: "Detail" },
     ],
   },
+  {
+    title: "Bhuiyan Nibash Interior",
+    description: "Vibrant interior design featuring bold color palettes, curated art walls, and warm material textures.",
+    longDescription: "The interior of Bhuiyan Nibash showcases a bold yet harmonious design language — sage green walls paired with burnt orange upholstery, curated gallery walls, and rich wood louver screens. Each room balances warmth and artistic expression, creating spaces that feel both lived-in and gallery-worthy.",
+    location: "Rangpur, Bangladesh",
+    year: "2024",
+    category: "Interior",
+    image: interiorLiving1,
+    gallery: [
+      { src: interiorLiving1, caption: "Living Room — Gallery Wall" },
+      { src: interiorLiving2, caption: "Living Area — Full View" },
+      { src: interiorBedroom, caption: "Bedroom" },
+    ],
+  },
 ];
 
 const ProjectsSection = () => {
