@@ -62,8 +62,11 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-[100] bg-background border-b border-border">
       <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
         <a
-          href="#home"
-          onClick={(e) => handleNavClick(e, "#home")}
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.reload();
+          }}
           className="font-display text-xl tracking-widest cursor-pointer group"
         >
           <span className="font-extralight transition-opacity duration-300 group-hover:opacity-60">NAFIZ</span>{" "}
