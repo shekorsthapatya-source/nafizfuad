@@ -7,7 +7,6 @@ import ServicesSection from "@/components/ServicesSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import ChatBot from "@/components/ChatBot";
-
 import LoadingScreen from "@/components/LoadingScreen";
 
 const Index = () => {
@@ -20,7 +19,7 @@ const Index = () => {
   return (
     <>
       {loading && <LoadingScreen onComplete={handleLoadingComplete} />}
-      <div id="main-content" className={`min-h-screen bg-background ${loading ? "overflow-hidden h-screen" : ""}`}>
+      <div className={`min-h-screen bg-background ${loading ? "overflow-hidden h-screen" : ""}`}>
         <Navbar />
         <HeroSection />
         <AboutSection />
@@ -29,7 +28,6 @@ const Index = () => {
         <ContactSection />
         <Footer />
         <ChatBot />
-        
       </div>
     </>
   );

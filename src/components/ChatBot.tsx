@@ -95,8 +95,7 @@ const ChatBot = () => {
       {/* Floating button */}
       <button
         onClick={() => setOpen(!open)}
-        className="fixed z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:bg-primary/90 transition-colors"
-        style={{ bottom: '20px', right: '20px' }}
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:bg-primary/90 transition-colors"
         aria-label="Toggle chat"
       >
         {open ? <X size={22} /> : <MessageCircle size={22} />}
@@ -106,12 +105,11 @@ const ChatBot = () => {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 30 }}
-            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-            className="fixed z-50 w-[360px] max-w-[calc(100vw-2rem)] h-[500px] max-h-[70vh] bg-background border border-border rounded-lg shadow-2xl flex flex-col overflow-hidden"
-            style={{ bottom: '84px', right: '20px' }}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-2rem)] h-[500px] max-h-[70vh] bg-background border border-border rounded-lg shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header */}
             <div className="px-4 py-3 border-b border-border bg-secondary/50">
@@ -123,7 +121,7 @@ const ChatBot = () => {
             <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3">
               {messages.length === 0 && (
                 <p className="text-xs text-muted-foreground text-center mt-8">
-                  Hi, I'm Nafiz Fuad's assistant. Would you like to see his latest Architectural projects?
+                  Hi! Ask me anything about Nafiz Fuad's architecture work.
                 </p>
               )}
               {messages.map((msg, i) => (
