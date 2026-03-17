@@ -110,7 +110,8 @@ const ChatBot = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-2rem)] h-[500px] max-h-[70vh] bg-background border border-border rounded-lg shadow-2xl flex flex-col overflow-hidden"
+            className="fixed z-50 w-[360px] max-w-[calc(100vw-2rem)] h-[500px] max-h-[70vh] bg-background border border-border rounded-lg shadow-2xl flex flex-col overflow-hidden"
+            style={{ bottom: '84px', left: '20px' }}
           >
             {/* Header */}
             <div className="px-4 py-3 border-b border-border bg-secondary/50">
