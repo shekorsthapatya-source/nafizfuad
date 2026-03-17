@@ -35,6 +35,7 @@ import eidgahConstruction from "@/assets/eidgah-construction.jpg";
 import interiorLiving1 from "@/assets/interior-living-1.jpg";
 import interiorLiving2 from "@/assets/interior-living-2.jpg";
 import interiorBedroom from "@/assets/interior-bedroom.jpg";
+import betarChamber from "@/assets/betar-directors-chamber.jpg";
 
 const categories = ["All", "Residential", "Cultural", "Religious", "Interior"];
 
