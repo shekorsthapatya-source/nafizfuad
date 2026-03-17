@@ -204,19 +204,20 @@ const ProjectsSection = () => {
                   className="group cursor-pointer"
                   onClick={() => setSelectedProject(project)}
                 >
-                  <div className="aspect-[4/3] overflow-hidden">
+                  <div className="aspect-[4/3] overflow-hidden relative">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
                     />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-display text-lg font-medium text-foreground mb-1">{project.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-2 line-clamp-2">{project.description}</p>
-                    <div className="flex items-center justify-between text-xs text-muted-foreground/70 tracking-wide">
-                      <span>{project.location}</span>
-                      <span>{project.year}</span>
+                    <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/60 transition-colors duration-500" />
+                    <div className="absolute inset-x-0 bottom-0 p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                      <h3 className="font-display text-lg font-medium text-white mb-1">{project.title}</h3>
+                      <p className="text-sm text-white/80 leading-relaxed mb-2 line-clamp-2">{project.description}</p>
+                      <div className="flex items-center justify-between text-xs text-white/70 tracking-wide">
+                        <span>{project.location}</span>
+                        <span>{project.year}</span>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
