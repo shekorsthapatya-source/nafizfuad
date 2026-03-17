@@ -32,8 +32,11 @@ import mosquePrayer from "@/assets/mosque-prayer.jpg";
 import chakuliDetail from "@/assets/chakuli-detail.jpg";
 import eidgahDetail from "@/assets/eidgah-detail.jpg";
 import eidgahConstruction from "@/assets/eidgah-construction.jpg";
+import interiorLiving1 from "@/assets/interior-living-1.jpg";
+import interiorLiving2 from "@/assets/interior-living-2.jpg";
+import interiorBedroom from "@/assets/interior-bedroom.jpg";
 
-const categories = ["All", "Residential", "Cultural", "Religious"];
+const categories = ["All", "Residential", "Cultural", "Religious", "Interior"];
 
 const projects = [
   {
