@@ -1,6 +1,26 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import ProjectModal from "./ProjectModal";
+
+const ParallaxImage = ({ src, alt, onClick }: { src: string; alt: string; onClick: () => void }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
+  return (
+    <div ref={ref} className="aspect-square overflow-hidden cursor-pointer group" onClick={onClick}>
+      <motion.img
+        src={src}
+        alt={alt}
+        style={{ y }}
+        className="w-[120%] h-[120%] object-cover transition-transform duration-500 group-hover:scale-105 -mt-[10%]"
+      />
+    </div>
+  );
+};
 
 import projectScreenOfLife from "@/assets/project-screen-of-life.jpg";
 import projectBhuiyanNibash from "@/assets/project-bhuiyan-nibash.jpg";
