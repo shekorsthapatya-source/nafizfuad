@@ -192,33 +192,28 @@ const ProjectsSection = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
             >
               {filtered.map((project, i) => (
                 <motion.div
                   key={project.title}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.1 }}
+                  transition={{ duration: 0.5, delay: i * 0.06 }}
                   className="group cursor-pointer"
                   onClick={() => setSelectedProject(project)}
                 >
-                  <div className="aspect-[4/3] overflow-hidden relative">
+                  <div className="aspect-square overflow-hidden">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/60 transition-colors duration-500" />
-                    <div className="absolute inset-x-0 bottom-0 p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                      <h3 className="font-display text-lg font-medium text-white mb-1">{project.title}</h3>
-                      <p className="text-sm text-white/80 leading-relaxed mb-2 line-clamp-2">{project.description}</p>
-                      <div className="flex items-center justify-between text-xs text-white/70 tracking-wide">
-                        <span>{project.location}</span>
-                        <span>{project.year}</span>
-                      </div>
-                    </div>
+                  </div>
+                  <div className="pt-2 pb-1">
+                    <h3 className="font-display text-sm font-medium text-foreground group-hover:text-accent transition-colors">{project.title}</h3>
+                    <p className="text-xs text-muted-foreground">{project.year}</p>
                   </div>
                 </motion.div>
               ))}
