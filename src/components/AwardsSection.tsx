@@ -3,6 +3,8 @@ import awardWinner1 from "@/assets/award-winner-1.jpg";
 import awardWinner2 from "@/assets/award-winner-2.jpg";
 import awardTrophy from "@/assets/award-trophy.jpg";
 import awardCompetition from "@/assets/award-competition.jpg";
+import designAiAward1 from "@/assets/design-ai-award-1.jpg";
+import designAiAward2 from "@/assets/design-ai-award-2.jpg";
 
 const awards = [
   {
@@ -11,6 +13,13 @@ const awards = [
     year: "2026",
     description: "Winner of the 'Toilets on the Go' mobile toilet design competition organized by WaterAid and Blue. Awarded BDT 100,000 prize money.",
     images: [awardWinner1, awardWinner2, awardTrophy, awardCompetition],
+  },
+  {
+    title: "Design & AI Revolution — Winner",
+    organization: "Wood & Metal Industries Expo",
+    year: "2025",
+    description: "Winner of the 'Design & AI Revolution 2025' competition at the Wood & Metal Industries Expo, Bangladesh.",
+    images: [designAiAward1, designAiAward2],
   },
 ];
 
