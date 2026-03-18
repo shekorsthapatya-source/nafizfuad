@@ -224,13 +224,11 @@ const ProjectsSection = () => {
                   className="group cursor-pointer"
                   onClick={() => setSelectedProject(project)}
                 >
-                  <div className="aspect-square overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
+                  <ParallaxImage
+                    src={project.image}
+                    alt={project.title}
+                    onClick={() => setSelectedProject(project)}
+                  />
                   <div className="pt-2 pb-1">
                     <h3 className="font-display text-sm font-medium text-foreground group-hover:text-accent transition-colors">{project.title}</h3>
                     <p className="text-xs text-muted-foreground">{project.year}</p>
