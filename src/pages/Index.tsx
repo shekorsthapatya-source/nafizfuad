@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
@@ -17,8 +18,15 @@ const Index = () => {
 
   return (
     <>
-      {loading && <LoadingScreen onComplete={handleLoadingComplete} />}
-      <div className={`min-h-screen bg-background ${loading ? "overflow-hidden h-screen" : ""}`}>
+      <AnimatePresence>
+        {loading && <LoadingScreen onComplete={handleLoadingComplete} />}
+      </AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: loading ? 0 : 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="min-h-screen bg-background"
+      >
         <Navbar />
         <div className="pt-16">
           <AboutSection />
@@ -28,7 +36,7 @@ const Index = () => {
           <Footer />
         </div>
         <ChatBot />
-      </div>
+      </motion.div>
     </>
   );
 };
