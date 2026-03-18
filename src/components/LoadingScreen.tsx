@@ -18,8 +18,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
         <motion.div
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6 }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center"
-          style={{ backgroundColor: '#000000' }}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-background"
         >
           <div className="relative flex flex-col items-center">
             {/* Logo box */}
@@ -80,7 +79,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
               transition={{ duration: 0.5 }}
               className="mt-6 text-xs tracking-[0.3em] uppercase text-muted-foreground"
             >
-              Md. Nafiz Fuad | designer
+              Architect & Designer
             </motion.p>
           </div>
         </motion.div>
