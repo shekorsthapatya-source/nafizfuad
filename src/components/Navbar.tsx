@@ -3,16 +3,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Portfolio", href: "#projects" },
-  { label: "Services", href: "#services" },
+  { label: "Awards", href: "#awards" },
   { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("#home");
+  const [activeSection, setActiveSection] = useState("#about");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,7 +44,6 @@ const Navbar = () => {
           <span className="font-medium transition-opacity duration-300 group-hover:opacity-60">FUAD</span>
         </a>
 
-        {/* Desktop */}
         <ul className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
             <li key={link.href}>
@@ -63,7 +61,6 @@ const Navbar = () => {
           ))}
         </ul>
 
-        {/* Mobile toggle */}
         <button
           className="md:hidden text-foreground"
           onClick={() => setIsOpen(!isOpen)}
@@ -73,7 +70,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
