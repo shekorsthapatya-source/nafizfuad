@@ -79,7 +79,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
               transition={{ duration: 0.5 }}
               className="mt-6 text-xs tracking-[0.3em] uppercase text-muted-foreground"
             >
-              Md. Nafiz Fuad | designer
+              Architect & Designer
             </motion.p>
           </div>
         </motion.div>
