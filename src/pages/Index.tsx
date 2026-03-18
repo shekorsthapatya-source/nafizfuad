@@ -1,9 +1,8 @@
 import { useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
-import ServicesSection from "@/components/ServicesSection";
+import AwardsSection from "@/components/AwardsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import ChatBot from "@/components/ChatBot";
@@ -21,12 +20,13 @@ const Index = () => {
       {loading && <LoadingScreen onComplete={handleLoadingComplete} />}
       <div className={`min-h-screen bg-background ${loading ? "overflow-hidden h-screen" : ""}`}>
         <Navbar />
-        <HeroSection />
-        <AboutSection />
-        <ProjectsSection />
-        <ServicesSection />
-        <ContactSection />
-        <Footer />
+        <div className="pt-16">
+          <AboutSection />
+          <ProjectsSection />
+          <AwardsSection />
+          <ContactSection />
+          <Footer />
+        </div>
         <ChatBot />
       </div>
     </>
