@@ -1,26 +1,6 @@
-import { useState, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import ProjectModal from "./ProjectModal";
-
-const ParallaxImage = ({ src, alt, onClick }: { src: string; alt: string; onClick: () => void }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
-
-  return (
-    <div ref={ref} className="aspect-square overflow-hidden cursor-pointer group" onClick={onClick}>
-      <motion.img
-        src={src}
-        alt={alt}
-        style={{ y }}
-        className="w-[120%] h-[120%] object-cover transition-transform duration-500 group-hover:scale-105 -mt-[10%]"
-      />
-    </div>
-  );
-};
 
 import projectScreenOfLife from "@/assets/project-screen-of-life.jpg";
 import projectBhuiyanNibash from "@/assets/project-bhuiyan-nibash.jpg";
@@ -224,11 +204,13 @@ const ProjectsSection = () => {
                   className="group cursor-pointer"
                   onClick={() => setSelectedProject(project)}
                 >
-                  <ParallaxImage
-                    src={project.image}
-                    alt={project.title}
-                    onClick={() => setSelectedProject(project)}
-                  />
+                  <div className="aspect-square overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
                   <div className="pt-2 pb-1">
                     <h3 className="font-display text-sm font-medium text-foreground group-hover:text-accent transition-colors">{project.title}</h3>
                     <p className="text-xs text-muted-foreground">{project.year}</p>
