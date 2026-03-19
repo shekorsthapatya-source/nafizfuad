@@ -26,7 +26,7 @@ const awards = [
     organization: "Wood & Metal Industries Expo",
     year: "2025",
     description: "Winner of the 'Design & AI Revolution 2025' competition at the Wood & Metal Industries Expo, Bangladesh.",
-    image: designAiAward1,
+    image: designAiAward2,
     gallery: [
       { src: designAiAward1, caption: "Award Event" },
       { src: designAiAward2, caption: "Certificate" },
