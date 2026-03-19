@@ -5,7 +5,8 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { label: "About", href: "#about" },
   { label: "Portfolio", href: "#projects" },
-  { label: "Awards", href: "#awards" },
+  { label: "Recognition", href: "#awards" },
+  { label: "Photography", href: "http://nafizfuad.qzz.io/photography", external: true },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -49,8 +50,9 @@ const Navbar = () => {
             <li key={link.href}>
               <a
                 href={link.href}
+                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 className={`text-xs tracking-widest uppercase px-4 py-1.5 transition-all duration-300 ease-in-out ${
-                  activeSection === link.href
+                  !link.external && activeSection === link.href
                     ? "bg-foreground text-background"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 }`}
@@ -83,8 +85,9 @@ const Navbar = () => {
                 <li key={link.href}>
                   <a
                     href={link.href}
+                    {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     className={`text-xs tracking-widest uppercase px-6 py-2 block transition-all duration-300 ease-in-out ${
-                      activeSection === link.href
+                      !link.external && activeSection === link.href
                         ? "bg-foreground text-background"
                         : "text-muted-foreground hover:text-foreground hover:bg-muted"
                     }`}
