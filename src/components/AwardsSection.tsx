@@ -13,7 +13,7 @@ const awards = [
     organization: "WaterAid × Blue",
     year: "2026",
     description: "Winner of the 'Toilets on the Go' mobile toilet design competition organized by WaterAid and Blue. Awarded BDT 100,000 prize money.",
-    image: awardWinner2,
+    image: awardWinner1,
     gallery: [
       { src: awardWinner1, caption: "Award Ceremony" },
       { src: awardWinner2, caption: "Winner Announcement" },
