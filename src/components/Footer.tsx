@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-
+import { Link } from "react-router-dom";
+import { Settings } from "lucide-react";
 const Footer = () => {
   return (
     <motion.footer
