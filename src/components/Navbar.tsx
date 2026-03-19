@@ -50,8 +50,9 @@ const Navbar = () => {
             <li key={link.href}>
               <a
                 href={link.href}
+                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 className={`text-xs tracking-widest uppercase px-4 py-1.5 transition-all duration-300 ease-in-out ${
-                  activeSection === link.href
+                  !link.external && activeSection === link.href
                     ? "bg-foreground text-background"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 }`}
