@@ -72,15 +72,6 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
           />
         </motion.div>
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: phase >= 2 ? 1 : 0 }}
-          transition={{ duration: 0.5 }}
-          className="mt-6 text-xs tracking-[0.3em] uppercase text-muted-foreground"
-        >
-          Architect & Designer
-        </motion.p>
       </div>
     </motion.div>
   );
