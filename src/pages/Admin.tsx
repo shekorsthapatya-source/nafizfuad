@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { Trash2, Copy, ArrowLeft, RefreshCw, LogOut } from "lucide-react";
@@ -19,6 +19,20 @@ const Admin = () => {
   const [authed, setAuthed] = useState(false);
   const navigate = useNavigate();
 
+  const fetchMessages = useCallback(async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("contact_messages")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (error) {
+      toast({ title: "Error loading messages", variant: "destructive" });
+    } else {
+      setMessages(data || []);
+    }
+    setLoading(false);
+  }, []);
+
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
       if (!session) {
@@ -34,23 +48,14 @@ const Admin = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  if (!authed) return null;
+  useEffect(() => {
+    if (authed) fetchMessages();
+  }, [authed, fetchMessages]);
 
-  const fetchMessages = async () => {
-    setLoading(true);
-    const { data, error } = await supabase
-      .from("contact_messages")
-      .select("*")
-      .order("created_at", { ascending: false });
-    if (error) {
-      toast({ title: "Error loading messages", variant: "destructive" });
-    } else {
-      setMessages(data || []);
-    }
-    setLoading(false);
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate("/login");
   };
-
-  useEffect(() => { fetchMessages(); }, []);
 
   const copyMessage = (msg: ContactMessage) => {
     const text = `Name: ${msg.name}\nEmail: ${msg.email}${msg.phone ? `\nPhone: ${msg.phone}` : ""}\nMessage: ${msg.message}\nDate: ${new Date(msg.created_at).toLocaleString()}`;
@@ -79,6 +84,8 @@ const Admin = () => {
     }
   };
 
+  if (!authed) return null;
+
   return (
     <div className="min-h-screen bg-background text-foreground p-6 lg:p-12">
       <div className="max-w-4xl mx-auto">
@@ -99,6 +106,9 @@ const Admin = () => {
                 Clear All
               </button>
             )}
+            <button onClick={handleLogout} className="p-2 border border-border rounded hover:bg-secondary transition-colors" title="Logout">
+              <LogOut size={16} />
+            </button>
           </div>
         </div>
 
