@@ -30,8 +30,10 @@ import mosqueViews from "@/assets/mosque-views.jpg";
 import mosqueExterior from "@/assets/mosque-exterior.jpg";
 import mosquePrayer from "@/assets/mosque-prayer.jpg";
 import chakuliDetail from "@/assets/chakuli-detail.jpg";
-import eidgahDetail from "@/assets/eidgah-detail.jpg";
-import eidgahConstruction from "@/assets/eidgah-construction.jpg";
+import eidgahCourtyard from "@/assets/eidgah-courtyard.jpg";
+import eidgahBrickCutting from "@/assets/eidgah-brick-cutting.jpg";
+import eidgahBambooDetail from "@/assets/eidgah-bamboo-detail.jpg";
+import eidgahPattern from "@/assets/eidgah-pattern.jpg";
 import interiorLiving1 from "@/assets/interior-living-1.jpg";
 import interiorLiving2 from "@/assets/interior-living-2.jpg";
 import interiorBedroom from "@/assets/interior-bedroom.jpg";
@@ -103,8 +105,10 @@ const projects = [
     category: "Religious",
     image: projectShahiEidgah,
     gallery: [
-      { src: eidgahDetail, caption: "Floor Detail" },
-      { src: eidgahConstruction, caption: "Construction" },
+      { src: eidgahCourtyard, caption: "Courtyard View" },
+      { src: eidgahPattern, caption: "Brick Pattern Detail" },
+      { src: eidgahBrickCutting, caption: "Brick Cutting & Layout Method" },
+      { src: eidgahBambooDetail, caption: "Bamboo Hole & Cover Detail" },
     ],
   },
   {
