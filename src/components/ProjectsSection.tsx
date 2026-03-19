@@ -2,17 +2,17 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ProjectModal from "./ProjectModal";
 
-import projectScreenOfLife from "@/assets/project-screen-of-life.jpg";
 import projectBhuiyanNibash from "@/assets/project-bhuiyan-nibash.jpg";
 import projectMuslimMosque from "@/assets/project-muslim-mosque.jpg";
 import projectShahiEidgah from "@/assets/project-shahi-eidgah.jpg";
 import projectChakuliRenovation from "@/assets/project-chakuli-renovation.jpg";
 
-import screenOfLifeDetail from "@/assets/screen-of-life-detail.jpg";
-import screenOfLifeArchway from "@/assets/screen-of-life-archway.jpg";
-import screenOfLifeEnd from "@/assets/screen-of-life-end.jpg";
-import screenSittingGarden from "@/assets/screen-sitting-garden.jpg";
-import screenCourtyard from "@/assets/screen-courtyard.jpg";
+import bhuiyanScreenDetail from "@/assets/bhuiyan-screen-detail.jpg";
+import bhuiyanScreenCollage from "@/assets/bhuiyan-screen-collage.jpg";
+import bhuiyanArchedDoor from "@/assets/bhuiyan-arched-door.jpg";
+import bhuiyanBrickCorridor from "@/assets/bhuiyan-brick-corridor.jpg";
+import bhuiyanConstructionCollage from "@/assets/bhuiyan-construction-collage.jpg";
+import bhuiyanLakeside from "@/assets/bhuiyan-lakeside.webp";
 import bhuiyanScreenDetail from "@/assets/bhuiyan-screen-detail.jpg";
 import bhuiyanScreenCollage from "@/assets/bhuiyan-screen-collage.jpg";
 import bhuiyanArchedDoor from "@/assets/bhuiyan-arched-door.jpg";
