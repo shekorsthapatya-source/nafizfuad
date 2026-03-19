@@ -57,11 +57,24 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
 
         {/* Content - editorial scroll layout */}
         <div className="relative z-[55] max-w-5xl mx-auto px-6 py-20">
-          {/* Project header */}
+          {/* Hero image above text */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            className="mb-12 overflow-hidden bg-muted">
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-auto object-cover"
+              loading="eager" />
+          </motion.div>
+
+          {/* Project header */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className="mb-16">
             
             <div className="flex items-center gap-3 text-xs text-muted-foreground tracking-[0.15em] uppercase mb-6">
@@ -79,14 +92,14 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             </p>
           </motion.div>
 
-          {/* Editorial image gallery - full bleed, stacked with captions */}
+          {/* Remaining gallery images */}
           <div className="space-y-4">
-            {allImages.map((item, i) =>
+            {(project.gallery || []).map((item, i) =>
             <motion.figure
               key={i}
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 + i * 0.08 }}
+              transition={{ duration: 0.6, delay: 0.2 + i * 0.08 }}
               className="relative">
               
                 <div className="overflow-hidden bg-muted">
