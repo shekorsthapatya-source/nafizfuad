@@ -105,8 +105,10 @@ const projects = [
     category: "Religious",
     image: projectShahiEidgah,
     gallery: [
-      { src: eidgahDetail, caption: "Floor Detail" },
-      { src: eidgahConstruction, caption: "Construction" },
+      { src: eidgahCourtyard, caption: "Courtyard View" },
+      { src: eidgahPattern, caption: "Brick Pattern Detail" },
+      { src: eidgahBrickCutting, caption: "Brick Cutting & Layout Method" },
+      { src: eidgahBambooDetail, caption: "Bamboo Hole & Cover Detail" },
     ],
   },
   {
