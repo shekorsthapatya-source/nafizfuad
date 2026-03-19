@@ -2,17 +2,11 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ProjectModal from "./ProjectModal";
 
-import projectScreenOfLife from "@/assets/project-screen-of-life.jpg";
 import projectBhuiyanNibash from "@/assets/project-bhuiyan-nibash.jpg";
 import projectMuslimMosque from "@/assets/project-muslim-mosque.jpg";
 import projectShahiEidgah from "@/assets/project-shahi-eidgah.jpg";
 import projectChakuliRenovation from "@/assets/project-chakuli-renovation.jpg";
 
-import screenOfLifeDetail from "@/assets/screen-of-life-detail.jpg";
-import screenOfLifeArchway from "@/assets/screen-of-life-archway.jpg";
-import screenOfLifeEnd from "@/assets/screen-of-life-end.jpg";
-import screenSittingGarden from "@/assets/screen-sitting-garden.jpg";
-import screenCourtyard from "@/assets/screen-courtyard.jpg";
 import bhuiyanScreenDetail from "@/assets/bhuiyan-screen-detail.jpg";
 import bhuiyanScreenCollage from "@/assets/bhuiyan-screen-collage.jpg";
 import bhuiyanArchedDoor from "@/assets/bhuiyan-arched-door.jpg";
@@ -37,22 +31,6 @@ const categories = ["All", "Residential", "Cultural", "Religious", "Interior"];
 
 const projects = [
   {
-    title: "The Screen of Life",
-    description: "Designed to treat west side facade and create a semi privacy wall using innovative brick construction methods.",
-    longDescription: "This screen was designed to treat west side facade and create a semi privacy wall for the user. It was built in a critical & innovative construction method. The most important thing in this project was the screen and the archway at the entry. It acts like a theatre of light. Where lights and shadows are playing drama and conveying different expressions all along the day. Birds rest on this screen and sing their song. Creating an interesting story with harmony of light and music of nature.",
-    location: "Dhaka, Bangladesh",
-    year: "2023",
-    category: "Residential",
-    image: projectScreenOfLife,
-    gallery: [
-      { src: screenOfLifeArchway, caption: "Archway Entry" },
-      { src: screenSittingGarden, caption: "Sitting Garden" },
-      { src: screenCourtyard, caption: "Courtyard" },
-      { src: screenOfLifeDetail, caption: "Screen Detail" },
-      { src: screenOfLifeEnd, caption: "End View" },
-    ],
-  },
-  {
     title: "Bhuiyan Nibash",
     description: "A cooler space design featuring 10\" walls, blending traditional materiality with modern thermal comfort.",
     longDescription: "Bhuiyan Nibash's property and attributes like 10\" wall and its construction method made it a cooler space. Always up to 6° cooler than outside temperature. A place like Dhaka, where weather is always extreme, this kind of attributes are required for sure.",
@@ -62,7 +40,6 @@ const projects = [
     role: "Project Architect",
     image: bhuiyanLakeside,
     gallery: [
-      { src: bhuiyanLakeside, caption: "Lakeside View" },
       { src: bhuiyanScreenCollage, caption: "Brick Screen Details" },
       { src: bhuiyanScreenDetail, caption: "Screen Detail — Looking Up" },
       { src: bhuiyanArchedDoor, caption: "Arched Door Entry" },
@@ -77,6 +54,7 @@ const projects = [
     location: "Visualisation",
     year: "2026",
     category: "Religious",
+    role: "Visualized",
     image: projectMuslimMosque,
     gallery: [
       { src: mosqueExterior, caption: "Exterior Visualization" },
@@ -92,9 +70,9 @@ const projects = [
     location: "Flooring Design",
     year: "2023",
     category: "Religious",
+    role: "Designer",
     image: eidgahCourtyard,
     gallery: [
-      { src: eidgahCourtyard, caption: "Courtyard View" },
       { src: eidgahPattern, caption: "Brick Pattern Detail" },
       { src: eidgahBrickCutting, caption: "Brick Cutting & Layout Method" },
       { src: eidgahBambooDetail, caption: "Bamboo Hole & Cover Detail" },
@@ -107,6 +85,7 @@ const projects = [
     location: "Nagaon, Rajshahi",
     year: "2023",
     category: "Cultural",
+    role: "Designer",
     image: projectChakuliRenovation,
     gallery: [
       { src: chakuliDetail, caption: "Detail" },
@@ -119,6 +98,7 @@ const projects = [
     location: "Dhaka, Bangladesh",
     year: "2026",
     category: "Interior",
+    role: "Designer",
     image: interiorLiving1,
     gallery: [
       { src: interiorLiving2, caption: "Living Area — Full View" },
@@ -132,6 +112,7 @@ const projects = [
     location: "Bangladesh Betar, Sayed Mahbub Morshed Rd, Dhaka 1207",
     year: "2026",
     category: "Interior",
+    role: "Designer",
     image: betarChamber,
     gallery: [],
   },
