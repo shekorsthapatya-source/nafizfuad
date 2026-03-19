@@ -78,12 +78,18 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="mb-16">
             
-            <div className="flex items-center gap-3 text-xs text-muted-foreground tracking-[0.15em] uppercase mb-6">
+            <div className="flex items-center gap-3 text-xs text-muted-foreground tracking-[0.15em] uppercase mb-6 flex-wrap">
               <span>{project.category}</span>
               <span className="w-1 h-1 rounded-full bg-accent" />
               <span>{project.location}</span>
               <span className="w-1 h-1 rounded-full bg-accent" />
               <span>{project.year}</span>
+              {project.role && (
+                <>
+                  <span className="w-1 h-1 rounded-full bg-accent" />
+                  <span>{project.role}</span>
+                </>
+              )}
             </div>
             <h2 className="font-display text-4xl font-light mb-8 leading-tight md:text-4xl">
               {project.title}
