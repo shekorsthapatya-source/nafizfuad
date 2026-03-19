@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
-import { Trash2, Copy, ArrowLeft, RefreshCw } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Trash2, Copy, ArrowLeft, RefreshCw, LogOut } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
 type ContactMessage = {
   id: string;
@@ -16,6 +16,25 @@ type ContactMessage = {
 const Admin = () => {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [loading, setLoading] = useState(true);
+  const [authed, setAuthed] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
+      if (!session) {
+        navigate("/login");
+      } else {
+        setAuthed(true);
+      }
+    });
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) navigate("/login");
+      else setAuthed(true);
+    });
+    return () => subscription.unsubscribe();
+  }, [navigate]);
+
+  if (!authed) return null;
 
   const fetchMessages = async () => {
     setLoading(true);
