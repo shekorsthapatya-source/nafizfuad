@@ -5,7 +5,8 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { label: "About", href: "#about" },
   { label: "Portfolio", href: "#projects" },
-  { label: "Awards", href: "#awards" },
+  { label: "Recognition", href: "#awards" },
+  { label: "Photography", href: "http://nafizfuad.qzz.io/photography", external: true },
   { label: "Contact", href: "#contact" },
 ];
 
