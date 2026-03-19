@@ -12,6 +12,7 @@ interface ProjectModalProps {
     location: string;
     year: string;
     category: string;
+    role?: string;
     image: string;
     gallery?: GalleryItem[];
   } | null;
