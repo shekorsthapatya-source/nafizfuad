@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-
+import { Link } from "react-router-dom";
+import { Settings } from "lucide-react";
 const Footer = () => {
   return (
     <motion.footer
@@ -14,9 +15,14 @@ const Footer = () => {
           <span className="font-light">NAFIZ</span>{" "}
           <span className="font-semibold">FUAD</span>
         </p>
-        <p className="text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Md. Nafiz Fuad. All rights reserved.
-        </p>
+        <div className="flex items-center gap-4">
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} Md. Nafiz Fuad. All rights reserved.
+          </p>
+          <Link to="/admin" className="text-muted-foreground/40 hover:text-muted-foreground transition-colors" title="Admin">
+            <Settings size={14} />
+          </Link>
+        </div>
       </div>
     </motion.footer>
   );
