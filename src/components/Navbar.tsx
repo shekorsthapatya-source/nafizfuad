@@ -45,7 +45,7 @@ const Navbar = () => {
           <span className="font-medium transition-opacity duration-300 group-hover:opacity-60">FUAD</span>
         </a>
 
-        <ul className="hidden md:flex items-center gap-1">
+        <ul className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
