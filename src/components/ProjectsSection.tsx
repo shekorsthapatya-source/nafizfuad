@@ -60,7 +60,7 @@ const projects = [
     year: "2026",
     category: "Residential",
     role: "Project Architect",
-    image: projectBhuiyanNibash,
+    image: bhuiyanLakeside,
     gallery: [
       { src: bhuiyanLakeside, caption: "Lakeside View" },
       { src: bhuiyanScreenCollage, caption: "Brick Screen Details" },
