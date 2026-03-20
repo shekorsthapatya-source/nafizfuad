@@ -12,10 +12,29 @@ import LoadingScreen from "@/components/LoadingScreen";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
   const handleLoadingComplete = useCallback(() => {
     setLoading(false);
   }, []);
+
+  // Scroll to section based on URL path
+  useEffect(() => {
+    if (loading) return;
+    const pathToSection: Record<string, string> = {
+      "/about": "about",
+      "/projects": "projects",
+      "/awards": "awards",
+      "/contact": "contact",
+    };
+    const section = pathToSection[location.pathname];
+    if (section) {
+      const el = document.getElementById(section);
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 100);
+      }
+    }
+  }, [location.pathname, loading]);
 
   return (
     <>
