@@ -4,11 +4,11 @@ import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Portfolio", href: "#projects" },
-  { label: "Recognition", href: "#awards" },
-  { label: "Photography", href: "/photography", route: true },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/about", section: "about" },
+  { label: "Portfolio", href: "/projects", section: "projects" },
+  { label: "Recognition", href: "/awards", section: "awards" },
+  { label: "Photography", href: "/photography" },
+  { label: "Contact", href: "/contact", section: "contact" },
 ];
 
 const Navbar = () => {
