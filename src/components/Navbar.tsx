@@ -1,39 +1,62 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Portfolio", href: "#projects" },
-  { label: "Recognition", href: "#awards" },
-  { label: "Photography", href: "/photography", route: true },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/about", section: "about" },
+  { label: "Portfolio", href: "/projects", section: "projects" },
+  { label: "Recognition", href: "/awards", section: "awards" },
+  { label: "Photography", href: "/photography" },
+  { label: "Contact", href: "/contact", section: "contact" },
 ];
+
+const sectionPaths = ["/about", "/projects", "/awards", "/contact"];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("#about");
+  const [activePath, setActivePath] = useState("/about");
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
+    // On index-like pages, track scroll to update active path
+    if (!sectionPaths.includes(location.pathname) && location.pathname !== "/") return;
+
     const handleScroll = () => {
-      const sections = navLinks.filter(l => !l.route).map((link) => link.href.replace("#", ""));
+      const sections = navLinks.filter(l => l.section).map(l => l.section!);
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
         if (el && el.getBoundingClientRect().top <= 120) {
-          setActiveSection(`#${sections[i]}`);
+          setActivePath(`/${sections[i]}`);
           break;
         }
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!sectionPaths.includes(location.pathname) && location.pathname !== "/") {
+      setActivePath(location.pathname);
+    }
+  }, [location.pathname]);
 
   const handleClick = (link: typeof navLinks[0], e: React.MouseEvent) => {
-    if (link.route) {
-      e.preventDefault();
+    e.preventDefault();
+    if (link.section) {
+      // If already on index page, just scroll
+      if (location.pathname === "/" || sectionPaths.includes(location.pathname)) {
+        const el = document.getElementById(link.section);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+        window.history.replaceState(null, "", link.href);
+        setActivePath(link.href);
+      } else {
+        navigate(link.href);
+      }
+    } else {
       navigate(link.href);
     }
   };
@@ -45,8 +68,8 @@ const Navbar = () => {
           href="/"
           onClick={(e) => {
             e.preventDefault();
-            if (window.location.pathname === "/") window.location.reload();
-            else window.location.href = "/";
+            if (location.pathname === "/") window.scrollTo({ top: 0, behavior: "smooth" });
+            else navigate("/");
           }}
           className="font-display text-xl tracking-widest cursor-pointer group"
         >
@@ -61,7 +84,7 @@ const Navbar = () => {
                 href={link.href}
                 onClick={(e) => handleClick(link, e)}
                 className={`text-xs tracking-widest uppercase px-4 py-1.5 transition-all duration-300 ease-in-out ${
-                  !link.route && activeSection === link.href
+                  activePath === link.href
                     ? "bg-foreground text-background"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 }`}
@@ -96,7 +119,7 @@ const Navbar = () => {
                     href={link.href}
                     onClick={(e) => { handleClick(link, e); setIsOpen(false); }}
                     className={`text-xs tracking-widest uppercase px-6 py-2 block transition-all duration-300 ease-in-out ${
-                      !link.route && activeSection === link.href
+                      activePath === link.href
                         ? "bg-foreground text-background"
                         : "text-muted-foreground hover:text-foreground hover:bg-muted"
                     }`}
