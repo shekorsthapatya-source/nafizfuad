@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const navLinks = [
   { label: "About", href: "#about" },
   { label: "Portfolio", href: "#projects" },
   { label: "Recognition", href: "#awards" },
-  { label: "Photography", href: "http://nafizfuad.qzz.io/photography", external: true },
+  { label: "Photography", href: "/photography", route: true },
   { label: "Contact", href: "#contact" },
 ];
 
