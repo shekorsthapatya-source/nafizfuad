@@ -2,49 +2,25 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import armenianChurch from "@/assets/armenian-church.jpeg";
+import cuAuditorium from "@/assets/chittagong-university-auditorium.jpeg";
 
 const photos = [
   {
-    title: "Golden Hour",
+    title: "Armenian Church",
     location: "Dhaka",
     year: "2025",
-    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
-    description: "Warm light casting long shadows across the landscape during the final moments of daylight.",
+    camera: "Nikon D3500",
+    image: armenianChurch,
+    description: "The historic Armenian Church in Old Dhaka, showcasing colonial-era architecture with its distinctive white and gold façade, arched corridors, and towering spire.",
   },
   {
-    title: "Morning Mist",
-    location: "Sylhet",
-    year: "2025",
-    image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80",
-    description: "Dense morning fog rolling over tea gardens, creating ethereal layers of green and white.",
-  },
-  {
-    title: "Urban Geometry",
+    title: "Chittagong University Auditorium",
     location: "Chittagong",
     year: "2024",
-    image: "https://images.unsplash.com/photo-1494526585095-c41746248156?w=800&q=80",
-    description: "Intersecting lines and shapes found in the everyday architecture of the port city.",
-  },
-  {
-    title: "Monsoon Reflections",
-    location: "Rajshahi",
-    year: "2024",
-    image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80",
-    description: "Rain-soaked streets mirroring the sky, blurring the boundary between earth and atmosphere.",
-  },
-  {
-    title: "River Life",
-    location: "Barisal",
-    year: "2024",
-    image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&q=80",
-    description: "Daily rhythms along the riverbank — boats, fishermen, and the quiet persistence of water.",
-  },
-  {
-    title: "Textured Walls",
-    location: "Old Dhaka",
-    year: "2023",
-    image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&q=80",
-    description: "Weathered surfaces telling stories of decades, each crack and peel a mark of time.",
+    camera: "Nikon D3500",
+    image: cuAuditorium,
+    description: "The brutalist red-brick auditorium of Chittagong University — bold geometric forms rising against the sky, a testament to modernist architecture in Bangladesh.",
   },
 ];
 
@@ -154,6 +130,7 @@ const Photography = () => {
                 <div>
                   <h3 className="font-display text-xl md:text-2xl font-medium">{selectedPhoto.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1">{selectedPhoto.location} · {selectedPhoto.year}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{selectedPhoto.camera}</p>
                 </div>
                 <button
                   onClick={() => setSelectedPhoto(null)}
