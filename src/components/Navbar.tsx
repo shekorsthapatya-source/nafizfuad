@@ -1,22 +1,24 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const navLinks = [
   { label: "About", href: "#about" },
   { label: "Portfolio", href: "#projects" },
   { label: "Recognition", href: "#awards" },
-  { label: "Photography", href: "http://nafizfuad.qzz.io/photography", external: true },
+  { label: "Photography", href: "/photography", route: true },
   { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("#about");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navLinks.map((link) => link.href.replace("#", ""));
+      const sections = navLinks.filter(l => !l.route).map((link) => link.href.replace("#", ""));
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
         if (el && el.getBoundingClientRect().top <= 120) {
@@ -28,6 +30,13 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleClick = (link: typeof navLinks[0], e: React.MouseEvent) => {
+    if (link.route) {
+      e.preventDefault();
+      navigate(link.href);
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
@@ -50,9 +59,9 @@ const Navbar = () => {
             <li key={link.href}>
               <a
                 href={link.href}
-                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                onClick={(e) => handleClick(link, e)}
                 className={`text-xs tracking-widest uppercase px-4 py-1.5 transition-all duration-300 ease-in-out ${
-                  !link.external && activeSection === link.href
+                  !link.route && activeSection === link.href
                     ? "bg-foreground text-background"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 }`}
@@ -85,13 +94,12 @@ const Navbar = () => {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    onClick={(e) => { handleClick(link, e); setIsOpen(false); }}
                     className={`text-xs tracking-widest uppercase px-6 py-2 block transition-all duration-300 ease-in-out ${
-                      !link.external && activeSection === link.href
+                      !link.route && activeSection === link.href
                         ? "bg-foreground text-background"
                         : "text-muted-foreground hover:text-foreground hover:bg-muted"
                     }`}
-                    onClick={() => setIsOpen(false)}
                   >
                     {link.label}
                   </a>
