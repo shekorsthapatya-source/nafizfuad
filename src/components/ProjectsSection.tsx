@@ -85,9 +85,10 @@ const projects = [
     year: "2023",
     category: "Cultural",
     role: "Designer",
-    image: projectChakuliRenovation,
+    image: chakuliCollageRender,
     gallery: [
-      { src: chakuliDetail, caption: "Detail" },
+      { src: chakuliComparison, caption: "Renovation vs Existing" },
+      { src: chakuliElevations, caption: "Elevation Drawings" },
     ],
   },
   {
