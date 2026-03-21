@@ -112,7 +112,9 @@ const projects = [
     location: "Dhaka, Bangladesh",
     year: "2026",
     category: "Interior",
-    role: "Designer",
+    credits: [
+      { label: "Designer", value: "MD. Nafiz Fuad" },
+    ],
     image: interiorLiving1,
     gallery: [
       { src: interiorLiving2, caption: "Living Area — Full View" },
