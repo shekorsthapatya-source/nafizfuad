@@ -82,9 +82,8 @@ const Navbar = () => {
         <ul className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
             <li key={link.href}>
-              <a
-                href={link.href}
-                onClick={(e) => handleClick(link, e)}
+              <button
+                onClick={() => handleClick(link)}
                 className={`text-xs tracking-widest uppercase px-4 py-1.5 transition-all duration-300 ease-in-out ${
                   activePath === link.href
                     ? "bg-foreground text-background"
@@ -92,7 +91,7 @@ const Navbar = () => {
                 }`}
               >
                 {link.label}
-              </a>
+              </button>
             </li>
           ))}
         </ul>
