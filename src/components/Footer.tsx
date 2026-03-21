@@ -21,7 +21,7 @@ const Footer = () => {
           </Link>
         </div>
         <p className="text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Mohammad Obaidullah. All rights reserved.
+          © {new Date().getFullYear()} MD. Nafiz Fuad. All rights reserved.
         </p>
       </div>
     </motion.footer>
