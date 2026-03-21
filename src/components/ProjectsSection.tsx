@@ -41,6 +41,7 @@ const projects = [
     category: "Residential",
     size: "6300 SFT",
     credits: [
+      { label: "Consultant Firm", value: "Chinta Sthapatya" },
       { label: "Principal Architect", value: "Mahmudul Gani Kanak" },
       { label: "Lead Architect", value: "Ahsan Habib" },
       { label: "Design Team", value: "Shihab Ahmed, Arif Mahtab Kabir Onjon" },
@@ -64,7 +65,8 @@ const projects = [
     year: "2025",
     category: "Religious",
     credits: [
-      { label: "Designer", value: "MD. Nafiz Fuad" },
+      { label: "Consultant Firm", value: "Chinta Sthapatya" },
+      { label: "Designer", value: "Mohammad Obaidullah" },
     ],
     image: mosqueFrontView,
     gallery: [
@@ -113,6 +115,7 @@ const projects = [
     year: "2025",
     category: "Interior",
     credits: [
+      { label: "Consultant Firm", value: "Nandan Interior" },
       { label: "Designer", value: "MD. Nafiz Fuad" },
     ],
     image: interiorLiving1,
