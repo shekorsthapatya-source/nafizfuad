@@ -18,7 +18,7 @@ import bhuiyanLakeside from "@/assets/bhuiyan-lakeside.webp";
 import mosqueFrontView from "@/assets/mosque-front-view.jpg";
 import mosqueAerialView from "@/assets/mosque-aerial-view.jpg";
 import mosquePrayerCorridor from "@/assets/mosque-prayer-corridor.jpg";
-import chakuliDetail from "@/assets/chakuli-detail.jpg";
+
 import eidgahCourtyard from "@/assets/eidgah-courtyard.jpg";
 import eidgahBrickCutting from "@/assets/eidgah-brick-cutting.jpg";
 import eidgahBambooDetail from "@/assets/eidgah-bamboo-detail.jpg";
