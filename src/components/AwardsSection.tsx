@@ -46,10 +46,10 @@ const AwardsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="mb-16"
           >
             <p className="text-sm tracking-[0.2em] uppercase text-accent mb-4">Recognition</p>
-            <h2 className="text-3xl md:text-5xl font-display font-light">Awards & Achievements</h2>
+            <h2 className="text-3xl md:text-5xl font-sans font-bold">Awards & Achievements</h2>
           </motion.div>
 
           <motion.div
