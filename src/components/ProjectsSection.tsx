@@ -65,7 +65,8 @@ const projects = [
     year: "2025",
     category: "Religious",
     credits: [
-      { label: "Designer", value: "MD. Nafiz Fuad" },
+      { label: "Consultant Firm", value: "Chinta Sthapatya" },
+      { label: "Designer", value: "Mohammad Obaidullah" },
     ],
     image: mosqueFrontView,
     gallery: [
