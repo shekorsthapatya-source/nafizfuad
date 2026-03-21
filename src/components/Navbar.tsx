@@ -116,9 +116,8 @@ const Navbar = () => {
             <ul className="flex flex-col items-center py-6 gap-2">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => { handleClick(link, e); setIsOpen(false); }}
+                  <button
+                    onClick={() => handleClick(link)}
                     className={`text-xs tracking-widest uppercase px-6 py-2 block transition-all duration-300 ease-in-out ${
                       activePath === link.href
                         ? "bg-foreground text-background"
@@ -126,7 +125,7 @@ const Navbar = () => {
                     }`}
                   >
                     {link.label}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
