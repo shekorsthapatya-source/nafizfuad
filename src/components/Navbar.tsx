@@ -24,6 +24,8 @@ const Navbar = () => {
     if (!sectionPaths.includes(location.pathname) && location.pathname !== "/") return;
 
     const handleScroll = () => {
+      const container = document.querySelector('.overflow-hidden.h-screen');
+      if (!container) return;
       const sections = navLinks.filter(l => l.section).map(l => l.section!);
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
