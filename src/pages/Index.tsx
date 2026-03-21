@@ -9,10 +9,14 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import ChatBot from "@/components/ChatBot";
 import LoadingScreen from "@/components/LoadingScreen";
+import { useSectionSnap } from "@/hooks/useSectionSnap";
+
+const SECTION_IDS = ["about", "projects", "awards", "contact", "footer"];
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const { containerRef, scrollToIndex } = useSectionSnap(SECTION_IDS, 1300);
 
   const handleLoadingComplete = useCallback(() => {
     setLoading(false);
@@ -21,20 +25,17 @@ const Index = () => {
   // Scroll to section based on URL path
   useEffect(() => {
     if (loading) return;
-    const pathToSection: Record<string, string> = {
-      "/about": "about",
-      "/projects": "projects",
-      "/awards": "awards",
-      "/contact": "contact",
+    const pathToSection: Record<string, number> = {
+      "/about": 0,
+      "/projects": 1,
+      "/awards": 2,
+      "/contact": 3,
     };
-    const section = pathToSection[location.pathname];
-    if (section) {
-      const el = document.getElementById(section);
-      if (el) {
-        setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 100);
-      }
+    const idx = pathToSection[location.pathname];
+    if (idx !== undefined) {
+      setTimeout(() => scrollToIndex(idx), 100);
     }
-  }, [location.pathname, loading]);
+  }, [location.pathname, loading, scrollToIndex]);
 
   return (
     <>
@@ -42,31 +43,32 @@ const Index = () => {
         {loading && <LoadingScreen onComplete={handleLoadingComplete} />}
       </AnimatePresence>
       <motion.div
+        ref={containerRef}
         initial={{ opacity: 0 }}
         animate={{ opacity: loading ? 0 : 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="h-screen overflow-y-scroll snap-y snap-mandatory bg-background"
+        className="h-screen overflow-hidden bg-background"
       >
         <Navbar />
         <div className="pt-16">
-          <div className="min-h-screen snap-start">
+          <section id="about" className="min-h-screen">
             <AboutSection />
-          </div>
-          <div className="h-[10vh] bg-background snap-none" />
-          <div className="min-h-screen snap-start">
+          </section>
+          <div className="h-[10vh] bg-background" />
+          <section id="projects" className="min-h-screen">
             <ProjectsSection />
-          </div>
-          <div className="h-[10vh] bg-background snap-none" />
-          <div className="min-h-screen snap-start">
+          </section>
+          <div className="h-[10vh] bg-background" />
+          <section id="awards" className="min-h-screen">
             <AwardsSection />
-          </div>
-          <div className="h-[10vh] bg-background snap-none" />
-          <div className="min-h-screen snap-start">
+          </section>
+          <div className="h-[10vh] bg-background" />
+          <section id="contact" className="min-h-screen">
             <ContactSection />
-          </div>
-          <div className="snap-start">
+          </section>
+          <section id="footer">
             <Footer />
-          </div>
+          </section>
         </div>
         <ChatBot />
       </motion.div>
