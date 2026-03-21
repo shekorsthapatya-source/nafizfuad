@@ -45,7 +45,7 @@ const projects = [
       { label: "Lead Architect", value: "Ahsan Habib" },
       { label: "Design Team", value: "Shihab Ahmed, Arif Mahtab Kabir Onjon" },
       { label: "Engineer", value: "Nesar Ahmed, MD. Nasir Patowary" },
-      { label: "Engineer", value: "Nafiz Fuad" },
+      { label: "Engineer", value: "Mohammad Obaidullah" },
     ],
     image: bhuiyanLakeside,
     gallery: [
@@ -64,7 +64,7 @@ const projects = [
     year: "2025",
     category: "Religious",
     credits: [
-      { label: "Designer", value: "Nafiz Fuad" },
+      { label: "Designer", value: "Mohammad Obaidullah" },
     ],
     image: mosqueFrontView,
     gallery: [
@@ -80,7 +80,7 @@ const projects = [
     year: "2023",
     category: "Religious",
     credits: [
-      { label: "Designer", value: "Nafiz Fuad" },
+      { label: "Designer", value: "Mohammad Obaidullah" },
     ],
     image: eidgahCourtyard,
     gallery: [
@@ -97,7 +97,7 @@ const projects = [
     year: "2023",
     category: "Cultural",
     credits: [
-      { label: "Designer", value: "Nafiz Fuad" },
+      { label: "Designer", value: "Mohammad Obaidullah" },
     ],
     image: chakuliCollageRender,
     gallery: [
@@ -113,7 +113,7 @@ const projects = [
     year: "2025",
     category: "Interior",
     credits: [
-      { label: "Designer", value: "Nafiz Fuad" },
+      { label: "Designer", value: "Mohammad Obaidullah" },
     ],
     image: interiorLiving1,
     gallery: [
@@ -129,7 +129,7 @@ const projects = [
     year: "2025",
     category: "Interior",
     credits: [
-      { label: "Designer", value: "Nafiz Fuad" },
+      { label: "Designer", value: "Mohammad Obaidullah" },
     ],
     image: betarChamber,
     gallery: [],
