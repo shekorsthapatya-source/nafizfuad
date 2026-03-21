@@ -79,7 +79,9 @@ const projects = [
     location: "Flooring Design",
     year: "2023",
     category: "Religious",
-    role: "Designer",
+    credits: [
+      { label: "Designer", value: "MD. Nafiz Fuad" },
+    ],
     image: eidgahCourtyard,
     gallery: [
       { src: eidgahPattern, caption: "Brick Pattern Detail" },
