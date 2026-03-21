@@ -1,6 +1,8 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import Navbar from "@/components/Navbar";
 import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
@@ -9,6 +11,8 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import ChatBot from "@/components/ChatBot";
 import LoadingScreen from "@/components/LoadingScreen";
+
+gsap.registerPlugin(ScrollToPlugin);
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
@@ -33,22 +37,33 @@ const Index = () => {
     if (section) {
       const el = document.getElementById(section);
       if (el) {
-        setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 100);
+        setTimeout(() => {
+          gsap.to(window, {
+            duration: 1.4,
+            scrollTo: { y: el, autoKill: false },
+            ease: "power3.inOut",
+          });
+        }, 100);
       }
     }
   }, [location.pathname, loading]);
 
-  // Custom scroll snap logic
+  // GSAP scroll snap logic
   useEffect(() => {
     if (loading) return;
 
     const goToSection = (index: number) => {
       const sections = document.querySelectorAll('.snap-section');
-      if (index < 0 || index >= sections.length) return;
+      if (index < 0 || index >= sections.length || isScrollingRef.current) return;
       isScrollingRef.current = true;
       currentSectionRef.current = index;
-      sections[index].scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => { isScrollingRef.current = false; }, 1000);
+
+      gsap.to(window, {
+        duration: 1.4,
+        scrollTo: { y: sections[index] as Element, autoKill: false },
+        ease: "power3.inOut",
+        onComplete: () => { isScrollingRef.current = false; },
+      });
     };
 
     const handleWheel = (e: WheelEvent) => {
@@ -69,7 +84,7 @@ const Index = () => {
     const handleTouchEnd = (e: TouchEvent) => {
       if (isScrollingRef.current) return;
       const diff = touchStartY - e.changedTouches[0].clientY;
-      if (Math.abs(diff) > 50) {
+      if (Math.abs(diff) > 40) {
         if (diff > 0) goToSection(currentSectionRef.current + 1);
         else goToSection(currentSectionRef.current - 1);
       }
@@ -77,8 +92,8 @@ const Index = () => {
 
     window.addEventListener('wheel', handleWheel, { passive: false });
     window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('touchstart', handleTouchStart);
-    window.addEventListener('touchend', handleTouchEnd);
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     return () => {
       window.removeEventListener('wheel', handleWheel);
@@ -101,18 +116,22 @@ const Index = () => {
       >
         <Navbar />
         <div className="pt-16">
-          <div className="min-h-screen snap-section" id="about">
+          <div className="h-screen snap-section" id="about">
             <AboutSection />
           </div>
-          <div className="min-h-screen snap-section" id="projects">
+          <div className="h-[8vh] bg-background pointer-events-none" />
+          <div className="h-screen snap-section" id="projects">
             <ProjectsSection />
           </div>
-          <div className="min-h-screen snap-section" id="awards">
+          <div className="h-[8vh] bg-background pointer-events-none" />
+          <div className="h-screen snap-section" id="awards">
             <AwardsSection />
           </div>
-          <div className="min-h-screen snap-section" id="contact">
+          <div className="h-[8vh] bg-background pointer-events-none" />
+          <div className="h-screen snap-section" id="contact">
             <ContactSection />
           </div>
+          <div className="h-[8vh] bg-background pointer-events-none" />
           <div className="snap-section">
             <Footer />
           </div>
