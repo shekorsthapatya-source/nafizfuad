@@ -45,7 +45,7 @@ const projects = [
       { label: "Lead Architect", value: "Ahsan Habib" },
       { label: "Design Team", value: "Shihab Ahmed, Arif Mahtab Kabir Onjon" },
       { label: "Engineer", value: "Nesar Ahmed, MD. Nasir Patowary" },
-      { label: "Engineer", value: "Mohammad Obaidullah" },
+      { label: "Engineer", value: "Nafiz Fuad" },
     ],
     image: bhuiyanLakeside,
     gallery: [
