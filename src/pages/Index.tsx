@@ -45,15 +45,28 @@ const Index = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: loading ? 0 : 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="min-h-screen bg-background"
+        className="h-screen overflow-y-scroll snap-y snap-mandatory bg-background"
       >
         <Navbar />
         <div className="pt-16">
-          <AboutSection />
-          <ProjectsSection />
-          <AwardsSection />
-          <ContactSection />
-          <Footer />
+          <div className="min-h-screen snap-start">
+            <AboutSection />
+          </div>
+          <div className="h-[10vh] bg-background snap-none" />
+          <div className="min-h-screen snap-start">
+            <ProjectsSection />
+          </div>
+          <div className="h-[10vh] bg-background snap-none" />
+          <div className="min-h-screen snap-start">
+            <AwardsSection />
+          </div>
+          <div className="h-[10vh] bg-background snap-none" />
+          <div className="min-h-screen snap-start">
+            <ContactSection />
+          </div>
+          <div className="snap-start">
+            <Footer />
+          </div>
         </div>
         <ChatBot />
       </motion.div>
