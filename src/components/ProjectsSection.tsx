@@ -96,7 +96,9 @@ const projects = [
     location: "Nagaon, Rajshahi",
     year: "2023",
     category: "Cultural",
-    role: "Designer",
+    credits: [
+      { label: "Designer", value: "MD. Nafiz Fuad" },
+    ],
     image: chakuliCollageRender,
     gallery: [
       { src: chakuliComparison, caption: "Renovation vs Existing" },
