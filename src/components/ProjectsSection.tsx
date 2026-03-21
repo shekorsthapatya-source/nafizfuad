@@ -97,7 +97,7 @@ const projects = [
     year: "2023",
     category: "Cultural",
     credits: [
-      { label: "Designer", value: "Mohammad Obaidullah" },
+      { label: "Designer", value: "Nafiz Fuad" },
     ],
     image: chakuliCollageRender,
     gallery: [
