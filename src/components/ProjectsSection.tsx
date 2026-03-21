@@ -46,7 +46,7 @@ const categories = ["All", "Residential", "Cultural", "Religious", "Interior"];
 
 const projects = [
   {
-    title: "Bhuiyan Nibash — A Harmonious Family Retreat",
+    title: "Bhuiyan Nibash",
     description: "A cooler space design featuring 10\" walls, blending traditional materiality with modern thermal comfort.",
     longDescription: "Bhuiyan Nibash is a residential haven located in Rangpur, Mahigonj, thoughtfully designed for a joint family dynamic. Although primarily inhabited by the parents, the space caters to their children who frequently visit. Nestled amidst the serene landscape, this dwelling offers respite from the demands of daily life, enabling the family to reconnect and rejuvenate.\n\nThe site's proximity to a dusty and heat-emitting rice field, situated on its southern side, posed a unique challenge. To mitigate this issue, we strategically positioned the building to shield the living spaces from dust and excessive heat. Simultaneously, we harnessed the prevailing southeastern air flow by introducing a central courtyard. This innovative design choice not only improves air circulation but also creates a visually captivating focal point for the entire property.\n\nIn response to the sun's intense heat from the west, we devised an ingenious solution — a perforated brick wall. This feature acts as a shield against the harsh western sun while facilitating continuous airflow. As a result, the bedrooms on the western side enjoy refreshing verandas, offering an ideal balance between natural light, ventilation, and thermal comfort.",
     location: "Rangpur",
