@@ -29,7 +29,7 @@ const AboutSection = () => {
           >
             <p className="text-sm text-muted-foreground mb-1">Hi, I am</p>
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-1">
-              NAFIZ FUAD
+              MOHAMMAD OBAIDULLAH
             </h2>
             <p className="text-sm text-muted-foreground mb-5">IDEB: 71732</p>
 
