@@ -44,13 +44,15 @@ const Navbar = () => {
     }
   }, [location.pathname]);
 
-  const handleClick = (link: typeof navLinks[0], e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleClick = (link: typeof navLinks[0]) => {
+    setIsOpen(false);
     if (link.section) {
-      // If already on index page, just scroll
       if (location.pathname === "/" || sectionPaths.includes(location.pathname)) {
-        const el = document.getElementById(link.section);
-        if (el) el.scrollIntoView({ behavior: "smooth" });
+        // Already on index page — scroll directly and update URL
+        setTimeout(() => {
+          const el = document.getElementById(link.section!);
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }, 50);
         window.history.replaceState(null, "", link.href);
         setActivePath(link.href);
       } else {
