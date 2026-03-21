@@ -63,7 +63,9 @@ const projects = [
     location: "Visualisation",
     year: "2026",
     category: "Religious",
-    role: "Visualized",
+    credits: [
+      { label: "Designer", value: "MD. Nafiz Fuad" },
+    ],
     image: mosqueFrontView,
     gallery: [
       { src: mosqueAerialView, caption: "Aerial View" },
