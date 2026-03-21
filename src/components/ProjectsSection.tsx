@@ -41,6 +41,7 @@ const projects = [
     category: "Residential",
     size: "6300 SFT",
     credits: [
+      { label: "Consultant Firm", value: "Chinta Sthapatya" },
       { label: "Principal Architect", value: "Mahmudul Gani Kanak" },
       { label: "Lead Architect", value: "Ahsan Habib" },
       { label: "Design Team", value: "Shihab Ahmed, Arif Mahtab Kabir Onjon" },
