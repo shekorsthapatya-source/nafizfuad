@@ -44,13 +44,15 @@ const Navbar = () => {
     }
   }, [location.pathname]);
 
-  const handleClick = (link: typeof navLinks[0], e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleClick = (link: typeof navLinks[0]) => {
+    setIsOpen(false);
     if (link.section) {
-      // If already on index page, just scroll
       if (location.pathname === "/" || sectionPaths.includes(location.pathname)) {
-        const el = document.getElementById(link.section);
-        if (el) el.scrollIntoView({ behavior: "smooth" });
+        // Already on index page — scroll directly and update URL
+        setTimeout(() => {
+          const el = document.getElementById(link.section!);
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }, 50);
         window.history.replaceState(null, "", link.href);
         setActivePath(link.href);
       } else {
@@ -80,9 +82,8 @@ const Navbar = () => {
         <ul className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
             <li key={link.href}>
-              <a
-                href={link.href}
-                onClick={(e) => handleClick(link, e)}
+              <button
+                onClick={() => handleClick(link)}
                 className={`text-xs tracking-widest uppercase px-4 py-1.5 transition-all duration-300 ease-in-out ${
                   activePath === link.href
                     ? "bg-foreground text-background"
@@ -90,7 +91,7 @@ const Navbar = () => {
                 }`}
               >
                 {link.label}
-              </a>
+              </button>
             </li>
           ))}
         </ul>
@@ -115,9 +116,8 @@ const Navbar = () => {
             <ul className="flex flex-col items-center py-6 gap-2">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => { handleClick(link, e); setIsOpen(false); }}
+                  <button
+                    onClick={() => handleClick(link)}
                     className={`text-xs tracking-widest uppercase px-6 py-2 block transition-all duration-300 ease-in-out ${
                       activePath === link.href
                         ? "bg-foreground text-background"
@@ -125,7 +125,7 @@ const Navbar = () => {
                     }`}
                   >
                     {link.label}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
