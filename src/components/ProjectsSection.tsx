@@ -153,28 +153,30 @@ const ProjectsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
           >
-            <p className="text-sm tracking-[0.2em] uppercase text-accent mb-4">Portfolio</p>
-            <h2 className="text-3xl md:text-5xl font-display font-light">Selected Works</h2>
-          </motion.div>
+            <div>
+              <p className="text-sm tracking-[0.2em] uppercase text-accent mb-4">Portfolio</p>
+              <h2 className="text-3xl md:text-5xl font-display font-light">Selected Works</h2>
+            </div>
 
-          {/* Filter tabs */}
-          <div className="flex justify-center gap-2 mb-12 flex-wrap">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2 text-sm tracking-wide transition-colors duration-300 ${
-                  activeCategory === cat
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+            {/* Filter tabs */}
+            <div className="flex gap-1 flex-wrap">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-2 text-xs tracking-[0.15em] uppercase transition-colors duration-300 ${
+                    activeCategory === cat
+                      ? "text-foreground border-b-2 border-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </motion.div>
 
           {/* Projects grid */}
           <AnimatePresence mode="wait">
