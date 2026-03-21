@@ -119,19 +119,19 @@ const Index = () => {
           <div className="h-screen snap-section" id="about">
             <AboutSection />
           </div>
-          <div className="h-[8vh] bg-background pointer-events-none" />
+          <div className="h-[15vh] bg-background pointer-events-none" />
           <div className="h-screen snap-section" id="projects">
             <ProjectsSection />
           </div>
-          <div className="h-[8vh] bg-background pointer-events-none" />
+          <div className="h-[15vh] bg-background pointer-events-none" />
           <div className="h-screen snap-section" id="awards">
             <AwardsSection />
           </div>
-          <div className="h-[8vh] bg-background pointer-events-none" />
+          <div className="h-[15vh] bg-background pointer-events-none" />
           <div className="h-screen snap-section" id="contact">
             <ContactSection />
           </div>
-          <div className="h-[8vh] bg-background pointer-events-none" />
+          <div className="h-[15vh] bg-background pointer-events-none" />
           <div className="snap-section">
             <Footer />
           </div>
