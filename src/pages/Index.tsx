@@ -59,9 +59,9 @@ const Index = () => {
       currentSectionRef.current = index;
 
       gsap.to(window, {
-        duration: 1.4,
+        duration: 1.2,
         scrollTo: { y: sections[index] as Element, autoKill: false },
-        ease: "power3.inOut",
+        ease: "power4.inOut",
         onComplete: () => { isScrollingRef.current = false; },
       });
     };
@@ -119,19 +119,15 @@ const Index = () => {
           <div className="h-screen snap-section" id="about">
             <AboutSection />
           </div>
-          <div className="h-[15vh] bg-background pointer-events-none" />
           <div className="h-screen snap-section" id="projects">
             <ProjectsSection />
           </div>
-          <div className="h-[15vh] bg-background pointer-events-none" />
           <div className="h-screen snap-section" id="awards">
             <AwardsSection />
           </div>
-          <div className="h-[15vh] bg-background pointer-events-none" />
           <div className="h-screen snap-section" id="contact">
             <ContactSection />
           </div>
-          <div className="h-[15vh] bg-background pointer-events-none" />
           <div className="snap-section">
             <Footer />
           </div>
