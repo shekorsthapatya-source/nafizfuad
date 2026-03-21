@@ -54,12 +54,10 @@ const projects = [
     year: "2026",
     category: "Religious",
     role: "Visualized",
-    image: projectMuslimMosque,
+    image: mosqueFrontView,
     gallery: [
-      { src: mosqueExterior, caption: "Exterior Visualization" },
-      { src: mosquePrayer, caption: "Prayer Space" },
-      { src: mosqueDetail, caption: "Detail" },
-      { src: mosqueViews, caption: "Views" },
+      { src: mosqueAerialView, caption: "Aerial View" },
+      { src: mosquePrayerCorridor, caption: "Prayer Corridor" },
     ],
   },
   {
