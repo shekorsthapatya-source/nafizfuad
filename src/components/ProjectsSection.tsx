@@ -92,8 +92,8 @@ const projects = [
   {
     title: "Chakuli Renovation",
     description: "Renovation project surrounded by heavy trees, blending functionality with memory-making architectural spaces.",
-    longDescription: "It was a renovation project located at Chakuli, Nagaon, Rajshahi. It was also a west-faced building, surrounded by heavy layers of trees. Because it was a vacation house, I tried to blend functionality and memory-making spaces.",
-    location: "Nagaon, Rajshahi",
+    longDescription: "It was a renovation project located at Chakuli, Naogaon, Rajshahi. It was also a west-faced building, surrounded by heavy layers of trees. Because it was a vacation house, I tried to blend functionality and memory-making spaces.",
+    location: "Naogaon, Rajshahi",
     year: "2023",
     category: "Cultural",
     credits: [
