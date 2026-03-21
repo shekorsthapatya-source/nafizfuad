@@ -64,7 +64,7 @@ const projects = [
     year: "2025",
     category: "Religious",
     credits: [
-      { label: "Designer", value: "Mohammad Obaidullah" },
+      { label: "Designer", value: "Nafiz Fuad" },
     ],
     image: mosqueFrontView,
     gallery: [
