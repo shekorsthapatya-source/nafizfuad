@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ProjectModal from "./ProjectModal";
 
 import projectBhuiyanNibash from "@/assets/project-bhuiyan-nibash.jpg";
-import projectMuslimMosque from "@/assets/project-muslim-mosque.jpg";
+import projectMuslimMosque from "@/assets/project-muslim-mosque.jpg"; // kept for potential use
 import projectShahiEidgah from "@/assets/project-shahi-eidgah.jpg";
 import projectChakuliRenovation from "@/assets/project-chakuli-renovation.jpg";
 
@@ -13,10 +13,9 @@ import bhuiyanArchedDoor from "@/assets/bhuiyan-arched-door.jpg";
 import bhuiyanBrickCorridor from "@/assets/bhuiyan-brick-corridor.jpg";
 import bhuiyanConstructionCollage from "@/assets/bhuiyan-construction-collage.jpg";
 import bhuiyanLakeside from "@/assets/bhuiyan-lakeside.webp";
-import mosqueDetail from "@/assets/mosque-detail.jpg";
-import mosqueViews from "@/assets/mosque-views.jpg";
-import mosqueExterior from "@/assets/mosque-exterior.jpg";
-import mosquePrayer from "@/assets/mosque-prayer.jpg";
+import mosqueFrontView from "@/assets/mosque-front-view.jpg";
+import mosqueAerialView from "@/assets/mosque-aerial-view.jpg";
+import mosquePrayerCorridor from "@/assets/mosque-prayer-corridor.jpg";
 import chakuliDetail from "@/assets/chakuli-detail.jpg";
 import eidgahCourtyard from "@/assets/eidgah-courtyard.jpg";
 import eidgahBrickCutting from "@/assets/eidgah-brick-cutting.jpg";
@@ -55,12 +54,10 @@ const projects = [
     year: "2026",
     category: "Religious",
     role: "Visualized",
-    image: projectMuslimMosque,
+    image: mosqueFrontView,
     gallery: [
-      { src: mosqueExterior, caption: "Exterior Visualization" },
-      { src: mosquePrayer, caption: "Prayer Space" },
-      { src: mosqueDetail, caption: "Detail" },
-      { src: mosqueViews, caption: "Views" },
+      { src: mosqueAerialView, caption: "Aerial View" },
+      { src: mosquePrayerCorridor, caption: "Prayer Corridor" },
     ],
   },
   {
