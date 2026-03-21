@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ProjectModal from "./ProjectModal";
 
 import projectBhuiyanNibash from "@/assets/project-bhuiyan-nibash.jpg";
-import projectMuslimMosque from "@/assets/project-muslim-mosque.jpg";
+import projectMuslimMosque from "@/assets/project-muslim-mosque.jpg"; // kept for potential use
 import projectShahiEidgah from "@/assets/project-shahi-eidgah.jpg";
 import projectChakuliRenovation from "@/assets/project-chakuli-renovation.jpg";
 
