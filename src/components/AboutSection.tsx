@@ -15,7 +15,7 @@ const AboutSection = () => {
             <div className="aspect-[3/4] w-56 md:w-64 mx-auto overflow-hidden">
               <img
                 src={nafizAbout}
-                alt="Md. Nafiz Fuad"
+                alt="Mohammad Obaidullah"
                 className="w-full h-full object-cover grayscale"
               />
             </div>

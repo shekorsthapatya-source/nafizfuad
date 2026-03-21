@@ -13,8 +13,8 @@ const Footer = () => {
       <div className="container mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <p className="font-display text-sm tracking-widest">
-            <span className="font-light">NAFIZ</span>{" "}
-            <span className="font-semibold">FUAD</span>
+            <span className="font-light">MOHAMMAD</span>{" "}
+            <span className="font-semibold">OBAIDULLAH</span>
           </p>
           <Link to="/admin" className="text-muted-foreground/40 hover:text-muted-foreground transition-colors" title="Admin">
             <Settings size={12} />
