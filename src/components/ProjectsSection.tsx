@@ -60,11 +60,11 @@ const projects = [
     title: "Muslim Mosque",
     description: "A place for finding peace and communicating with the creator through thoughtful minimalist visualisation.",
     longDescription: "A mosque is a place for finding peace and communicating with the creator. I tried to create that feeling in these visualisations. The design explores the interplay of brick, light, and open space to evoke a sense of spiritual tranquility.",
-    location: "Visualisation",
-    year: "2026",
+    location: "Cumilla",
+    year: "2025",
     category: "Religious",
     credits: [
-      { label: "Designer", value: "MD. Nafiz Fuad" },
+      { label: "Designer", value: "Mohammad Obaidullah" },
     ],
     image: mosqueFrontView,
     gallery: [
