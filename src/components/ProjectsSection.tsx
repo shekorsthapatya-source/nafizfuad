@@ -115,6 +115,7 @@ const projects = [
     year: "2025",
     category: "Interior",
     credits: [
+      { label: "Consultant Firm", value: "Nandan Interior" },
       { label: "Designer", value: "MD. Nafiz Fuad" },
     ],
     image: interiorLiving1,
