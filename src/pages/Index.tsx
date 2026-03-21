@@ -45,7 +45,7 @@ const Index = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: loading ? 0 : 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="h-screen overflow-y-scroll snap-y snap-mandatory bg-background"
+        className="h-screen overflow-y-scroll snap-y snap-proximity bg-background scroll-smooth"
       >
         <Navbar />
         <div className="pt-16">
