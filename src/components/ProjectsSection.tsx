@@ -9,12 +9,26 @@ import chakuliCollageRender from "@/assets/chakuli-collage-render.jpg";
 import chakuliComparison from "@/assets/chakuli-renovation-comparison.jpg";
 import chakuliElevations from "@/assets/chakuli-elevations.jpg";
 
-import bhuiyanScreenDetail from "@/assets/bhuiyan-screen-detail.jpg";
-import bhuiyanScreenCollage from "@/assets/bhuiyan-screen-collage.jpg";
-import bhuiyanArchedDoor from "@/assets/bhuiyan-arched-door.jpg";
-import bhuiyanBrickCorridor from "@/assets/bhuiyan-brick-corridor.jpg";
-import bhuiyanConstructionCollage from "@/assets/bhuiyan-construction-collage.jpg";
-import bhuiyanLakeside from "@/assets/bhuiyan-lakeside.webp";
+import bn00 from "@/assets/bhuiyan-nibash/bn-00.webp";
+import bn01 from "@/assets/bhuiyan-nibash/bn-01.webp";
+import bn02 from "@/assets/bhuiyan-nibash/bn-02.webp";
+import bn03 from "@/assets/bhuiyan-nibash/bn-03.webp";
+import bn04 from "@/assets/bhuiyan-nibash/bn-04.webp";
+import bn05 from "@/assets/bhuiyan-nibash/bn-05.webp";
+import bn06 from "@/assets/bhuiyan-nibash/bn-06.webp";
+import bn07 from "@/assets/bhuiyan-nibash/bn-07.webp";
+import bn08 from "@/assets/bhuiyan-nibash/bn-08.webp";
+import bn09 from "@/assets/bhuiyan-nibash/bn-09.webp";
+import bn10 from "@/assets/bhuiyan-nibash/bn-10.webp";
+import bn11 from "@/assets/bhuiyan-nibash/bn-11.webp";
+import bn12 from "@/assets/bhuiyan-nibash/bn-12.webp";
+import bn13 from "@/assets/bhuiyan-nibash/bn-13.webp";
+import bn14 from "@/assets/bhuiyan-nibash/bn-14.webp";
+import bn15 from "@/assets/bhuiyan-nibash/bn-15.webp";
+import bn16 from "@/assets/bhuiyan-nibash/bn-16.webp";
+import bn17 from "@/assets/bhuiyan-nibash/bn-17.webp";
+import bn18 from "@/assets/bhuiyan-nibash/bn-18.webp";
+import bn19 from "@/assets/bhuiyan-nibash/bn-19.webp";
 import mosqueFrontView from "@/assets/mosque-front-view.jpg";
 import mosqueAerialView from "@/assets/mosque-aerial-view.jpg";
 import mosquePrayerCorridor from "@/assets/mosque-prayer-corridor.jpg";
@@ -48,13 +62,27 @@ const projects = [
       { label: "Engineer", value: "Nesar Ahmed, MD. Nasir Patowary" },
       { label: "Engineer", value: "MD. Nafiz Fuad" },
     ],
-    image: bhuiyanLakeside,
+    image: bn00,
     gallery: [
-      { src: bhuiyanScreenCollage, caption: "Brick Screen Details" },
-      { src: bhuiyanScreenDetail, caption: "Screen Detail — Looking Up" },
-      { src: bhuiyanArchedDoor, caption: "Arched Door Entry" },
-      { src: bhuiyanBrickCorridor, caption: "Brick Corridor" },
-      { src: bhuiyanConstructionCollage, caption: "Construction Progress" },
+      { src: bn01, caption: "" },
+      { src: bn02, caption: "" },
+      { src: bn03, caption: "" },
+      { src: bn04, caption: "" },
+      { src: bn05, caption: "" },
+      { src: bn06, caption: "" },
+      { src: bn07, caption: "" },
+      { src: bn08, caption: "" },
+      { src: bn09, caption: "" },
+      { src: bn10, caption: "" },
+      { src: bn11, caption: "" },
+      { src: bn12, caption: "" },
+      { src: bn13, caption: "" },
+      { src: bn14, caption: "" },
+      { src: bn15, caption: "" },
+      { src: bn16, caption: "" },
+      { src: bn17, caption: "" },
+      { src: bn18, caption: "" },
+      { src: bn19, caption: "" },
     ],
   },
   {
