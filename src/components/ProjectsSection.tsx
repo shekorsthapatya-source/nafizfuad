@@ -128,7 +128,9 @@ const projects = [
     location: "Bangladesh Betar, Sayed Mahbub Morshed Rd, Dhaka 1207",
     year: "2026",
     category: "Interior",
-    role: "Designer",
+    credits: [
+      { label: "Designer", value: "MD. Nafiz Fuad" },
+    ],
     image: betarChamber,
     gallery: [],
   },
