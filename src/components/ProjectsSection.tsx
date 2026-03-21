@@ -129,7 +129,7 @@ const projects = [
     year: "2025",
     category: "Interior",
     credits: [
-      { label: "Designer", value: "Mohammad Obaidullah" },
+      { label: "Designer", value: "Nafiz Fuad" },
     ],
     image: betarChamber,
     gallery: [],
