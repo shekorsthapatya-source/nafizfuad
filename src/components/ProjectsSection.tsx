@@ -31,8 +31,6 @@ import bn18 from "@/assets/bhuiyan-nibash/bn-18.webp";
 import bn19 from "@/assets/bhuiyan-nibash/bn-19.webp";
 import mosqueFrontView from "@/assets/mosque-front-view.jpg";
 import mosqueAerialView from "@/assets/mosque-aerial-view.jpg";
-import mosqueFrontView from "@/assets/mosque-front-view.jpg";
-import mosqueAerialView from "@/assets/mosque-aerial-view.jpg";
 import mosquePrayerCorridor from "@/assets/mosque-prayer-corridor.jpg";
 
 import eidgahCourtyard from "@/assets/eidgah-courtyard.jpg";
