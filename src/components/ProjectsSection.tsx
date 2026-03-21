@@ -157,7 +157,7 @@ const ProjectsSection = () => {
           >
             <div>
               <p className="text-sm tracking-[0.2em] uppercase text-accent mb-4">Portfolio</p>
-              <h2 className="text-3xl md:text-5xl font-display font-light">Selected Works</h2>
+              <h2 className="text-3xl md:text-5xl font-sans font-bold">Selected Works</h2>
             </div>
 
             {/* Filter tabs */}
