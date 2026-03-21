@@ -5,7 +5,9 @@ import ProjectModal from "./ProjectModal";
 import projectBhuiyanNibash from "@/assets/project-bhuiyan-nibash.jpg";
 import projectMuslimMosque from "@/assets/project-muslim-mosque.jpg"; // kept for potential use
 import projectShahiEidgah from "@/assets/project-shahi-eidgah.jpg";
-import projectChakuliRenovation from "@/assets/project-chakuli-renovation.jpg";
+import chakuliCollageRender from "@/assets/chakuli-collage-render.jpg";
+import chakuliComparison from "@/assets/chakuli-renovation-comparison.jpg";
+import chakuliElevations from "@/assets/chakuli-elevations.jpg";
 
 import bhuiyanScreenDetail from "@/assets/bhuiyan-screen-detail.jpg";
 import bhuiyanScreenCollage from "@/assets/bhuiyan-screen-collage.jpg";
@@ -16,7 +18,7 @@ import bhuiyanLakeside from "@/assets/bhuiyan-lakeside.webp";
 import mosqueFrontView from "@/assets/mosque-front-view.jpg";
 import mosqueAerialView from "@/assets/mosque-aerial-view.jpg";
 import mosquePrayerCorridor from "@/assets/mosque-prayer-corridor.jpg";
-import chakuliDetail from "@/assets/chakuli-detail.jpg";
+
 import eidgahCourtyard from "@/assets/eidgah-courtyard.jpg";
 import eidgahBrickCutting from "@/assets/eidgah-brick-cutting.jpg";
 import eidgahBambooDetail from "@/assets/eidgah-bamboo-detail.jpg";
@@ -83,9 +85,10 @@ const projects = [
     year: "2023",
     category: "Cultural",
     role: "Designer",
-    image: projectChakuliRenovation,
+    image: chakuliCollageRender,
     gallery: [
-      { src: chakuliDetail, caption: "Detail" },
+      { src: chakuliComparison, caption: "Renovation vs Existing" },
+      { src: chakuliElevations, caption: "Elevation Drawings" },
     ],
   },
   {
