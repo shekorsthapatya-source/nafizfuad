@@ -45,7 +45,7 @@ const projects = [
       { label: "Lead Architect", value: "Ahsan Habib" },
       { label: "Design Team", value: "Shihab Ahmed, Arif Mahtab Kabir Onjon" },
       { label: "Engineer", value: "Nesar Ahmed, MD. Nasir Patowary" },
-      { label: "Engineer", value: "MD. Nafiz Fuad" },
+      { label: "Engineer", value: "Mohammad Obaidullah" },
     ],
     image: bhuiyanLakeside,
     gallery: [
@@ -60,11 +60,11 @@ const projects = [
     title: "Muslim Mosque",
     description: "A place for finding peace and communicating with the creator through thoughtful minimalist visualisation.",
     longDescription: "A mosque is a place for finding peace and communicating with the creator. I tried to create that feeling in these visualisations. The design explores the interplay of brick, light, and open space to evoke a sense of spiritual tranquility.",
-    location: "Visualisation",
-    year: "2026",
+    location: "Cumilla",
+    year: "2025",
     category: "Religious",
     credits: [
-      { label: "Designer", value: "MD. Nafiz Fuad" },
+      { label: "Designer", value: "Mohammad Obaidullah" },
     ],
     image: mosqueFrontView,
     gallery: [
@@ -80,7 +80,7 @@ const projects = [
     year: "2023",
     category: "Religious",
     credits: [
-      { label: "Designer", value: "MD. Nafiz Fuad" },
+      { label: "Designer", value: "Mohammad Obaidullah" },
     ],
     image: eidgahCourtyard,
     gallery: [
@@ -97,7 +97,7 @@ const projects = [
     year: "2023",
     category: "Cultural",
     credits: [
-      { label: "Designer", value: "MD. Nafiz Fuad" },
+      { label: "Designer", value: "Mohammad Obaidullah" },
     ],
     image: chakuliCollageRender,
     gallery: [
@@ -110,10 +110,10 @@ const projects = [
     description: "Vibrant interior design featuring bold color palettes, curated art walls, and warm material textures.",
     longDescription: "This residential interior project explores the intersection of vibrant color theory and minimalist structure. By pairing deep sage green surfaces with high-saturation orange accents, the space achieves a balanced energy that is both calming and stimulating. The design features a curated gallery wall and custom wooden millwork, emphasizing a \"refined-maximalist\" aesthetic for modern urban living.",
     location: "Dhaka, Bangladesh",
-    year: "2026",
+    year: "2025",
     category: "Interior",
     credits: [
-      { label: "Designer", value: "MD. Nafiz Fuad" },
+      { label: "Designer", value: "Mohammad Obaidullah" },
     ],
     image: interiorLiving1,
     gallery: [
@@ -126,10 +126,10 @@ const projects = [
     description: "Interior design exploring verticality and light to maximize a narrow executive space with reflective glass and continuous wall features.",
     longDescription: "This interior project explores the use of verticality and light to maximize a narrow executive space. By integrating reflective glass elements and a continuous wall feature, the design creates a sense of depth and transparency. The furniture selection focuses on ergonomics and classic executive styling, ensuring the space serves as both a private workstation and a professional reception area. The vertical wall battens on the right draw the eye upward, making the ceiling feel higher. Since it's designed for a radio station, the materials—wood, fabric sofa, and textured flooring—were chosen to suggest a soft acoustic environment appropriate for a broadcaster. The contrast between the dark wooden doors and desk against bright white walls creates a clean-cut, professional look.",
     location: "Bangladesh Betar, Sayed Mahbub Morshed Rd, Dhaka 1207",
-    year: "2026",
+    year: "2025",
     category: "Interior",
     credits: [
-      { label: "Designer", value: "MD. Nafiz Fuad" },
+      { label: "Designer", value: "Mohammad Obaidullah" },
     ],
     image: betarChamber,
     gallery: [],
