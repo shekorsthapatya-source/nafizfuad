@@ -43,11 +43,11 @@ const ContactSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-16"
         >
           <p className="text-sm tracking-[0.2em] uppercase text-accent mb-4">Get In Touch</p>
-          <h2 className="text-3xl md:text-5xl font-display font-light mb-4">Start Your Project</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-sans font-bold mb-4">Start Your Project</h2>
+          <p className="text-muted-foreground max-w-xl">
             Ready to bring your vision to life? Reach out to discuss your project, and let's create something extraordinary together.
           </p>
         </motion.div>
