@@ -47,7 +47,7 @@ const Index = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: loading ? 0 : 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="h-screen overflow-hidden lg:overflow-hidden overflow-y-auto bg-background"
+        className="h-screen overflow-y-auto lg:overflow-hidden bg-background"
       >
         <Navbar />
         <div className="pt-16">
