@@ -47,7 +47,7 @@ const Index = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: loading ? 0 : 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="h-screen overflow-hidden bg-background"
+        className="h-screen overflow-y-auto lg:overflow-hidden bg-background"
       >
         <Navbar />
         <div className="pt-16">
@@ -55,7 +55,7 @@ const Index = () => {
             <AboutSection />
           </section>
           <div className="h-[10vh] bg-background" />
-          <section id="projects" className="min-h-screen">
+          <section id="projects">
             <ProjectsSection />
           </section>
           <div className="h-[10vh] bg-background" />
