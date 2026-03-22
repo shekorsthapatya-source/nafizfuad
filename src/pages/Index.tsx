@@ -59,7 +59,7 @@ const Index = () => {
             <ProjectsSection />
           </section>
           <div className="h-[10vh] bg-background" />
-          <section id="awards" className="min-h-screen">
+          <section id="awards">
             <AwardsSection />
           </section>
           <div className="h-[10vh] bg-background" />
