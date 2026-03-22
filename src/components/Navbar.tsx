@@ -81,25 +81,8 @@ const Navbar = () => {
           <span className="font-medium transition-opacity duration-300 group-hover:opacity-60">FUAD</span>
         </a>
 
-        <ul className="hidden lg:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <button
-                onClick={() => handleClick(link)}
-                className={`text-xs tracking-widest uppercase px-4 py-1.5 transition-all duration-300 ease-in-out ${
-                  activePath === link.href
-                    ? "bg-foreground text-background"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                }`}
-              >
-                {link.label}
-              </button>
-            </li>
-          ))}
-        </ul>
-
         <button
-          className="lg:hidden text-foreground"
+          className="text-foreground"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -113,7 +96,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-background border-b border-border overflow-hidden"
+            className="bg-background border-b border-border overflow-hidden"
           >
             <ul className="flex flex-col items-center py-6 gap-2">
               {navLinks.map((link) => (
