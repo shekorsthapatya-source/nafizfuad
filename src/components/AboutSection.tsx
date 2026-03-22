@@ -85,7 +85,7 @@ const AboutSection = () => {
           animate={{ y: [0, 6, 0] }}
           transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
         >
-          <ChevronDown className="w-6 h-6 text-muted-foreground/40" />
+          <ChevronDown className="w-8 h-8 text-muted-foreground/40" />
         </motion.div>
       </motion.div>
     </section>
