@@ -103,8 +103,7 @@ const Navbar = () => {
           href="/"
           onClick={(e) => {
             e.preventDefault();
-            if (location.pathname === "/") window.scrollTo({ top: 0, behavior: "smooth" });
-            else navigate("/");
+            window.location.href = "/";
           }}
           className="font-display text-xl tracking-widest cursor-pointer group"
         >
