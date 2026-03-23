@@ -25,9 +25,6 @@ const Navbar = () => {
   useEffect(() => {
     if (isMobile) return;
 
-    // Open by default on desktop
-    setIsOpen(true);
-
     const handleScroll = () => {
       const scrollY = window.scrollY || document.documentElement.scrollTop;
       // Also check the snap container
