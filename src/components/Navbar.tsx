@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const navLinks = [
   { label: "About", href: "/about", section: "about" },
@@ -18,14 +19,48 @@ const Navbar = () => {
   const [activePath, setActivePath] = useState("/about");
   const navigate = useNavigate();
   const location = useLocation();
+  const isMobile = useIsMobile();
 
+  // Desktop: auto-open menu at top, collapse on scroll
   useEffect(() => {
-    // On index-like pages, track scroll to update active path
+    if (isMobile) return;
+
+    // Open by default on desktop
+    setIsOpen(true);
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      // Also check the snap container
+      const container = document.querySelector('.overflow-y-auto.lg\\:overflow-hidden');
+      const containerScroll = container ? container.scrollTop : 0;
+      const totalScroll = scrollY + containerScroll;
+
+      if (totalScroll > 80) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // Also listen on snap container
+    const container = document.querySelector('.overflow-y-auto.lg\\:overflow-hidden');
+    if (container) {
+      container.addEventListener("scroll", handleScroll, { passive: true });
+    }
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (container) {
+        container.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [isMobile, location.pathname]);
+
+  // Track active section from scroll
+  useEffect(() => {
     if (!sectionPaths.includes(location.pathname) && location.pathname !== "/") return;
 
     const handleScroll = () => {
-      const container = document.querySelector('.overflow-hidden.h-screen');
-      if (!container) return;
       const sections = navLinks.filter(l => l.section).map(l => l.section!);
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
@@ -50,7 +85,6 @@ const Navbar = () => {
     setIsOpen(false);
     if (link.section) {
       if (location.pathname === "/" || sectionPaths.includes(location.pathname)) {
-        // Already on index page — scroll directly and update URL
         setTimeout(() => {
           const el = document.getElementById(link.section!);
           if (el) el.scrollIntoView({ behavior: "smooth" });

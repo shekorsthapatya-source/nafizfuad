@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { getProjectBySlug } from "@/data/projects";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Lightbox from "@/components/Lightbox";
 import { useState } from "react";
 
 const MetaRow = ({ label, value }: { label: string; value: string }) => (
@@ -18,6 +19,7 @@ const ProjectDetail = () => {
   const navigate = useNavigate();
   const project = slug ? getProjectBySlug(slug) : undefined;
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   if (!project) {
     return (
@@ -36,12 +38,17 @@ const ProjectDetail = () => {
   const isLongText = descriptionText.length > 300;
   const displayText = showFullDescription ? descriptionText : descriptionText.slice(0, 300);
 
+  // Build all images list: hero + gallery
+  const allImages = [
+    { src: project.image, caption: project.title },
+    ...(project.gallery || []).map((g) => ({ src: g.src, caption: g.caption })),
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="pt-16">
         <div className="max-w-5xl mx-auto px-6 py-12 lg:py-20">
-          {/* Back button */}
           <motion.button
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
@@ -53,21 +60,16 @@ const ProjectDetail = () => {
             Back to Projects
           </motion.button>
 
-          {/* Hero image */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-12 overflow-hidden bg-muted"
+            className="mb-12 overflow-hidden bg-muted cursor-pointer"
+            onClick={() => setLightboxIndex(0)}
           >
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-auto object-cover"
-            />
+            <img src={project.image} alt={project.title} className="w-full h-auto object-cover" />
           </motion.div>
 
-          {/* Title */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -77,7 +79,6 @@ const ProjectDetail = () => {
             {project.title}
           </motion.h1>
 
-          {/* Metadata */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -94,7 +95,6 @@ const ProjectDetail = () => {
             {project.size && <MetaRow label="Size" value={project.size} />}
           </motion.div>
 
-          {/* Description */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -114,7 +114,6 @@ const ProjectDetail = () => {
             )}
           </motion.div>
 
-          {/* Gallery */}
           <div className="space-y-4">
             {(project.gallery || []).map((item, i) => (
               <motion.figure
@@ -123,6 +122,8 @@ const ProjectDetail = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.6, delay: i * 0.06 }}
+                className="cursor-pointer"
+                onClick={() => setLightboxIndex(i + 1)}
               >
                 <div className="overflow-hidden bg-muted">
                   <img
@@ -143,6 +144,15 @@ const ProjectDetail = () => {
         </div>
         <Footer />
       </div>
+
+      {lightboxIndex !== null && (
+        <Lightbox
+          images={allImages}
+          currentIndex={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+          onNavigate={setLightboxIndex}
+        />
+      )}
     </div>
   );
 };

@@ -8,7 +8,9 @@ import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import Photography from "./pages/Photography";
+import PhotoDetail from "./pages/PhotoDetail";
 import ProjectDetail from "./pages/ProjectDetail";
+import AwardDetail from "./pages/AwardDetail";
 
 const queryClient = new QueryClient();
 
@@ -24,8 +26,10 @@ const App = () => (
           <Route path="/projects" element={<Index />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/awards" element={<Index />} />
+          <Route path="/awards/:slug" element={<AwardDetail />} />
           <Route path="/contact" element={<Index />} />
           <Route path="/photography" element={<Photography />} />
+          <Route path="/photography/:slug" element={<PhotoDetail />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
