@@ -8,7 +8,7 @@ const HeroSection = () => {
       <div className="absolute inset-0">
         <img
           src={portfolioCover}
-          alt="Portfolio cover - brick architecture"
+          alt="Nafiz Fuad architecture portfolio — brick facade detail"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-[#0f0f0f]/85" />

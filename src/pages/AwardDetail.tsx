@@ -49,7 +49,7 @@ const AwardDetail = () => {
             className="mb-12 overflow-hidden bg-muted cursor-pointer"
             onClick={() => setLightboxIndex(0)}
           >
-            <img src={award.image} alt={award.title} className="w-full h-auto object-cover" />
+            <img src={award.image} alt={`${award.title} — ${award.organization} award, ${award.year}`} className="w-full h-auto object-cover" />
           </motion.div>
 
           <motion.h1
@@ -91,7 +91,7 @@ const AwardDetail = () => {
                 onClick={() => setLightboxIndex(j)}
               >
                 <div className="overflow-hidden bg-muted">
-                  <img src={img.src} alt={img.caption} className="w-full h-auto object-cover" loading="lazy" />
+                  <img src={img.src} alt={`${award.title} — ${img.caption}`} className="w-full h-auto object-cover" loading="lazy" />
                 </div>
                 <figcaption className="mt-2 text-xs text-muted-foreground">{img.caption}</figcaption>
               </motion.figure>

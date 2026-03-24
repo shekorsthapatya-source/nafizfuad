@@ -65,7 +65,7 @@ const ProjectsSection = () => {
                 <div className="aspect-square overflow-hidden">
                   <img
                     src={project.image}
-                    alt={project.title}
+                    alt={`${project.title} — ${project.category} project in ${project.location}`}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>

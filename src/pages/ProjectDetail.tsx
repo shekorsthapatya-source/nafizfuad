@@ -67,7 +67,7 @@ const ProjectDetail = () => {
             className="mb-12 overflow-hidden bg-muted cursor-pointer"
             onClick={() => setLightboxIndex(0)}
           >
-            <img src={project.image} alt={project.title} className="w-full h-auto object-cover" />
+            <img src={project.image} alt={`${project.title} — ${project.category} architecture project in ${project.location}`} className="w-full h-auto object-cover" />
           </motion.div>
 
           <motion.h1
@@ -128,7 +128,7 @@ const ProjectDetail = () => {
                 <div className="overflow-hidden bg-muted">
                   <img
                     src={item.src}
-                    alt={item.caption}
+                    alt={item.caption || `${project.title} gallery image ${i + 1}`}
                     className="w-full h-auto object-cover"
                     loading={i > 1 ? "lazy" : "eager"}
                   />
