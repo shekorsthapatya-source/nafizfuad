@@ -49,7 +49,7 @@ const PhotoDetail = () => {
             className="mb-12 overflow-hidden bg-muted cursor-pointer"
             onClick={() => setLightboxOpen(true)}
           >
-            <img src={photo.image} alt={photo.title} className="w-full h-auto object-cover" />
+            <img src={photo.image} alt={`${photo.title} — photographed in ${photo.location}, ${photo.year} with ${photo.camera}`} className="w-full h-auto object-cover" />
           </motion.div>
 
           <motion.h1

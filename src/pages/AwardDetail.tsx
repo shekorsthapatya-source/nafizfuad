@@ -91,7 +91,7 @@ const AwardDetail = () => {
                 onClick={() => setLightboxIndex(j)}
               >
                 <div className="overflow-hidden bg-muted">
-                  <img src={img.src} alt={img.caption} className="w-full h-auto object-cover" loading="lazy" />
+                  <img src={img.src} alt={`${award.title} — ${img.caption}`} className="w-full h-auto object-cover" loading="lazy" />
                 </div>
                 <figcaption className="mt-2 text-xs text-muted-foreground">{img.caption}</figcaption>
               </motion.figure>

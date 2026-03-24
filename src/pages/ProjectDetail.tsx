@@ -128,7 +128,7 @@ const ProjectDetail = () => {
                 <div className="overflow-hidden bg-muted">
                   <img
                     src={item.src}
-                    alt={item.caption}
+                    alt={item.caption || `${project.title} gallery image ${i + 1}`}
                     className="w-full h-auto object-cover"
                     loading={i > 1 ? "lazy" : "eager"}
                   />
