@@ -49,7 +49,7 @@ const AwardDetail = () => {
             className="mb-12 overflow-hidden bg-muted cursor-pointer"
             onClick={() => setLightboxIndex(0)}
           >
-            <img src={award.image} alt={award.title} className="w-full h-auto object-cover" />
+            <img src={award.image} alt={`${award.title} — ${award.organization} award, ${award.year}`} className="w-full h-auto object-cover" />
           </motion.div>
 
           <motion.h1
