@@ -3,10 +3,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 
+const ALLOWED_EMAILS = ["ar.nafizfuad@gmail.com", "draeyex@gmail.com"];
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isSignUp, setIsSignUp] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -14,14 +15,11 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      if (isSignUp) {
-        const { error } = await supabase.auth.signUp({ email, password });
-        if (error) throw error;
-        toast({ title: "Account created! You're now logged in." });
-      } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
+      if (!ALLOWED_EMAILS.includes(email.toLowerCase().trim())) {
+        throw new Error("This email is not authorized to access the admin panel.");
       }
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
       navigate("/admin");
     } catch (err: any) {
       toast({ title: err.message, variant: "destructive" });
