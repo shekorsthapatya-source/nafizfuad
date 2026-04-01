@@ -1,0 +1,14 @@
+
+INSERT INTO storage.buckets (id, name, public) VALUES ('project-images', 'project-images', true);
+
+CREATE POLICY "Anyone can view project images"
+ON storage.objects FOR SELECT TO anon, authenticated
+USING (bucket_id = 'project-images');
+
+CREATE POLICY "Admins can upload project images"
+ON storage.objects FOR INSERT TO authenticated
+WITH CHECK (bucket_id = 'project-images' AND public.has_role(auth.uid(), 'admin'));
+
+CREATE POLICY "Admins can delete project images"
+ON storage.objects FOR DELETE TO authenticated
+USING (bucket_id = 'project-images' AND public.has_role(auth.uid(), 'admin'));
