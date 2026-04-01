@@ -215,8 +215,8 @@ const Admin = () => {
       category: editingProject.category,
       size: editingProject.size || null,
       image_url: editingProject.image_url || null,
-      gallery: editingProject.gallery as unknown as Record<string, unknown>[],
-      credits: editingProject.credits as unknown as Record<string, unknown>[],
+      gallery: JSON.parse(JSON.stringify(editingProject.gallery)),
+      credits: JSON.parse(JSON.stringify(editingProject.credits)),
     };
 
     if (editingId) {
@@ -224,7 +224,7 @@ const Admin = () => {
       if (error) { toast({ title: "Failed to save", variant: "destructive" }); return; }
       toast({ title: "Project updated" });
     } else {
-      const { error } = await supabase.from("projects").insert(payload);
+      const { error } = await supabase.from("projects").insert([payload]);
       if (error) { toast({ title: "Failed to create: " + error.message, variant: "destructive" }); return; }
       toast({ title: "Project created" });
     }
