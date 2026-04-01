@@ -31,9 +31,7 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-6">
       <div className="w-full max-w-sm">
-        <h1 className="text-2xl font-display font-light text-center mb-8">
-          {isSignUp ? "Create Account" : "Admin Login"}
-        </h1>
+        <h1 className="text-2xl font-display font-light text-center mb-8">Admin Login</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"
@@ -57,15 +55,9 @@ const Login = () => {
             disabled={loading}
             className="w-full py-3 bg-primary text-primary-foreground text-sm tracking-widest uppercase hover:bg-primary/90 disabled:opacity-50 transition-colors"
           >
-            {loading ? "..." : isSignUp ? "Sign Up" : "Login"}
+            {loading ? "..." : "Login"}
           </button>
         </form>
-        <button
-          onClick={() => setIsSignUp(!isSignUp)}
-          className="w-full mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors text-center"
-        >
-          {isSignUp ? "Already have an account? Login" : "Need an account? Sign Up"}
-        </button>
       </div>
     </div>
   );
