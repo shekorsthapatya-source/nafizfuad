@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Title (kept short as you wanted) -->
     <title>Nafiz Fuad</title>
 
     <!-- SEO Meta -->
@@ -31,6 +30,18 @@
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" />
 
+    <!-- 🔥 Hidden SEO content style -->
+    <style>
+      .seo-hidden {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+    </style>
+
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -56,29 +67,25 @@
 
   <body>
 
-    <!-- ✅ SEO FIX: Pre-rendered content for crawlers -->
-    <div id="root">
-      <header>
-        <h1>Nafiz Fuad | Professional Architect & Interior Designer</h1>
-      </header>
-
-      <main>
-        <p>
-          Nafiz Fuad is a professional architect based in Bangladesh specializing in residential,
-          commercial, and interior design. Explore high-quality architectural projects and modern design solutions.
-        </p>
-
-        <nav>
-          <ul>
-            <li><a href="#projects">Architectural Projects</a></li>
-            <li><a href="#about">About Nafiz</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </nav>
-      </main>
+    <!-- ✅ Hidden SEO Content (NOT visible to users) -->
+    <div class="seo-hidden">
+      <h1>Nafiz Fuad | Professional Architect & Interior Designer</h1>
+      <p>
+        Nafiz Fuad is a professional architect in Bangladesh specializing in residential,
+        commercial, and interior design.
+      </p>
+      <nav>
+        <ul>
+          <li><a href="#projects">Architectural Projects</a></li>
+          <li><a href="#about">About Nafiz</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
     </div>
 
     <!-- React App -->
+    <div id="root"></div>
+
     <script type="module" src="/src/main.tsx"></script>
 
   </body>
