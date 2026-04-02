@@ -4,10 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Title (kept simple but improved SEO slightly) -->
     <title>Nafiz Fuad</title>
 
     <!-- SEO Meta -->
-    <meta name="description" content="Nafiz Fuad is a professional architect in Bangladesh specializing in residential, commercial and interior design.">
+    <meta name="description" content="Nafiz Fuad is a professional architect in Bangladesh specializing in residential, commercial and interior design. View portfolio and projects.">
     <meta name="keywords" content="Architect Bangladesh, Interior Designer Dhaka, Nafiz Fuad Architect">
     <meta name="author" content="Nafiz Fuad" />
 
@@ -16,7 +17,7 @@
 
     <!-- Open Graph -->
     <meta property="og:title" content="Nafiz Fuad">
-    <meta property="og:description" content="Professional architect in Bangladesh specializing in residential and interior design.">
+    <meta property="og:description" content="Professional architect in Bangladesh. View projects and portfolio.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://nafizfuad.qzz.io/">
     <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/debee8b4-5daf-4d82-99a4-813e25e911d2">
@@ -30,15 +31,19 @@
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" />
 
-    <!-- 🔥 Hidden SEO content style -->
+    <!-- ✅ Clean Loader Style -->
     <style>
-      .seo-hidden {
-        position: absolute;
-        left: -9999px;
-        top: auto;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
+      #loader {
+        position: fixed;
+        inset: 0;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: sans-serif;
+        font-size: 14px;
+        color: #666;
+        z-index: 9999;
       }
     </style>
 
@@ -51,9 +56,8 @@
       "jobTitle": "Architect",
       "url": "https://nafizfuad.qzz.io",
       "sameAs": [
-        "https://www.linkedin.com/in/yourprofile",
-        "https://www.instagram.com/yourprofile",
-        "https://www.facebook.com/yourprofile"
+        "https://linkedin.com/in/your-actual-profile",
+        "https://instagram.com/your-actual-profile"
       ],
       "address": {
         "@type": "PostalAddress",
@@ -67,26 +71,26 @@
 
   <body>
 
-    <!-- ✅ Hidden SEO Content (NOT visible to users) -->
-    <div class="seo-hidden">
-      <h1>Nafiz Fuad | Professional Architect & Interior Designer</h1>
-      <p>
-        Nafiz Fuad is a professional architect in Bangladesh specializing in residential,
-        commercial, and interior design.
-      </p>
-      <nav>
-        <ul>
-          <li><a href="#projects">Architectural Projects</a></li>
-          <li><a href="#about">About Nafiz</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+    <!-- ✅ Clean minimal loader (no ugly SEO text) -->
+    <div id="loader">Loading...</div>
+
+    <!-- ✅ Root with REAL (visible, simple) SEO content -->
+    <div id="root">
+      <h1 style="font-size:16px; font-weight:500; text-align:center; margin-top:20px;">
+        Nafiz Fuad - Architect in Bangladesh
+      </h1>
     </div>
 
-    <!-- React App -->
-    <div id="root"></div>
-
+    <!-- React -->
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Remove loader after React loads -->
+    <script>
+      window.addEventListener("load", () => {
+        const loader = document.getElementById("loader");
+        if (loader) loader.style.display = "none";
+      });
+    </script>
 
   </body>
 </html>
