@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      awards: {
+        Row: {
+          created_at: string
+          description: string
+          gallery: Json | null
+          id: string
+          image_url: string | null
+          organization: string
+          slug: string
+          title: string
+          year: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          gallery?: Json | null
+          id?: string
+          image_url?: string | null
+          organization?: string
+          slug: string
+          title: string
+          year?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          gallery?: Json | null
+          id?: string
+          image_url?: string | null
+          organization?: string
+          slug?: string
+          title?: string
+          year?: string
+        }
+        Relationships: []
+      }
       contact_messages: {
         Row: {
           created_at: string
@@ -38,6 +74,42 @@ export type Database = {
           message?: string
           name?: string
           phone?: string | null
+        }
+        Relationships: []
+      }
+      photography: {
+        Row: {
+          camera: string
+          created_at: string
+          description: string
+          id: string
+          image_url: string | null
+          location: string
+          slug: string
+          title: string
+          year: string
+        }
+        Insert: {
+          camera?: string
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string | null
+          location?: string
+          slug: string
+          title: string
+          year?: string
+        }
+        Update: {
+          camera?: string
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string | null
+          location?: string
+          slug?: string
+          title?: string
+          year?: string
         }
         Relationships: []
       }
