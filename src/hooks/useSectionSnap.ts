@@ -1,22 +1,31 @@
 import { useRef, useEffect, useCallback } from "react";
 
-// Power4.inOut easing
-function power4InOut(t: number): number {
-  if (t < 0.5) return 8 * t * t * t * t;
+// Quintic ease-in-out for buttery smooth transitions
+function quinticInOut(t: number): number {
+  if (t < 0.5) {
+    return 16 * t * t * t * t * t;
+  }
   const f = t - 1;
-  return 1 - 8 * f * f * f * f;
+  return 1 + 16 * f * f * f * f * f;
+}
+
+// Smooth lerp for within-section scrolling
+function easeOutExpo(t: number): number {
+  return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
 }
 
 const MOBILE_BREAKPOINT = 1024;
 
-export function useSectionSnap(sectionIds: string[], duration = 1300) {
+export function useSectionSnap(sectionIds: string[], duration = 1100) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isAnimating = useRef(false);
   const currentIndex = useRef(0);
   const touchStartY = useRef(0);
   const isMobile = useRef(false);
+  const wheelAccumulator = useRef(0);
+  const wheelTimeout = useRef<ReturnType<typeof setTimeout>>();
+  const lastWheelTime = useRef(0);
 
-  // Check if we're on mobile/tablet
   const checkMobile = useCallback(() => {
     isMobile.current = window.innerWidth < MOBILE_BREAKPOINT;
   }, []);
@@ -26,6 +35,7 @@ export function useSectionSnap(sectionIds: string[], duration = 1300) {
       const container = containerRef.current;
       if (!container || isAnimating.current) return;
       const clamped = Math.max(0, Math.min(index, sectionIds.length - 1));
+      if (clamped === currentIndex.current) return;
       const target = document.getElementById(sectionIds[clamped]);
       if (!target) return;
 
@@ -44,14 +54,15 @@ export function useSectionSnap(sectionIds: string[], duration = 1300) {
       function step(now: number) {
         const elapsed = now - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        const eased = power4InOut(progress);
+        const eased = quinticInOut(progress);
         container!.scrollTop = start + distance * eased;
         if (progress < 1) {
           requestAnimationFrame(step);
         } else {
+          container!.scrollTop = end;
           setTimeout(() => {
             isAnimating.current = false;
-          }, 100);
+          }, 80);
         }
       }
 
@@ -60,7 +71,6 @@ export function useSectionSnap(sectionIds: string[], duration = 1300) {
     [sectionIds, duration]
   );
 
-  // Find which section index corresponds to a scroll position
   const findCurrentSection = useCallback(() => {
     const container = containerRef.current;
     if (!container) return 0;
@@ -80,7 +90,6 @@ export function useSectionSnap(sectionIds: string[], duration = 1300) {
     return closest;
   }, [sectionIds]);
 
-  // Check if current section has more content to scroll within
   const canScrollWithinSection = useCallback(
     (direction: number) => {
       const container = containerRef.current;
@@ -95,17 +104,14 @@ export function useSectionSnap(sectionIds: string[], duration = 1300) {
       const viewportBottom = viewportTop + container.clientHeight;
 
       if (direction > 0) {
-        // Scrolling down — is there more section below the viewport?
         return sectionBottom - viewportBottom > 10;
       } else {
-        // Scrolling up — is there more section above the viewport?
         return viewportTop - sectionTop > 10;
       }
     },
     [sectionIds]
   );
 
-  // Smooth scroll within section (partial scroll)
   const scrollWithinSection = useCallback(
     (delta: number) => {
       const container = containerRef.current;
@@ -118,31 +124,30 @@ export function useSectionSnap(sectionIds: string[], duration = 1300) {
       const sectionTop = section.offsetTop - container.offsetTop;
       const sectionBottom = sectionTop + section.scrollHeight;
 
-      // Scroll by a fixed amount within the section bounds
-      const scrollAmount = Math.min(Math.abs(delta) * 2, 300);
+      // Smoother, more responsive within-section scroll
+      const scrollAmount = Math.min(Math.abs(delta) * 1.8, 250);
       const direction = delta > 0 ? 1 : -1;
       let targetScroll = container.scrollTop + direction * scrollAmount;
 
-      // Clamp within section
       targetScroll = Math.max(sectionTop, Math.min(targetScroll, sectionBottom - container.clientHeight));
 
       isAnimating.current = true;
       const start = container.scrollTop;
       const distance = targetScroll - start;
       const startTime = performance.now();
-      const scrollDuration = 400;
+      const scrollDuration = 350;
 
       function step(now: number) {
         const elapsed = now - startTime;
         const progress = Math.min(elapsed / scrollDuration, 1);
-        const eased = power4InOut(progress);
+        const eased = easeOutExpo(progress);
         container!.scrollTop = start + distance * eased;
         if (progress < 1) {
           requestAnimationFrame(step);
         } else {
           setTimeout(() => {
             isAnimating.current = false;
-          }, 50);
+          }, 30);
         }
       }
 
@@ -159,16 +164,39 @@ export function useSectionSnap(sectionIds: string[], duration = 1300) {
     window.addEventListener("resize", checkMobile);
 
     const handleWheel = (e: WheelEvent) => {
-      // On mobile/tablet, allow normal scrolling
       if (isMobile.current) return;
-
       e.preventDefault();
       if (isAnimating.current) return;
-      if (Math.abs(e.deltaY) < 5) return;
 
-      const direction = e.deltaY > 0 ? 1 : -1;
+      const now = performance.now();
+      const timeDelta = now - lastWheelTime.current;
+      lastWheelTime.current = now;
 
-      // Check if current section has more content to scroll
+      // Reset accumulator if there's a pause in scrolling
+      if (timeDelta > 200) {
+        wheelAccumulator.current = 0;
+      }
+
+      wheelAccumulator.current += e.deltaY;
+
+      // Clear existing timeout
+      if (wheelTimeout.current) {
+        clearTimeout(wheelTimeout.current);
+      }
+
+      const absDelta = Math.abs(wheelAccumulator.current);
+
+      // Debounce: require meaningful scroll intent
+      if (absDelta < 30) {
+        wheelTimeout.current = setTimeout(() => {
+          wheelAccumulator.current = 0;
+        }, 150);
+        return;
+      }
+
+      const direction = wheelAccumulator.current > 0 ? 1 : -1;
+      wheelAccumulator.current = 0;
+
       if (canScrollWithinSection(direction)) {
         scrollWithinSection(e.deltaY);
       } else {
@@ -181,9 +209,7 @@ export function useSectionSnap(sectionIds: string[], duration = 1300) {
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
-      // On mobile/tablet, allow normal scrolling
       if (isMobile.current) return;
-
       if (isAnimating.current) return;
       const deltaY = touchStartY.current - e.changedTouches[0].clientY;
       if (Math.abs(deltaY) < 40) return;
@@ -201,19 +227,17 @@ export function useSectionSnap(sectionIds: string[], duration = 1300) {
       if (isAnimating.current) return;
       if (e.key === "ArrowDown" || e.key === "PageDown") {
         e.preventDefault();
-        const direction = 1;
-        if (canScrollWithinSection(direction)) {
+        if (canScrollWithinSection(1)) {
           scrollWithinSection(200);
         } else {
-          scrollToIndex(currentIndex.current + direction);
+          scrollToIndex(currentIndex.current + 1);
         }
       } else if (e.key === "ArrowUp" || e.key === "PageUp") {
         e.preventDefault();
-        const direction = -1;
-        if (canScrollWithinSection(direction)) {
+        if (canScrollWithinSection(-1)) {
           scrollWithinSection(-200);
         } else {
-          scrollToIndex(currentIndex.current + direction);
+          scrollToIndex(currentIndex.current - 1);
         }
       }
     };
@@ -229,6 +253,7 @@ export function useSectionSnap(sectionIds: string[], duration = 1300) {
       container.removeEventListener("touchend", handleTouchEnd);
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("resize", checkMobile);
+      if (wheelTimeout.current) clearTimeout(wheelTimeout.current);
     };
   }, [scrollToIndex, checkMobile, canScrollWithinSection, scrollWithinSection]);
 
