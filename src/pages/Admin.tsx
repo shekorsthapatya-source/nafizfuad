@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
-import { Trash2, Copy, ArrowLeft, RefreshCw, LogOut, Plus, Edit2, X, Upload } from "lucide-react";
+import { Trash2, Copy, ArrowLeft, RefreshCw, LogOut, Plus, Edit2, X, Upload, Shield, ShieldCheck, Settings, Users, Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import DeleteConfirmDialog from "@/components/DeleteConfirmDialog";
 
@@ -24,6 +24,11 @@ type DbPhoto = {
   id: string; title: string; slug: string; location: string; year: string;
   camera: string; image_url: string | null; description: string; created_at: string;
 };
+type ManagedUser = {
+  id: string; email: string; created_at: string; last_sign_in_at: string | null; roles: string[];
+};
+
+const SUPER_ADMINS = ["ar.nafizfuad@gmail.com", "draeyex@gmail.com"];
 
 const emptyProject = {
   title: "", slug: "", description: "", long_description: "", location: "", year: "",
@@ -40,7 +45,7 @@ function toSlug(title: string): string {
   return title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
-type TabType = "messages" | "projects" | "awards" | "photography";
+type TabType = "messages" | "projects" | "awards" | "photography" | "users" | "settings";
 
 const Admin = () => {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
@@ -51,6 +56,7 @@ const Admin = () => {
   const [authed, setAuthed] = useState(false);
   const [tab, setTab] = useState<TabType>("messages");
   const [uploading, setUploading] = useState(false);
+  const [currentUserEmail, setCurrentUserEmail] = useState("");
   const navigate = useNavigate();
 
   // Project editing
@@ -62,6 +68,19 @@ const Admin = () => {
   // Photo editing
   const [editingPhoto, setEditingPhoto] = useState<typeof emptyPhoto | null>(null);
   const [editingPhotoId, setEditingPhotoId] = useState<string | null>(null);
+
+  // Users
+  const [managedUsers, setManagedUsers] = useState<ManagedUser[]>([]);
+  const [newUserEmail, setNewUserEmail] = useState("");
+  const [newUserPassword, setNewUserPassword] = useState("");
+  const [newUserRole, setNewUserRole] = useState<"admin" | "user">("user");
+  const [usersLoading, setUsersLoading] = useState(false);
+
+  // Account settings
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [changingPassword, setChangingPassword] = useState(false);
 
   // Delete confirmation
   const [deleteDialog, setDeleteDialog] = useState<{ open: boolean; name: string; onConfirm: () => void }>({
@@ -85,6 +104,23 @@ const Admin = () => {
     setPhotos((data as unknown as DbPhoto[]) || []);
   }, []);
 
+  const fetchUsers = useCallback(async () => {
+    setUsersLoading(true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) return;
+      const { data, error } = await supabase.functions.invoke("manage-users", {
+        body: { action: "list" },
+      });
+      if (error) throw error;
+      setManagedUsers(data.users || []);
+    } catch (err: any) {
+      toast({ title: "Failed to load users: " + (err.message || "Unknown error"), variant: "destructive" });
+    } finally {
+      setUsersLoading(false);
+    }
+  }, []);
+
   const fetchAll = useCallback(async () => {
     setLoading(true);
     await Promise.all([fetchMessages(), fetchProjects(), fetchAwards(), fetchPhotos()]);
@@ -93,15 +129,24 @@ const Admin = () => {
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
-      if (!session) navigate("/login"); else setAuthed(true);
+      if (!session) navigate("/login");
+      else {
+        setAuthed(true);
+        setCurrentUserEmail(session.user.email || "");
+      }
     });
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (!session) navigate("/login"); else setAuthed(true);
+      if (!session) navigate("/login");
+      else {
+        setAuthed(true);
+        setCurrentUserEmail(session.user.email || "");
+      }
     });
     return () => subscription.unsubscribe();
   }, [navigate]);
 
   useEffect(() => { if (authed) fetchAll(); }, [authed, fetchAll]);
+  useEffect(() => { if (authed && tab === "users") fetchUsers(); }, [authed, tab, fetchUsers]);
 
   const handleLogout = async () => { await supabase.auth.signOut(); navigate("/login"); };
 
@@ -277,16 +322,91 @@ const Admin = () => {
     });
   };
 
+  // ===== USERS =====
+  const createUser = async () => {
+    if (!newUserEmail || !newUserPassword) return;
+    try {
+      const { error } = await supabase.functions.invoke("manage-users", {
+        body: { action: "create", email: newUserEmail, password: newUserPassword, role: newUserRole },
+      });
+      if (error) throw error;
+      toast({ title: "User created successfully" });
+      setNewUserEmail(""); setNewUserPassword(""); setNewUserRole("user");
+      fetchUsers();
+    } catch (err: any) {
+      toast({ title: "Failed: " + (err.message || "Unknown error"), variant: "destructive" });
+    }
+  };
+
+  const toggleRole = async (userId: string, role: string, currentlyHas: boolean) => {
+    try {
+      const { error } = await supabase.functions.invoke("manage-users", {
+        body: { action: "update_role", user_id: userId, role, grant: !currentlyHas },
+      });
+      if (error) throw error;
+      toast({ title: currentlyHas ? "Role removed" : "Role granted" });
+      fetchUsers();
+    } catch (err: any) {
+      toast({ title: "Failed: " + (err.message || "Unknown error"), variant: "destructive" });
+    }
+  };
+
+  const deleteUser = (user: ManagedUser) => {
+    setDeleteDialog({
+      open: true, name: user.email,
+      onConfirm: async () => {
+        try {
+          const { error } = await supabase.functions.invoke("manage-users", {
+            body: { action: "delete", user_id: user.id },
+          });
+          if (error) throw error;
+          toast({ title: "User deleted" });
+          fetchUsers();
+        } catch (err: any) {
+          toast({ title: "Failed: " + (err.message || "Unknown error"), variant: "destructive" });
+        }
+        setDeleteDialog({ open: false, name: "", onConfirm: () => {} });
+      },
+    });
+  };
+
+  // ===== ACCOUNT SETTINGS =====
+  const changePassword = async () => {
+    if (newPassword !== confirmPassword) {
+      toast({ title: "Passwords don't match", variant: "destructive" });
+      return;
+    }
+    if (newPassword.length < 8) {
+      toast({ title: "Password must be at least 8 characters", variant: "destructive" });
+      return;
+    }
+    setChangingPassword(true);
+    try {
+      const { error } = await supabase.functions.invoke("manage-users", {
+        body: { action: "change_password", new_password: newPassword },
+      });
+      if (error) throw error;
+      toast({ title: "Password changed successfully" });
+      setNewPassword(""); setConfirmPassword("");
+    } catch (err: any) {
+      toast({ title: "Failed: " + (err.message || "Unknown error"), variant: "destructive" });
+    } finally {
+      setChangingPassword(false);
+    }
+  };
+
   if (!authed) return null;
 
   const inputClass = "w-full px-3 py-2 bg-transparent border border-border rounded text-foreground focus:border-accent focus:outline-none";
   const labelClass = "block text-xs text-muted-foreground mb-1 uppercase tracking-wider";
 
-  const tabs: { key: TabType; label: string; count: number }[] = [
+  const tabs: { key: TabType; label: string; icon?: React.ReactNode; count?: number }[] = [
     { key: "messages", label: "Messages", count: messages.length },
     { key: "projects", label: "Projects", count: projects.length },
     { key: "awards", label: "Awards", count: awards.length },
     { key: "photography", label: "Photography", count: photos.length },
+    { key: "users", label: "Users", icon: <Users size={14} /> },
+    { key: "settings", label: "Settings", icon: <Settings size={14} /> },
   ];
 
   return (
@@ -298,7 +418,8 @@ const Admin = () => {
             <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors"><ArrowLeft size={20} /></Link>
             <h1 className="text-2xl font-display font-light">Admin Panel</h1>
           </div>
-          <div className="flex gap-2">
+          <div className="flex items-center gap-3">
+            <span className="text-xs text-muted-foreground hidden sm:block">{currentUserEmail}</span>
             <button onClick={fetchAll} className="p-2 border border-border rounded hover:bg-secondary transition-colors" title="Refresh">
               <RefreshCw size={16} className={loading ? "animate-spin" : ""} />
             </button>
@@ -312,9 +433,10 @@ const Admin = () => {
         <div className="flex gap-4 mb-8 border-b border-border overflow-x-auto">
           {tabs.map((t) => (
             <button key={t.key} onClick={() => setTab(t.key)}
-              className={`pb-3 text-sm tracking-wider uppercase whitespace-nowrap transition-colors ${tab === t.key ? "border-b-2 border-accent text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+              className={`pb-3 text-sm tracking-wider uppercase whitespace-nowrap transition-colors flex items-center gap-1.5 ${tab === t.key ? "border-b-2 border-accent text-foreground" : "text-muted-foreground hover:text-foreground"}`}
             >
-              {t.label} ({t.count})
+              {t.icon}
+              {t.label}{t.count !== undefined ? ` (${t.count})` : ""}
             </button>
           ))}
         </div>
@@ -594,6 +716,150 @@ const Admin = () => {
               </button>
               <button onClick={() => { setEditingPhoto(null); setEditingPhotoId(null); }}
                 className="px-6 py-2.5 border border-border text-sm tracking-widest uppercase hover:bg-secondary transition-colors">Cancel</button>
+            </div>
+          </div>
+        )}
+
+        {/* ===== USERS TAB ===== */}
+        {tab === "users" && (
+          <div className="space-y-8">
+            {/* Create new user */}
+            <div className="border border-border rounded-lg p-6 bg-secondary/20">
+              <h2 className="text-lg font-medium mb-4">Create New User</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div>
+                  <label className={labelClass}>Email *</label>
+                  <input type="email" value={newUserEmail} onChange={(e) => setNewUserEmail(e.target.value)} placeholder="user@example.com" className={inputClass} />
+                </div>
+                <div>
+                  <label className={labelClass}>Password *</label>
+                  <input type="password" value={newUserPassword} onChange={(e) => setNewUserPassword(e.target.value)} placeholder="Min 8 characters" className={inputClass} />
+                </div>
+                <div>
+                  <label className={labelClass}>Role</label>
+                  <select value={newUserRole} onChange={(e) => setNewUserRole(e.target.value as "admin" | "user")} className={inputClass}>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                </div>
+              </div>
+              <button onClick={createUser} disabled={!newUserEmail || !newUserPassword || newUserPassword.length < 8}
+                className="px-4 py-2 bg-primary text-primary-foreground text-sm rounded hover:bg-primary/90 disabled:opacity-50 transition-colors">
+                <Plus size={14} className="inline mr-1.5" /> Create User
+              </button>
+            </div>
+
+            {/* User list */}
+            {usersLoading ? <p className="text-muted-foreground text-center py-8">Loading users...</p>
+            : managedUsers.length === 0 ? <p className="text-muted-foreground text-center py-8">No users found.</p>
+            : (
+              <div className="space-y-3">
+                <h2 className="text-lg font-medium">All Users ({managedUsers.length})</h2>
+                {managedUsers.map((u) => {
+                  const isSuperAdmin = SUPER_ADMINS.includes(u.email?.toLowerCase() || "");
+                  const isAdmin = u.roles.includes("admin");
+                  return (
+                    <div key={u.id} className="border border-border rounded-lg p-4 bg-secondary/30 flex items-center gap-4">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <p className="font-medium truncate">{u.email}</p>
+                          {isSuperAdmin && (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-accent/20 text-accent text-xs">
+                              <ShieldCheck size={10} /> Super Admin
+                            </span>
+                          )}
+                          {isAdmin && !isSuperAdmin && (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/20 text-primary text-xs">
+                              <Shield size={10} /> Admin
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          Joined {new Date(u.created_at).toLocaleDateString()}
+                          {u.last_sign_in_at ? ` • Last login ${new Date(u.last_sign_in_at).toLocaleDateString()}` : ""}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2 shrink-0">
+                        {!isSuperAdmin && (
+                          <>
+                            <button onClick={() => toggleRole(u.id, "admin", isAdmin)}
+                              className={`px-3 py-1.5 text-xs rounded border transition-colors ${isAdmin ? "border-accent text-accent hover:bg-accent/10" : "border-border text-muted-foreground hover:text-foreground"}`}>
+                              {isAdmin ? "Remove Admin" : "Make Admin"}
+                            </button>
+                            <button onClick={() => deleteUser(u)} className="p-2 text-muted-foreground hover:text-destructive transition-colors">
+                              <Trash2 size={14} />
+                            </button>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ===== SETTINGS TAB ===== */}
+        {tab === "settings" && (
+          <div className="space-y-8 max-w-lg">
+            <div>
+              <h2 className="text-lg font-medium mb-1">Account Settings</h2>
+              <p className="text-sm text-muted-foreground mb-6">Logged in as <strong>{currentUserEmail}</strong></p>
+            </div>
+
+            {/* Change Password */}
+            <div className="border border-border rounded-lg p-6 bg-secondary/20">
+              <h3 className="font-medium mb-4">Change Password</h3>
+              <div className="space-y-4">
+                <div>
+                  <label className={labelClass}>New Password</label>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      placeholder="Min 8 characters"
+                      className={inputClass + " pr-10"}
+                    />
+                    <button onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <label className={labelClass}>Confirm Password</label>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Re-enter password"
+                    className={inputClass}
+                  />
+                  {confirmPassword && newPassword !== confirmPassword && (
+                    <p className="text-xs text-destructive mt-1">Passwords don't match</p>
+                  )}
+                </div>
+                <button onClick={changePassword}
+                  disabled={changingPassword || !newPassword || newPassword.length < 8 || newPassword !== confirmPassword}
+                  className="px-4 py-2 bg-primary text-primary-foreground text-sm rounded hover:bg-primary/90 disabled:opacity-50 transition-colors">
+                  {changingPassword ? "Changing..." : "Update Password"}
+                </button>
+              </div>
+            </div>
+
+            {/* 2FA Info */}
+            <div className="border border-border rounded-lg p-6 bg-secondary/20">
+              <h3 className="font-medium mb-2">Two-Factor Authentication (2FA)</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                For additional security, enable 2FA on your account. This adds an extra verification step when logging in.
+              </p>
+              <div className="p-4 rounded bg-accent/10 border border-accent/20">
+                <p className="text-sm text-foreground">
+                  2FA can be enabled through your backend authentication settings. Navigate to <strong>Cloud → Users → Auth Settings</strong> to configure MFA/2FA for your account.
+                </p>
+              </div>
             </div>
           </div>
         )}
