@@ -83,13 +83,13 @@ const Lightbox = ({ images, currentIndex, onClose, onNavigate }: LightboxProps) 
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.25 }}
-          className="max-w-[90vw] max-h-[85vh] flex flex-col items-center"
+          className="w-full h-full flex flex-col items-center justify-center px-14 py-12"
           onClick={(e) => e.stopPropagation()}
         >
           <img
             src={images[currentIndex].src}
             alt={images[currentIndex].caption || ""}
-            className="max-w-full max-h-[80vh] object-contain"
+            className="max-w-full max-h-[calc(100vh-6rem)] object-contain"
           />
           {images[currentIndex].caption && (
             <p className="mt-3 text-white/60 text-sm text-center">{images[currentIndex].caption}</p>
