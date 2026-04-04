@@ -1,19 +1,152 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://nafizfuad.qzz.io/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://nafizfuad.qzz.io/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://nafizfuad.qzz.io/projects</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://nafizfuad.qzz.io/projects/bhuiyan-nibash</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://nafizfuad.qzz.io/projects/muslim-mosque</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://nafizfuad.qzz.io/projects/shahi-eid-gah</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://nafizfuad.qzz.io/projects/chakuli-renovation</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://nafizfuad.qzz.io/projects/sage-saffron</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://nafizfuad.qzz.io/projects/bangladesh-betar-directors-chamber</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://nafizfuad.qzz.io/awards</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://nafizfuad.qzz.io/awards/toilets-on-the-go-winner</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://nafizfuad.qzz.io/awards/design-ai-revolution-winner</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://nafizfuad.qzz.io/photography</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://nafizfuad.qzz.io/photography/armenian-church</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://nafizfuad.qzz.io/photography/chittagong-university-auditorium</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://nafizfuad.qzz.io/contact</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://nafizfuad.qzz.io/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/portfolio-cover.jpg</image:loc>
+      <image:title>Nafiz Fuad Architecture Portfolio Cover</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/nafiz-portrait.jpg</image:loc>
+      <image:title>Nafiz Fuad — Architect and Designer</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nafizfuad.qzz.io/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nafizfuad.qzz.io/projects</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nafizfuad.qzz.io/projects/bhuiyan-nibash</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/bhuiyan-nibash.webp</image:loc>
+      <image:title>Bhuiyan Nibash — Residential Architecture in Rangpur</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nafizfuad.qzz.io/projects/muslim-mosque</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/mosque-front-view.jpg</image:loc>
+      <image:title>Muslim Mosque — Religious Architecture by Nafiz Fuad</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/mosque-aerial-view.jpg</image:loc>
+      <image:title>Muslim Mosque Aerial View</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/mosque-prayer-corridor.jpg</image:loc>
+      <image:title>Muslim Mosque Prayer Corridor</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nafizfuad.qzz.io/projects/shahi-eid-gah</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/eidgah-courtyard.jpg</image:loc>
+      <image:title>Shahi Eid-gah — Jay-namaz Flooring Design</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/eidgah-pattern.jpg</image:loc>
+      <image:title>Shahi Eid-gah Brick Pattern Detail</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nafizfuad.qzz.io/projects/chakuli-renovation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/chakuli-collage-render.jpg</image:loc>
+      <image:title>Chakuli Renovation — Cultural Architecture in Rajshahi</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nafizfuad.qzz.io/projects/sage-saffron</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/interior-living-1.jpg</image:loc>
+      <image:title>Sage and Saffron — Bold Interior Design in Dhaka</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/interior-living-2.jpg</image:loc>
+      <image:title>Sage and Saffron Living Area Full View</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/interior-bedroom.jpg</image:loc>
+      <image:title>Sage and Saffron Bedroom Design</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nafizfuad.qzz.io/projects/bangladesh-betar-directors-chamber</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/betar-directors-chamber.jpg</image:loc>
+      <image:title>Bangladesh Betar Directors Chamber Interior</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nafizfuad.qzz.io/awards</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nafizfuad.qzz.io/awards/toilets-on-the-go-winner</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/award-winner-1.jpg</image:loc>
+      <image:title>Toilets on the Go Award Ceremony</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nafizfuad.qzz.io/awards/design-ai-revolution-winner</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/design-ai-award-2.jpg</image:loc>
+      <image:title>Design AI Revolution 2025 Winner Certificate</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nafizfuad.qzz.io/photography</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nafizfuad.qzz.io/photography/armenian-church</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/armenian-church.jpeg</image:loc>
+      <image:title>Armenian Church — Colonial Architecture in Old Dhaka</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nafizfuad.qzz.io/photography/chittagong-university-auditorium</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://nafizfuad.qzz.io/images/chittagong-university-auditorium.jpeg</image:loc>
+      <image:title>Chittagong University Auditorium — Brutalist Architecture</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nafizfuad.qzz.io/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
