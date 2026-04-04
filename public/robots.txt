@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://nafizfuad.lovable.app/sitemap.xml
+Sitemap: https://nafizfuad.qzz.io/sitemap.xml
