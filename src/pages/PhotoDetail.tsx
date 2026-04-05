@@ -19,9 +19,10 @@ const PhotoDetail = () => {
     if (!slug) { setLoading(false); return; }
     supabase.from("photography").select("*").eq("slug", slug).maybeSingle().then(({ data }) => {
       if (data) {
+        const hc = getPhotoBySlug(slug);
         setPhoto({
           title: data.title, slug: data.slug, location: data.location,
-          year: data.year, camera: data.camera, image: data.image_url || "",
+          year: data.year, camera: data.camera, image: data.image_url || hc?.image || "",
           description: data.description,
         });
       } else {
@@ -31,6 +32,11 @@ const PhotoDetail = () => {
       setLoading(false);
     });
   }, [slug]);
+
+  useEffect(() => {
+    if (photo) document.title = `Nafiz Fuad | ${photo.title}`;
+    return () => { document.title = "Nafiz Fuad"; };
+  }, [photo]);
 
   if (loading) return <div className="min-h-screen bg-background flex items-center justify-center"><p className="text-muted-foreground">Loading...</p></div>;
 

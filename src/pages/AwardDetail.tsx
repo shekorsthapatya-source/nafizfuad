@@ -21,10 +21,11 @@ const AwardDetail = () => {
     if (!slug) { setLoading(false); return; }
     supabase.from("awards").select("*").eq("slug", slug).maybeSingle().then(({ data }) => {
       if (data) {
+        const hc = getAwardBySlug(slug);
         setAward({
           title: data.title, slug: data.slug, organization: data.organization,
-          year: data.year, description: data.description, image: data.image_url || "",
-          gallery: (data.gallery as GalleryItem[]) || [],
+          year: data.year, description: data.description, image: data.image_url || hc?.image || "",
+          gallery: (data.gallery as GalleryItem[]) || hc?.gallery || [],
         });
       } else {
         const hc = getAwardBySlug(slug);
@@ -33,6 +34,11 @@ const AwardDetail = () => {
       setLoading(false);
     });
   }, [slug]);
+
+  useEffect(() => {
+    if (award) document.title = `Nafiz Fuad | ${award.title}`;
+    return () => { document.title = "Nafiz Fuad"; };
+  }, [award]);
 
   if (loading) return <div className="min-h-screen bg-background flex items-center justify-center"><p className="text-muted-foreground">Loading...</p></div>;
 

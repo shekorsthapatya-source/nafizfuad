@@ -12,6 +12,7 @@ type DbAward = {
 const AwardsSection = () => {
   const navigate = useNavigate();
   const [dbAwards, setDbAwards] = useState<DbAward[]>([]);
+  const [brokenImages, setBrokenImages] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     supabase.from("awards").select("id,title,slug,organization,year,description,image_url")
@@ -21,7 +22,10 @@ const AwardsSection = () => {
 
   const dbSlugs = new Set(dbAwards.map((a) => a.slug));
   const allAwards = [
-    ...dbAwards.map((a) => ({ title: a.title, slug: a.slug, organization: a.organization, year: a.year, image: a.image_url || "" })),
+    ...dbAwards.map((a) => {
+      const hc = hardcodedAwards.find(h => h.slug === a.slug);
+      return { title: a.title, slug: a.slug, organization: a.organization, year: a.year, image: a.image_url || hc?.image || "" };
+    }),
     ...hardcodedAwards.filter((a) => !dbSlugs.has(a.slug)).map((a) => ({ title: a.title, slug: a.slug, organization: a.organization, year: a.year, image: a.image })),
   ];
 
@@ -34,13 +38,13 @@ const AwardsSection = () => {
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {allAwards.map((award, i) => (
+          {allAwards.filter(a => a.image && !brokenImages.has(a.slug)).map((award, i) => (
             <motion.div key={award.slug} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.06 }} className="group cursor-pointer" onClick={() => navigate(`/awards/${award.slug}`)}>
               <div className="aspect-square overflow-hidden">
-                {award.image ? <img src={award.image} alt={`${award.title} — ${award.organization}, ${award.year}`}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-                  : <div className="w-full h-full bg-muted flex items-center justify-center text-muted-foreground text-xs">No image</div>}
+                <img src={award.image} alt={`${award.title} — ${award.organization}, ${award.year}`}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy"
+                  onError={() => setBrokenImages(prev => new Set(prev).add(award.slug))} />
               </div>
               <div className="pt-2 pb-1">
                 <h3 className="font-display text-sm font-medium text-foreground group-hover:text-accent transition-colors">{award.title}</h3>
