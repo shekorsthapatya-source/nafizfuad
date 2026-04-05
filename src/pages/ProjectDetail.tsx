@@ -28,25 +28,29 @@ const ProjectDetail = () => {
 
   useEffect(() => {
     if (!slug) { setLoading(false); return; }
-    // Try DB first
     supabase.from("projects").select("*").eq("slug", slug).maybeSingle().then(({ data }) => {
       if (data) {
+        const hc = getProjectBySlug(slug);
         setProject({
           title: data.title, slug: data.slug, description: data.description,
           longDescription: data.long_description || "", location: data.location,
           year: data.year, status: data.status, category: data.category,
-          size: data.size, image: data.image_url || "",
-          gallery: (data.gallery as GalleryItem[]) || [],
-          credits: (data.credits as Credit[]) || [],
+          size: data.size, image: data.image_url || hc?.image || "",
+          gallery: (data.gallery as GalleryItem[]) || hc?.gallery || [],
+          credits: (data.credits as Credit[]) || hc?.credits || [],
         });
       } else {
-        // Fallback to hardcoded
         const hc = getProjectBySlug(slug);
         if (hc) setProject(hc);
       }
       setLoading(false);
     });
   }, [slug]);
+
+  useEffect(() => {
+    if (project) document.title = `Nafiz Fuad | ${project.title}`;
+    return () => { document.title = "Nafiz Fuad"; };
+  }, [project]);
 
   if (loading) return <div className="min-h-screen bg-background flex items-center justify-center"><p className="text-muted-foreground">Loading...</p></div>;
 

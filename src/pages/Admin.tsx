@@ -1,9 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
-import { Trash2, Copy, ArrowLeft, RefreshCw, LogOut, Plus, Edit2, X, Upload, Shield, ShieldCheck, Settings, Users, Eye, EyeOff } from "lucide-react";
+import { Trash2, Copy, ArrowLeft, RefreshCw, LogOut, Plus, Edit2, X, Upload, Shield, ShieldCheck, Settings, Users, Eye, EyeOff, ChevronDown, ChevronUp } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import DeleteConfirmDialog from "@/components/DeleteConfirmDialog";
+import { projects as hardcodedProjects } from "@/data/projects";
+import { awards as hardcodedAwards } from "@/data/awards";
+import { photos as hardcodedPhotos } from "@/data/photos";
 
 type ContactMessage = {
   id: string; name: string; email: string; phone: string | null; message: string; created_at: string;
@@ -69,6 +72,13 @@ const Admin = () => {
   const [editingPhoto, setEditingPhoto] = useState<typeof emptyPhoto | null>(null);
   const [editingPhotoId, setEditingPhotoId] = useState<string | null>(null);
 
+  // Categories
+  const [categories, setCategories] = useState<string[]>([]);
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [showCategoryManager, setShowCategoryManager] = useState(false);
+  const [deletingCategory, setDeletingCategory] = useState<string | null>(null);
+  const [reassignCategory, setReassignCategory] = useState("");
+
   // Users
   const [managedUsers, setManagedUsers] = useState<ManagedUser[]>([]);
   const [newUserEmail, setNewUserEmail] = useState("");
@@ -103,6 +113,10 @@ const Admin = () => {
     const { data } = await supabase.from("photography").select("*").order("created_at", { ascending: false });
     setPhotos((data as unknown as DbPhoto[]) || []);
   }, []);
+  const fetchCategories = useCallback(async () => {
+    const { data } = await supabase.from("categories").select("name").order("name");
+    if (data) setCategories(data.map((c: any) => c.name));
+  }, []);
 
   const fetchUsers = useCallback(async () => {
     setUsersLoading(true);
@@ -121,11 +135,65 @@ const Admin = () => {
     }
   }, []);
 
+  // Sync hardcoded data to DB
+  const syncHardcodedData = useCallback(async () => {
+    try {
+      const [{ data: dbP }, { data: dbA }, { data: dbPh }] = await Promise.all([
+        supabase.from("projects").select("slug"),
+        supabase.from("awards").select("slug"),
+        supabase.from("photography").select("slug"),
+      ]);
+
+      const projSlugs = new Set((dbP || []).map((p: any) => p.slug));
+      const awardSlugs = new Set((dbA || []).map((a: any) => a.slug));
+      const photoSlugs = new Set((dbPh || []).map((p: any) => p.slug));
+
+      const missingProjects = hardcodedProjects.filter(p => !projSlugs.has(p.slug));
+      if (missingProjects.length > 0) {
+        for (const hp of missingProjects) {
+          await supabase.from("projects").insert({
+            title: hp.title, slug: hp.slug, description: hp.description,
+            long_description: hp.longDescription || null, location: hp.location,
+            year: hp.year, status: hp.status || null, category: hp.category,
+            size: hp.size || null, image_url: hp.image || null,
+            gallery: hp.gallery ? JSON.parse(JSON.stringify(hp.gallery)) : [],
+            credits: hp.credits ? JSON.parse(JSON.stringify(hp.credits)) : [],
+          });
+        }
+      }
+
+      const missingAwards = hardcodedAwards.filter(a => !awardSlugs.has(a.slug));
+      if (missingAwards.length > 0) {
+        for (const ha of missingAwards) {
+          await supabase.from("awards").insert({
+            title: ha.title, slug: ha.slug, organization: ha.organization,
+            year: ha.year, description: ha.description,
+            image_url: ha.image || null,
+            gallery: ha.gallery ? JSON.parse(JSON.stringify(ha.gallery)) : [],
+          });
+        }
+      }
+
+      const missingPhotos = hardcodedPhotos.filter(p => !photoSlugs.has(p.slug));
+      if (missingPhotos.length > 0) {
+        for (const hp of missingPhotos) {
+          await supabase.from("photography").insert({
+            title: hp.title, slug: hp.slug, location: hp.location,
+            year: hp.year, camera: hp.camera,
+            image_url: hp.image || null, description: hp.description,
+          });
+        }
+      }
+    } catch (err) {
+      console.error("Sync error:", err);
+    }
+  }, []);
+
   const fetchAll = useCallback(async () => {
     setLoading(true);
-    await Promise.all([fetchMessages(), fetchProjects(), fetchAwards(), fetchPhotos()]);
+    await Promise.all([fetchMessages(), fetchProjects(), fetchAwards(), fetchPhotos(), fetchCategories()]);
     setLoading(false);
-  }, [fetchMessages, fetchProjects, fetchAwards, fetchPhotos]);
+  }, [fetchMessages, fetchProjects, fetchAwards, fetchPhotos, fetchCategories]);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
@@ -145,7 +213,12 @@ const Admin = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  useEffect(() => { if (authed) fetchAll(); }, [authed, fetchAll]);
+  useEffect(() => {
+    if (authed) {
+      syncHardcodedData().then(() => fetchAll());
+    }
+  }, [authed, syncHardcodedData, fetchAll]);
+
   useEffect(() => { if (authed && tab === "users") fetchUsers(); }, [authed, tab, fetchUsers]);
 
   const handleLogout = async () => { await supabase.auth.signOut(); navigate("/login"); };
@@ -173,10 +246,10 @@ const Admin = () => {
   const handleProjectImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: "main" | "gallery") => {
     if (!e.target.files || !editingProject) return;
     setUploading(true);
-    const slug = editingProject.slug || toSlug(editingProject.title) || "temp";
+    const slug = editingProject.slug || toSlug(editingProject.title) || `upload-${Date.now()}`;
     if (type === "main") {
       const file = e.target.files[0];
-      const url = await uploadImage(file, "project-images", `${slug}/main.${file.name.split(".").pop()}`);
+      const url = await uploadImage(file, "project-images", `${slug}/main-${Date.now()}.${file.name.split(".").pop()}`);
       if (url) setEditingProject({ ...editingProject, image_url: url });
     } else {
       const newItems: GalleryItem[] = [];
@@ -229,10 +302,10 @@ const Admin = () => {
   const handleAwardImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: "main" | "gallery") => {
     if (!e.target.files || !editingAward) return;
     setUploading(true);
-    const slug = editingAward.slug || toSlug(editingAward.title) || "temp";
+    const slug = editingAward.slug || toSlug(editingAward.title) || `upload-${Date.now()}`;
     if (type === "main") {
       const file = e.target.files[0];
-      const url = await uploadImage(file, "award-images", `${slug}/main.${file.name.split(".").pop()}`);
+      const url = await uploadImage(file, "award-images", `${slug}/main-${Date.now()}.${file.name.split(".").pop()}`);
       if (url) setEditingAward({ ...editingAward, image_url: url });
     } else {
       const newItems: GalleryItem[] = [];
@@ -283,9 +356,9 @@ const Admin = () => {
   const handlePhotoImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.[0] || !editingPhoto) return;
     setUploading(true);
-    const slug = editingPhoto.slug || toSlug(editingPhoto.title) || "temp";
+    const slug = editingPhoto.slug || toSlug(editingPhoto.title) || `upload-${Date.now()}`;
     const file = e.target.files[0];
-    const url = await uploadImage(file, "photo-images", `${slug}/main.${file.name.split(".").pop()}`);
+    const url = await uploadImage(file, "photo-images", `${slug}/main-${Date.now()}.${file.name.split(".").pop()}`);
     if (url) setEditingPhoto({ ...editingPhoto, image_url: url });
     setUploading(false);
   };
@@ -320,6 +393,30 @@ const Admin = () => {
         setDeleteDialog({ open: false, name: "", onConfirm: () => {} });
       },
     });
+  };
+
+  // ===== CATEGORIES =====
+  const addCategory = async () => {
+    if (!newCategoryName.trim()) return;
+    const { error } = await supabase.from("categories").insert({ name: newCategoryName.trim() } as any);
+    if (error) { toast({ title: "Category already exists or error", variant: "destructive" }); return; }
+    toast({ title: "Category added" });
+    setNewCategoryName("");
+    fetchCategories();
+  };
+
+  const deleteCategory = async (name: string) => {
+    if (!reassignCategory || reassignCategory === name) {
+      toast({ title: "Select a different category to reassign projects", variant: "destructive" });
+      return;
+    }
+    await supabase.from("projects").update({ category: reassignCategory }).eq("category", name);
+    await supabase.from("categories").delete().eq("name", name);
+    toast({ title: `Category "${name}" deleted, projects reassigned to "${reassignCategory}"` });
+    setDeletingCategory(null);
+    setReassignCategory("");
+    fetchCategories();
+    fetchProjects();
   };
 
   // ===== USERS =====
@@ -400,6 +497,10 @@ const Admin = () => {
   const inputClass = "w-full px-3 py-2 bg-transparent border border-border rounded text-foreground focus:border-accent focus:outline-none";
   const labelClass = "block text-xs text-muted-foreground mb-1 uppercase tracking-wider";
 
+  // Derive all unique categories from projects + DB categories
+  const projectCategories = Array.from(new Set(projects.map(p => p.category).filter(Boolean)));
+  const allCategories = Array.from(new Set([...categories, ...projectCategories])).sort();
+
   const tabs: { key: TabType; label: string; icon?: React.ReactNode; count?: number }[] = [
     { key: "messages", label: "Messages", count: messages.length },
     { key: "projects", label: "Projects", count: projects.length },
@@ -420,7 +521,7 @@ const Admin = () => {
           </div>
           <div className="flex items-center gap-3">
             <span className="text-xs text-muted-foreground hidden sm:block">{currentUserEmail}</span>
-            <button onClick={fetchAll} className="p-2 border border-border rounded hover:bg-secondary transition-colors" title="Refresh">
+            <button onClick={() => { syncHardcodedData().then(() => fetchAll()); }} className="p-2 border border-border rounded hover:bg-secondary transition-colors" title="Refresh & Sync">
               <RefreshCw size={16} className={loading ? "animate-spin" : ""} />
             </button>
             <button onClick={handleLogout} className="p-2 border border-border rounded hover:bg-secondary transition-colors" title="Logout">
@@ -472,6 +573,49 @@ const Admin = () => {
         {/* ===== PROJECTS TAB ===== */}
         {tab === "projects" && !editingProject && (
           <>
+            {/* Category Manager */}
+            <div className="border border-border rounded-lg p-4 mb-6 bg-secondary/20">
+              <button onClick={() => setShowCategoryManager(!showCategoryManager)}
+                className="flex items-center justify-between w-full text-sm font-medium">
+                <span>Manage Categories ({allCategories.length})</span>
+                {showCategoryManager ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+              </button>
+              {showCategoryManager && (
+                <div className="mt-4 space-y-3">
+                  <div className="flex flex-wrap gap-2">
+                    {allCategories.map(cat => (
+                      <div key={cat} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-secondary rounded text-sm">
+                        {cat}
+                        {deletingCategory === cat ? (
+                          <div className="flex items-center gap-1 ml-2">
+                            <select value={reassignCategory} onChange={(e) => setReassignCategory(e.target.value)}
+                              className="text-xs bg-transparent border border-border rounded px-1 py-0.5">
+                              <option value="">Move to...</option>
+                              {allCategories.filter(c => c !== cat).map(c => <option key={c} value={c}>{c}</option>)}
+                            </select>
+                            <button onClick={() => deleteCategory(cat)} className="text-destructive text-xs hover:underline">Confirm</button>
+                            <button onClick={() => { setDeletingCategory(null); setReassignCategory(""); }} className="text-muted-foreground text-xs">Cancel</button>
+                          </div>
+                        ) : (
+                          <button onClick={() => setDeletingCategory(cat)} className="text-muted-foreground hover:text-destructive transition-colors">
+                            <X size={12} />
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex gap-2 max-w-sm">
+                    <input value={newCategoryName} onChange={(e) => setNewCategoryName(e.target.value)}
+                      placeholder="New category name" className={inputClass} onKeyDown={(e) => e.key === "Enter" && addCategory()} />
+                    <button onClick={addCategory} disabled={!newCategoryName.trim()}
+                      className="px-4 py-2 bg-primary text-primary-foreground text-sm rounded hover:bg-primary/90 disabled:opacity-50 transition-colors whitespace-nowrap">
+                      <Plus size={14} className="inline mr-1" /> Add
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
             <div className="flex justify-end mb-4">
               <button onClick={() => { setEditingProject({ ...emptyProject }); setEditingProjectId(null); }}
                 className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-sm rounded hover:bg-primary/90 transition-colors">
@@ -511,7 +655,22 @@ const Admin = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div><label className={labelClass}>Title *</label><input value={editingProject.title} onChange={(e) => setEditingProject({ ...editingProject, title: e.target.value, slug: toSlug(e.target.value) })} className={inputClass} /></div>
               <div><label className={labelClass}>Slug</label><input value={editingProject.slug} onChange={(e) => setEditingProject({ ...editingProject, slug: e.target.value })} className={inputClass} /></div>
-              <div><label className={labelClass}>Category *</label><input value={editingProject.category} onChange={(e) => setEditingProject({ ...editingProject, category: e.target.value })} placeholder="Residential, Cultural..." className={inputClass} /></div>
+              <div>
+                <label className={labelClass}>Category *</label>
+                <select value={allCategories.includes(editingProject.category) ? editingProject.category : "__custom__"}
+                  onChange={(e) => {
+                    if (e.target.value !== "__custom__") setEditingProject({ ...editingProject, category: e.target.value });
+                  }}
+                  className={inputClass}>
+                  <option value="">Select category...</option>
+                  {allCategories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                  {editingProject.category && !allCategories.includes(editingProject.category) && (
+                    <option value="__custom__">{editingProject.category} (custom)</option>
+                  )}
+                </select>
+                <input value={editingProject.category} onChange={(e) => setEditingProject({ ...editingProject, category: e.target.value })}
+                  placeholder="Or type a custom category" className={inputClass + " mt-2"} />
+              </div>
               <div><label className={labelClass}>Location *</label><input value={editingProject.location} onChange={(e) => setEditingProject({ ...editingProject, location: e.target.value })} className={inputClass} /></div>
               <div><label className={labelClass}>Year *</label><input value={editingProject.year} onChange={(e) => setEditingProject({ ...editingProject, year: e.target.value })} className={inputClass} /></div>
               <div><label className={labelClass}>Status</label><input value={editingProject.status} onChange={(e) => setEditingProject({ ...editingProject, status: e.target.value })} placeholder="Completed, Ongoing..." className={inputClass} /></div>
@@ -723,7 +882,6 @@ const Admin = () => {
         {/* ===== USERS TAB ===== */}
         {tab === "users" && (
           <div className="space-y-8">
-            {/* Create new user */}
             <div className="border border-border rounded-lg p-6 bg-secondary/20">
               <h2 className="text-lg font-medium mb-4">Create New User</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
@@ -749,7 +907,6 @@ const Admin = () => {
               </button>
             </div>
 
-            {/* User list */}
             {usersLoading ? <p className="text-muted-foreground text-center py-8">Loading users...</p>
             : managedUsers.length === 0 ? <p className="text-muted-foreground text-center py-8">No users found.</p>
             : (
@@ -808,7 +965,6 @@ const Admin = () => {
               <p className="text-sm text-muted-foreground mb-6">Logged in as <strong>{currentUserEmail}</strong></p>
             </div>
 
-            {/* Change Password */}
             <div className="border border-border rounded-lg p-6 bg-secondary/20">
               <h3 className="font-medium mb-4">Change Password</h3>
               <div className="space-y-4">
@@ -849,7 +1005,6 @@ const Admin = () => {
               </div>
             </div>
 
-            {/* 2FA Info */}
             <div className="border border-border rounded-lg p-6 bg-secondary/20">
               <h3 className="font-medium mb-2">Two-Factor Authentication (2FA)</h3>
               <p className="text-sm text-muted-foreground mb-4">

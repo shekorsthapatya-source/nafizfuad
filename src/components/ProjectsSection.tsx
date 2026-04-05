@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { projects as hardcodedProjects, categories } from "@/data/projects";
+import { projects as hardcodedProjects } from "@/data/projects";
 
 type DbProject = {
   id: string; title: string; slug: string; description: string; location: string;
@@ -12,6 +12,7 @@ type DbProject = {
 const ProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [dbProjects, setDbProjects] = useState<DbProject[]>([]);
+  const [brokenImages, setBrokenImages] = useState<Set<string>>(new Set());
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,16 +21,16 @@ const ProjectsSection = () => {
       .then(({ data }) => setDbProjects((data as DbProject[]) || []));
   }, []);
 
-  // Merge: DB projects first, then hardcoded (filtered to avoid duplicates)
-  const hardcodedSlugs = new Set(dbProjects.map((p) => p.slug));
+  const dbSlugs = new Set(dbProjects.map((p) => p.slug));
   const allProjects = [
-    ...dbProjects.map((p) => ({ title: p.title, slug: p.slug, description: p.description, location: p.location, year: p.year, category: p.category, image: p.image_url || "" })),
-    ...hardcodedProjects.filter((p) => !hardcodedSlugs.has(p.slug)).map((p) => ({ title: p.title, slug: p.slug, description: p.description, location: p.location, year: p.year, category: p.category, image: p.image })),
+    ...dbProjects.map((p) => {
+      const hc = hardcodedProjects.find(h => h.slug === p.slug);
+      return { title: p.title, slug: p.slug, description: p.description, location: p.location, year: p.year, category: p.category, image: p.image_url || hc?.image || "" };
+    }),
+    ...hardcodedProjects.filter((p) => !dbSlugs.has(p.slug)).map((p) => ({ title: p.title, slug: p.slug, description: p.description, location: p.location, year: p.year, category: p.category, image: p.image })),
   ];
 
-  // Get all unique categories
   const allCategories = ["All", ...Array.from(new Set(allProjects.map((p) => p.category).filter(Boolean)))];
-
   const filtered = activeCategory === "All" ? allProjects : allProjects.filter((p) => p.category === activeCategory);
 
   return (
@@ -54,13 +55,13 @@ const ProjectsSection = () => {
         <AnimatePresence mode="wait">
           <motion.div key={activeCategory} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {filtered.map((project, i) => (
+            {filtered.filter(p => p.image && !brokenImages.has(p.slug)).map((project, i) => (
               <motion.div key={project.slug} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.06 }} className="group cursor-pointer" onClick={() => navigate(`/projects/${project.slug}`)}>
                 <div className="aspect-square overflow-hidden">
-                  {project.image ? <img src={project.image} alt={`${project.title} — ${project.category} project in ${project.location}`}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-                    : <div className="w-full h-full bg-muted flex items-center justify-center text-muted-foreground text-xs">No image</div>}
+                  <img src={project.image} alt={`${project.title} — ${project.category} project in ${project.location}`}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy"
+                    onError={() => setBrokenImages(prev => new Set(prev).add(project.slug))} />
                 </div>
                 <div className="pt-2 pb-1">
                   <h3 className="font-display text-sm font-medium text-foreground group-hover:text-accent transition-colors">{project.title}</h3>

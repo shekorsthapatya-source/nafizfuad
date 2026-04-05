@@ -1,9 +1,10 @@
+import { useEffect } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
@@ -15,6 +16,24 @@ import AwardDetail from "./pages/AwardDetail";
 
 const queryClient = new QueryClient();
 
+const PageTitle = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    const map: Record<string, string> = {
+      "/": "Nafiz Fuad | Home",
+      "/about": "Nafiz Fuad | About",
+      "/projects": "Nafiz Fuad | Projects",
+      "/awards": "Nafiz Fuad | Awards",
+      "/photography": "Nafiz Fuad | Photography",
+      "/contact": "Nafiz Fuad | Contact",
+      "/admin": "Nafiz Fuad | Admin",
+      "/login": "Nafiz Fuad | Login",
+    };
+    document.title = map[pathname] || "Nafiz Fuad";
+  }, [pathname]);
+  return null;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -22,6 +41,7 @@ const App = () => (
       <Sonner />
       <Analytics />
       <BrowserRouter>
+        <PageTitle />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<Index />} />
