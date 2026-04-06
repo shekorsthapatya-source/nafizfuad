@@ -863,6 +863,7 @@ const Admin = () => {
               <div><label className={labelClass}>Location *</label><input value={editingPhoto.location} onChange={(e) => setEditingPhoto({ ...editingPhoto, location: e.target.value })} className={inputClass} /></div>
               <div><label className={labelClass}>Year *</label><input value={editingPhoto.year} onChange={(e) => setEditingPhoto({ ...editingPhoto, year: e.target.value })} className={inputClass} /></div>
               <div><label className={labelClass}>Camera *</label><input value={editingPhoto.camera} onChange={(e) => setEditingPhoto({ ...editingPhoto, camera: e.target.value })} className={inputClass} /></div>
+              <div><label className={labelClass}>Position (Order)</label><input type="number" value={editingPhoto.position} onChange={(e) => setEditingPhoto({ ...editingPhoto, position: parseInt(e.target.value) || 0 })} placeholder="0" className={inputClass} /></div>
             </div>
             <div><label className={labelClass}>Description *</label><textarea value={editingPhoto.description} onChange={(e) => setEditingPhoto({ ...editingPhoto, description: e.target.value })} rows={3} className={inputClass + " resize-none"} /></div>
             <div>
