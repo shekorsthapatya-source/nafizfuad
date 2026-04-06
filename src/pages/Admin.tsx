@@ -102,15 +102,15 @@ const Admin = () => {
     setMessages(data || []);
   }, []);
   const fetchProjects = useCallback(async () => {
-    const { data } = await supabase.from("projects").select("*").order("created_at", { ascending: false });
+    const { data } = await supabase.from("projects").select("*").order("position", { ascending: true }).order("created_at", { ascending: false });
     setProjects((data as unknown as DbProject[]) || []);
   }, []);
   const fetchAwards = useCallback(async () => {
-    const { data } = await supabase.from("awards").select("*").order("created_at", { ascending: false });
+    const { data } = await supabase.from("awards").select("*").order("position", { ascending: true }).order("created_at", { ascending: false });
     setAwards((data as unknown as DbAward[]) || []);
   }, []);
   const fetchPhotos = useCallback(async () => {
-    const { data } = await supabase.from("photography").select("*").order("created_at", { ascending: false });
+    const { data } = await supabase.from("photography").select("*").order("position", { ascending: true }).order("created_at", { ascending: false });
     setPhotos((data as unknown as DbPhoto[]) || []);
   }, []);
   const fetchCategories = useCallback(async () => {
