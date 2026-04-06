@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -15,12 +15,26 @@ const SECTION_IDS = ["about", "projects", "awards", "contact", "footer"];
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
+  const [contactVisible, setContactVisible] = useState(false);
   const location = useLocation();
+  const contactRef = useRef<HTMLElement>(null);
   const { containerRef, scrollToIndex } = useSectionSnap(SECTION_IDS, 1300);
 
   const handleLoadingComplete = useCallback(() => {
     setLoading(false);
   }, []);
+
+  // Track contact section visibility
+  useEffect(() => {
+    const el = contactRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setContactVisible(entry.isIntersecting),
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [loading]);
 
   // Scroll to section based on URL path
   useEffect(() => {
@@ -63,14 +77,14 @@ const Index = () => {
             <AwardsSection />
           </section>
           <div className="h-[10vh] bg-background" />
-          <section id="contact" className="min-h-screen">
+          <section id="contact" ref={contactRef} className="min-h-screen">
             <ContactSection />
           </section>
           <section id="footer">
             <Footer />
           </section>
         </div>
-        <ChatBot />
+        {!contactVisible && <ChatBot />}
       </motion.div>
     </>
   );
