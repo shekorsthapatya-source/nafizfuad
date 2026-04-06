@@ -17,15 +17,15 @@ type GalleryItem = { src: string; caption: string };
 type DbProject = {
   id: string; title: string; slug: string; description: string; long_description: string | null;
   location: string; year: string; status: string | null; category: string; size: string | null;
-  image_url: string | null; gallery: GalleryItem[]; credits: Credit[]; created_at: string;
+  image_url: string | null; gallery: GalleryItem[]; credits: Credit[]; created_at: string; position: number;
 };
 type DbAward = {
   id: string; title: string; slug: string; organization: string; year: string;
-  description: string; image_url: string | null; gallery: GalleryItem[]; created_at: string;
+  description: string; image_url: string | null; gallery: GalleryItem[]; created_at: string; position: number;
 };
 type DbPhoto = {
   id: string; title: string; slug: string; location: string; year: string;
-  camera: string; image_url: string | null; description: string; created_at: string;
+  camera: string; image_url: string | null; description: string; created_at: string; position: number;
 };
 type ManagedUser = {
   id: string; email: string; created_at: string; last_sign_in_at: string | null; roles: string[];
@@ -35,13 +35,13 @@ const SUPER_ADMINS = ["ar.nafizfuad@gmail.com", "draeyex@gmail.com"];
 
 const emptyProject = {
   title: "", slug: "", description: "", long_description: "", location: "", year: "",
-  status: "", category: "", size: "", image_url: "", gallery: [] as GalleryItem[], credits: [] as Credit[],
+  status: "", category: "", size: "", image_url: "", gallery: [] as GalleryItem[], credits: [] as Credit[], position: 0,
 };
 const emptyAward = {
-  title: "", slug: "", organization: "", year: "", description: "", image_url: "", gallery: [] as GalleryItem[],
+  title: "", slug: "", organization: "", year: "", description: "", image_url: "", gallery: [] as GalleryItem[], position: 0,
 };
 const emptyPhoto = {
-  title: "", slug: "", location: "", year: "", camera: "", image_url: "", description: "",
+  title: "", slug: "", location: "", year: "", camera: "", image_url: "", description: "", position: 0,
 };
 
 function toSlug(title: string): string {
