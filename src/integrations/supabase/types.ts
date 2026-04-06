@@ -22,6 +22,7 @@ export type Database = {
           id: string
           image_url: string | null
           organization: string
+          position: number | null
           slug: string
           title: string
           year: string
@@ -33,6 +34,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           organization?: string
+          position?: number | null
           slug: string
           title: string
           year?: string
@@ -44,6 +46,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           organization?: string
+          position?: number | null
           slug?: string
           title?: string
           year?: string
@@ -103,6 +106,7 @@ export type Database = {
           id: string
           image_url: string | null
           location: string
+          position: number | null
           slug: string
           title: string
           year: string
@@ -114,6 +118,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           location?: string
+          position?: number | null
           slug: string
           title: string
           year?: string
@@ -125,6 +130,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           location?: string
+          position?: number | null
           slug?: string
           title?: string
           year?: string
@@ -142,6 +148,7 @@ export type Database = {
           image_url: string | null
           location: string
           long_description: string | null
+          position: number | null
           size: string | null
           slug: string
           status: string | null
@@ -158,6 +165,7 @@ export type Database = {
           image_url?: string | null
           location?: string
           long_description?: string | null
+          position?: number | null
           size?: string | null
           slug: string
           status?: string | null
@@ -174,6 +182,7 @@ export type Database = {
           image_url?: string | null
           location?: string
           long_description?: string | null
+          position?: number | null
           size?: string | null
           slug?: string
           status?: string | null
