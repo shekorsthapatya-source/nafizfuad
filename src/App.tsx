@@ -13,6 +13,7 @@ import Photography from "./pages/Photography";
 import PhotoDetail from "./pages/PhotoDetail";
 import ProjectDetail from "./pages/ProjectDetail";
 import AwardDetail from "./pages/AwardDetail";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => (
       <Analytics />
       <BrowserRouter>
         <PageTitle />
+        <WhatsAppButton />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<Index />} />
