@@ -15,8 +15,8 @@ const AwardsSection = () => {
   const [brokenImages, setBrokenImages] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    supabase.from("awards").select("id,title,slug,organization,year,description,image_url")
-      .order("created_at", { ascending: false })
+    supabase.from("awards").select("id,title,slug,organization,year,description,image_url,position")
+      .order("position", { ascending: true }).order("created_at", { ascending: false })
       .then(({ data }) => setDbAwards((data as DbAward[]) || []));
   }, []);
 

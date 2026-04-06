@@ -16,8 +16,8 @@ const ProjectsSection = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    supabase.from("projects").select("id,title,slug,description,location,year,category,image_url")
-      .order("created_at", { ascending: false })
+    supabase.from("projects").select("id,title,slug,description,location,year,category,image_url,position")
+      .order("position", { ascending: true }).order("created_at", { ascending: false })
       .then(({ data }) => setDbProjects((data as DbProject[]) || []));
   }, []);
 
