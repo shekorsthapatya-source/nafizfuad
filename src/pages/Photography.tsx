@@ -17,7 +17,7 @@ const Photography = () => {
   const [brokenImages, setBrokenImages] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    supabase.from("photography").select("*").order("created_at", { ascending: false })
+    supabase.from("photography").select("*").order("position", { ascending: true }).order("created_at", { ascending: false })
       .then(({ data }) => setDbPhotos((data as DbPhoto[]) || []));
   }, []);
 

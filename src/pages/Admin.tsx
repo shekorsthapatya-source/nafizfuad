@@ -17,15 +17,15 @@ type GalleryItem = { src: string; caption: string };
 type DbProject = {
   id: string; title: string; slug: string; description: string; long_description: string | null;
   location: string; year: string; status: string | null; category: string; size: string | null;
-  image_url: string | null; gallery: GalleryItem[]; credits: Credit[]; created_at: string;
+  image_url: string | null; gallery: GalleryItem[]; credits: Credit[]; created_at: string; position: number;
 };
 type DbAward = {
   id: string; title: string; slug: string; organization: string; year: string;
-  description: string; image_url: string | null; gallery: GalleryItem[]; created_at: string;
+  description: string; image_url: string | null; gallery: GalleryItem[]; created_at: string; position: number;
 };
 type DbPhoto = {
   id: string; title: string; slug: string; location: string; year: string;
-  camera: string; image_url: string | null; description: string; created_at: string;
+  camera: string; image_url: string | null; description: string; created_at: string; position: number;
 };
 type ManagedUser = {
   id: string; email: string; created_at: string; last_sign_in_at: string | null; roles: string[];
@@ -35,13 +35,13 @@ const SUPER_ADMINS = ["ar.nafizfuad@gmail.com", "draeyex@gmail.com"];
 
 const emptyProject = {
   title: "", slug: "", description: "", long_description: "", location: "", year: "",
-  status: "", category: "", size: "", image_url: "", gallery: [] as GalleryItem[], credits: [] as Credit[],
+  status: "", category: "", size: "", image_url: "", gallery: [] as GalleryItem[], credits: [] as Credit[], position: 0,
 };
 const emptyAward = {
-  title: "", slug: "", organization: "", year: "", description: "", image_url: "", gallery: [] as GalleryItem[],
+  title: "", slug: "", organization: "", year: "", description: "", image_url: "", gallery: [] as GalleryItem[], position: 0,
 };
 const emptyPhoto = {
-  title: "", slug: "", location: "", year: "", camera: "", image_url: "", description: "",
+  title: "", slug: "", location: "", year: "", camera: "", image_url: "", description: "", position: 0,
 };
 
 function toSlug(title: string): string {
@@ -102,15 +102,15 @@ const Admin = () => {
     setMessages(data || []);
   }, []);
   const fetchProjects = useCallback(async () => {
-    const { data } = await supabase.from("projects").select("*").order("created_at", { ascending: false });
+    const { data } = await supabase.from("projects").select("*").order("position", { ascending: true }).order("created_at", { ascending: false });
     setProjects((data as unknown as DbProject[]) || []);
   }, []);
   const fetchAwards = useCallback(async () => {
-    const { data } = await supabase.from("awards").select("*").order("created_at", { ascending: false });
+    const { data } = await supabase.from("awards").select("*").order("position", { ascending: true }).order("created_at", { ascending: false });
     setAwards((data as unknown as DbAward[]) || []);
   }, []);
   const fetchPhotos = useCallback(async () => {
-    const { data } = await supabase.from("photography").select("*").order("created_at", { ascending: false });
+    const { data } = await supabase.from("photography").select("*").order("position", { ascending: true }).order("created_at", { ascending: false });
     setPhotos((data as unknown as DbPhoto[]) || []);
   }, []);
   const fetchCategories = useCallback(async () => {
@@ -273,6 +273,7 @@ const Admin = () => {
       size: editingProject.size || null, image_url: editingProject.image_url || null,
       gallery: JSON.parse(JSON.stringify(editingProject.gallery)),
       credits: JSON.parse(JSON.stringify(editingProject.credits)),
+      position: editingProject.position || 0,
     };
     if (editingProjectId) {
       const { error } = await supabase.from("projects").update(payload).eq("id", editingProjectId);
@@ -327,6 +328,7 @@ const Admin = () => {
       year: editingAward.year, description: editingAward.description,
       image_url: editingAward.image_url || null,
       gallery: JSON.parse(JSON.stringify(editingAward.gallery)),
+      position: editingAward.position || 0,
     };
     if (editingAwardId) {
       const { error } = await supabase.from("awards").update(payload).eq("id", editingAwardId);
@@ -370,6 +372,7 @@ const Admin = () => {
       title: editingPhoto.title, slug, location: editingPhoto.location,
       year: editingPhoto.year, camera: editingPhoto.camera,
       image_url: editingPhoto.image_url || null, description: editingPhoto.description,
+      position: editingPhoto.position || 0,
     };
     if (editingPhotoId) {
       const { error } = await supabase.from("photography").update(payload).eq("id", editingPhotoId);
@@ -631,11 +634,11 @@ const Admin = () => {
                     {p.image_url && <img src={p.image_url} alt={p.title} className="w-24 h-24 object-cover rounded shrink-0" />}
                     <div className="flex-1 min-w-0">
                       <p className="font-medium truncate">{p.title}</p>
-                      <p className="text-sm text-muted-foreground">{p.category} • {p.location} • {p.year}</p>
+                      <p className="text-sm text-muted-foreground">{p.category} • {p.location} • {p.year} • <span className="text-accent">#{p.position || 0}</span></p>
                       <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{p.description}</p>
                     </div>
                     <div className="flex gap-1 shrink-0">
-                      <button onClick={() => { setEditingProject({ ...p, long_description: p.long_description || "", status: p.status || "", size: p.size || "", image_url: p.image_url || "", gallery: p.gallery || [], credits: p.credits || [] }); setEditingProjectId(p.id); }}
+                      <button onClick={() => { setEditingProject({ ...p, long_description: p.long_description || "", status: p.status || "", size: p.size || "", image_url: p.image_url || "", gallery: p.gallery || [], credits: p.credits || [], position: p.position || 0 }); setEditingProjectId(p.id); }}
                         className="p-2 text-muted-foreground hover:text-foreground transition-colors"><Edit2 size={14} /></button>
                       <button onClick={() => confirmDeleteProject(p)} className="p-2 text-muted-foreground hover:text-destructive transition-colors"><Trash2 size={14} /></button>
                     </div>
@@ -675,6 +678,7 @@ const Admin = () => {
               <div><label className={labelClass}>Year *</label><input value={editingProject.year} onChange={(e) => setEditingProject({ ...editingProject, year: e.target.value })} className={inputClass} /></div>
               <div><label className={labelClass}>Status</label><input value={editingProject.status} onChange={(e) => setEditingProject({ ...editingProject, status: e.target.value })} placeholder="Completed, Ongoing..." className={inputClass} /></div>
               <div><label className={labelClass}>Size</label><input value={editingProject.size} onChange={(e) => setEditingProject({ ...editingProject, size: e.target.value })} placeholder="e.g. 6300 SFT" className={inputClass} /></div>
+              <div><label className={labelClass}>Position (Order)</label><input type="number" value={editingProject.position} onChange={(e) => setEditingProject({ ...editingProject, position: parseInt(e.target.value) || 0 })} placeholder="0" className={inputClass} /></div>
             </div>
             <div><label className={labelClass}>Short Description *</label><textarea value={editingProject.description} onChange={(e) => setEditingProject({ ...editingProject, description: e.target.value })} rows={2} className={inputClass + " resize-none"} /></div>
             <div><label className={labelClass}>Long Description</label><textarea value={editingProject.long_description} onChange={(e) => setEditingProject({ ...editingProject, long_description: e.target.value })} rows={5} className={inputClass + " resize-none"} /></div>
@@ -748,11 +752,11 @@ const Admin = () => {
                     {a.image_url && <img src={a.image_url} alt={a.title} className="w-24 h-24 object-cover rounded shrink-0" />}
                     <div className="flex-1 min-w-0">
                       <p className="font-medium truncate">{a.title}</p>
-                      <p className="text-sm text-muted-foreground">{a.organization} • {a.year}</p>
+                      <p className="text-sm text-muted-foreground">{a.organization} • {a.year} • <span className="text-accent">#{a.position || 0}</span></p>
                       <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{a.description}</p>
                     </div>
                     <div className="flex gap-1 shrink-0">
-                      <button onClick={() => { setEditingAward({ ...a, image_url: a.image_url || "", gallery: a.gallery || [] }); setEditingAwardId(a.id); }}
+                      <button onClick={() => { setEditingAward({ ...a, image_url: a.image_url || "", gallery: a.gallery || [], position: a.position || 0 }); setEditingAwardId(a.id); }}
                         className="p-2 text-muted-foreground hover:text-foreground transition-colors"><Edit2 size={14} /></button>
                       <button onClick={() => confirmDeleteAward(a)} className="p-2 text-muted-foreground hover:text-destructive transition-colors"><Trash2 size={14} /></button>
                     </div>
@@ -774,6 +778,7 @@ const Admin = () => {
               <div><label className={labelClass}>Slug</label><input value={editingAward.slug} onChange={(e) => setEditingAward({ ...editingAward, slug: e.target.value })} className={inputClass} /></div>
               <div><label className={labelClass}>Organization *</label><input value={editingAward.organization} onChange={(e) => setEditingAward({ ...editingAward, organization: e.target.value })} className={inputClass} /></div>
               <div><label className={labelClass}>Year *</label><input value={editingAward.year} onChange={(e) => setEditingAward({ ...editingAward, year: e.target.value })} className={inputClass} /></div>
+              <div><label className={labelClass}>Position (Order)</label><input type="number" value={editingAward.position} onChange={(e) => setEditingAward({ ...editingAward, position: parseInt(e.target.value) || 0 })} placeholder="0" className={inputClass} /></div>
             </div>
             <div><label className={labelClass}>Description *</label><textarea value={editingAward.description} onChange={(e) => setEditingAward({ ...editingAward, description: e.target.value })} rows={3} className={inputClass + " resize-none"} /></div>
             <div>
@@ -831,11 +836,11 @@ const Admin = () => {
                     {p.image_url && <img src={p.image_url} alt={p.title} className="w-24 h-24 object-cover rounded shrink-0" />}
                     <div className="flex-1 min-w-0">
                       <p className="font-medium truncate">{p.title}</p>
-                      <p className="text-sm text-muted-foreground">{p.location} • {p.year} • {p.camera}</p>
+                      <p className="text-sm text-muted-foreground">{p.location} • {p.year} • {p.camera} • <span className="text-accent">#{p.position || 0}</span></p>
                       <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{p.description}</p>
                     </div>
                     <div className="flex gap-1 shrink-0">
-                      <button onClick={() => { setEditingPhoto({ ...p, image_url: p.image_url || "" }); setEditingPhotoId(p.id); }}
+                      <button onClick={() => { setEditingPhoto({ ...p, image_url: p.image_url || "", position: p.position || 0 }); setEditingPhotoId(p.id); }}
                         className="p-2 text-muted-foreground hover:text-foreground transition-colors"><Edit2 size={14} /></button>
                       <button onClick={() => confirmDeletePhoto(p)} className="p-2 text-muted-foreground hover:text-destructive transition-colors"><Trash2 size={14} /></button>
                     </div>
@@ -858,6 +863,7 @@ const Admin = () => {
               <div><label className={labelClass}>Location *</label><input value={editingPhoto.location} onChange={(e) => setEditingPhoto({ ...editingPhoto, location: e.target.value })} className={inputClass} /></div>
               <div><label className={labelClass}>Year *</label><input value={editingPhoto.year} onChange={(e) => setEditingPhoto({ ...editingPhoto, year: e.target.value })} className={inputClass} /></div>
               <div><label className={labelClass}>Camera *</label><input value={editingPhoto.camera} onChange={(e) => setEditingPhoto({ ...editingPhoto, camera: e.target.value })} className={inputClass} /></div>
+              <div><label className={labelClass}>Position (Order)</label><input type="number" value={editingPhoto.position} onChange={(e) => setEditingPhoto({ ...editingPhoto, position: parseInt(e.target.value) || 0 })} placeholder="0" className={inputClass} /></div>
             </div>
             <div><label className={labelClass}>Description *</label><textarea value={editingPhoto.description} onChange={(e) => setEditingPhoto({ ...editingPhoto, description: e.target.value })} rows={3} className={inputClass + " resize-none"} /></div>
             <div>
