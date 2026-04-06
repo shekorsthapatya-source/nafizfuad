@@ -678,7 +678,7 @@ const Admin = () => {
               <div><label className={labelClass}>Year *</label><input value={editingProject.year} onChange={(e) => setEditingProject({ ...editingProject, year: e.target.value })} className={inputClass} /></div>
               <div><label className={labelClass}>Status</label><input value={editingProject.status} onChange={(e) => setEditingProject({ ...editingProject, status: e.target.value })} placeholder="Completed, Ongoing..." className={inputClass} /></div>
               <div><label className={labelClass}>Size</label><input value={editingProject.size} onChange={(e) => setEditingProject({ ...editingProject, size: e.target.value })} placeholder="e.g. 6300 SFT" className={inputClass} /></div>
-            </div>
+              <div><label className={labelClass}>Position (Order)</label><input type="number" value={editingProject.position} onChange={(e) => setEditingProject({ ...editingProject, position: parseInt(e.target.value) || 0 })} placeholder="0" className={inputClass} /></div>
             <div><label className={labelClass}>Short Description *</label><textarea value={editingProject.description} onChange={(e) => setEditingProject({ ...editingProject, description: e.target.value })} rows={2} className={inputClass + " resize-none"} /></div>
             <div><label className={labelClass}>Long Description</label><textarea value={editingProject.long_description} onChange={(e) => setEditingProject({ ...editingProject, long_description: e.target.value })} rows={5} className={inputClass + " resize-none"} /></div>
             <div>
