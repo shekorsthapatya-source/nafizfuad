@@ -273,6 +273,7 @@ const Admin = () => {
       size: editingProject.size || null, image_url: editingProject.image_url || null,
       gallery: JSON.parse(JSON.stringify(editingProject.gallery)),
       credits: JSON.parse(JSON.stringify(editingProject.credits)),
+      position: editingProject.position || 0,
     };
     if (editingProjectId) {
       const { error } = await supabase.from("projects").update(payload).eq("id", editingProjectId);
@@ -327,6 +328,7 @@ const Admin = () => {
       year: editingAward.year, description: editingAward.description,
       image_url: editingAward.image_url || null,
       gallery: JSON.parse(JSON.stringify(editingAward.gallery)),
+      position: editingAward.position || 0,
     };
     if (editingAwardId) {
       const { error } = await supabase.from("awards").update(payload).eq("id", editingAwardId);
@@ -370,6 +372,7 @@ const Admin = () => {
       title: editingPhoto.title, slug, location: editingPhoto.location,
       year: editingPhoto.year, camera: editingPhoto.camera,
       image_url: editingPhoto.image_url || null, description: editingPhoto.description,
+      position: editingPhoto.position || 0,
     };
     if (editingPhotoId) {
       const { error } = await supabase.from("photography").update(payload).eq("id", editingPhotoId);
