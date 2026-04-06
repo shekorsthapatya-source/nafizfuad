@@ -634,7 +634,7 @@ const Admin = () => {
                     {p.image_url && <img src={p.image_url} alt={p.title} className="w-24 h-24 object-cover rounded shrink-0" />}
                     <div className="flex-1 min-w-0">
                       <p className="font-medium truncate">{p.title}</p>
-                      <p className="text-sm text-muted-foreground">{p.category} • {p.location} • {p.year}</p>
+                      <p className="text-sm text-muted-foreground">{p.category} • {p.location} • {p.year} • <span className="text-accent">#{p.position || 0}</span></p>
                       <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{p.description}</p>
                     </div>
                     <div className="flex gap-1 shrink-0">
@@ -752,7 +752,7 @@ const Admin = () => {
                     {a.image_url && <img src={a.image_url} alt={a.title} className="w-24 h-24 object-cover rounded shrink-0" />}
                     <div className="flex-1 min-w-0">
                       <p className="font-medium truncate">{a.title}</p>
-                      <p className="text-sm text-muted-foreground">{a.organization} • {a.year}</p>
+                      <p className="text-sm text-muted-foreground">{a.organization} • {a.year} • <span className="text-accent">#{a.position || 0}</span></p>
                       <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{a.description}</p>
                     </div>
                     <div className="flex gap-1 shrink-0">
@@ -836,7 +836,7 @@ const Admin = () => {
                     {p.image_url && <img src={p.image_url} alt={p.title} className="w-24 h-24 object-cover rounded shrink-0" />}
                     <div className="flex-1 min-w-0">
                       <p className="font-medium truncate">{p.title}</p>
-                      <p className="text-sm text-muted-foreground">{p.location} • {p.year} • {p.camera}</p>
+                      <p className="text-sm text-muted-foreground">{p.location} • {p.year} • {p.camera} • <span className="text-accent">#{p.position || 0}</span></p>
                       <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{p.description}</p>
                     </div>
                     <div className="flex gap-1 shrink-0">
