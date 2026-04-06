@@ -638,7 +638,7 @@ const Admin = () => {
                       <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{p.description}</p>
                     </div>
                     <div className="flex gap-1 shrink-0">
-                      <button onClick={() => { setEditingProject({ ...p, long_description: p.long_description || "", status: p.status || "", size: p.size || "", image_url: p.image_url || "", gallery: p.gallery || [], credits: p.credits || [] }); setEditingProjectId(p.id); }}
+                      <button onClick={() => { setEditingProject({ ...p, long_description: p.long_description || "", status: p.status || "", size: p.size || "", image_url: p.image_url || "", gallery: p.gallery || [], credits: p.credits || [], position: p.position || 0 }); setEditingProjectId(p.id); }}
                         className="p-2 text-muted-foreground hover:text-foreground transition-colors"><Edit2 size={14} /></button>
                       <button onClick={() => confirmDeleteProject(p)} className="p-2 text-muted-foreground hover:text-destructive transition-colors"><Trash2 size={14} /></button>
                     </div>
@@ -756,7 +756,7 @@ const Admin = () => {
                       <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{a.description}</p>
                     </div>
                     <div className="flex gap-1 shrink-0">
-                      <button onClick={() => { setEditingAward({ ...a, image_url: a.image_url || "", gallery: a.gallery || [] }); setEditingAwardId(a.id); }}
+                      <button onClick={() => { setEditingAward({ ...a, image_url: a.image_url || "", gallery: a.gallery || [], position: a.position || 0 }); setEditingAwardId(a.id); }}
                         className="p-2 text-muted-foreground hover:text-foreground transition-colors"><Edit2 size={14} /></button>
                       <button onClick={() => confirmDeleteAward(a)} className="p-2 text-muted-foreground hover:text-destructive transition-colors"><Trash2 size={14} /></button>
                     </div>
@@ -839,7 +839,7 @@ const Admin = () => {
                       <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{p.description}</p>
                     </div>
                     <div className="flex gap-1 shrink-0">
-                      <button onClick={() => { setEditingPhoto({ ...p, image_url: p.image_url || "" }); setEditingPhotoId(p.id); }}
+                      <button onClick={() => { setEditingPhoto({ ...p, image_url: p.image_url || "", position: p.position || 0 }); setEditingPhotoId(p.id); }}
                         className="p-2 text-muted-foreground hover:text-foreground transition-colors"><Edit2 size={14} /></button>
                       <button onClick={() => confirmDeletePhoto(p)} className="p-2 text-muted-foreground hover:text-destructive transition-colors"><Trash2 size={14} /></button>
                     </div>
