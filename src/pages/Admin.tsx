@@ -778,7 +778,7 @@ const Admin = () => {
               <div><label className={labelClass}>Slug</label><input value={editingAward.slug} onChange={(e) => setEditingAward({ ...editingAward, slug: e.target.value })} className={inputClass} /></div>
               <div><label className={labelClass}>Organization *</label><input value={editingAward.organization} onChange={(e) => setEditingAward({ ...editingAward, organization: e.target.value })} className={inputClass} /></div>
               <div><label className={labelClass}>Year *</label><input value={editingAward.year} onChange={(e) => setEditingAward({ ...editingAward, year: e.target.value })} className={inputClass} /></div>
-            </div>
+              <div><label className={labelClass}>Position (Order)</label><input type="number" value={editingAward.position} onChange={(e) => setEditingAward({ ...editingAward, position: parseInt(e.target.value) || 0 })} placeholder="0" className={inputClass} /></div>
             <div><label className={labelClass}>Description *</label><textarea value={editingAward.description} onChange={(e) => setEditingAward({ ...editingAward, description: e.target.value })} rows={3} className={inputClass + " resize-none"} /></div>
             <div>
               <label className={labelClass}>Main Image</label>
