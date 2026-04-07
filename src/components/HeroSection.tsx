@@ -1,17 +1,13 @@
 import { motion } from "framer-motion";
-import portfolioCover from "@/assets/portfolio-cover.jpg";
 
 const HeroSection = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      {/* Background image with dark overlay */}
-      <div className="absolute inset-0">
-        <img
-          src={portfolioCover}
-          alt="Nafiz Fuad architecture portfolio — brick facade detail"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-[#0f0f0f]/85" />
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#0f0f0f] to-[#1a1a1a]">
+        <div className="absolute inset-0 opacity-30" style={{
+          backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 50%)'
+        }} />
       </div>
 
       <div className="relative z-10 container mx-auto px-6 lg:px-12 text-center">

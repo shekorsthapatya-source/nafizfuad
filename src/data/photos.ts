@@ -1,5 +1,5 @@
-import armenianChurch from "@/assets/armenian-church.jpeg";
-import cuAuditorium from "@/assets/chittagong-university-auditorium.jpeg";
+const armenianChurch = "https://images.unsplash.com/photo-1605106250963-ffda6d2a4b32?w=800&h=600&fit=crop";
+const cuAuditorium = "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=800&h=600&fit=crop";
 
 export interface Photo {
   title: string;

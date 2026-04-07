@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import nafizAbout from "@/assets/nafiz-about.jpg";
+import { User } from "lucide-react";
 
 const AboutSection = () => {
   const navigate = useNavigate();
@@ -18,12 +18,8 @@ const AboutSection = () => {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="bg-card flex items-center justify-center p-8 lg:p-10"
           >
-            <div className="aspect-[3/4] w-full max-w-[280px] overflow-hidden">
-              <img
-                src={nafizAbout}
-                alt="Portrait of MD. Nafiz Fuad, architect based in Dhaka, Bangladesh"
-                className="w-full h-full object-cover grayscale"
-              />
+            <div className="aspect-[3/4] w-full max-w-[280px] overflow-hidden bg-muted flex items-center justify-center">
+              <User className="w-32 h-32 text-muted-foreground/30" strokeWidth={1} />
             </div>
           </motion.div>
 

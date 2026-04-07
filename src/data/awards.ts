@@ -1,10 +1,10 @@
-import awardWinner1 from "@/assets/award-winner-1.jpg";
-import awardWinner2 from "@/assets/award-winner-2.jpg";
-import awardTrophy from "@/assets/award-trophy.jpg";
-import awardCompetition from "@/assets/award-competition.jpg";
-import designAiAward1 from "@/assets/design-ai-award-1.jpg";
-import designAiAward2 from "@/assets/design-ai-award-2.jpg";
-import designAiAward3 from "@/assets/design-ai-award-3.jpg";
+const awardWinner1 = "https://images.unsplash.com/photo-1541336032412-2048a678540d?w=800&h=600&fit=crop";
+const awardWinner2 = "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop";
+const awardTrophy = "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&h=600&fit=crop";
+const awardCompetition = "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&h=600&fit=crop";
+const designAiAward1 = "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop";
+const designAiAward2 = "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=800&h=600&fit=crop";
+const designAiAward3 = "https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=800&h=600&fit=crop";
 
 export type AwardGalleryItem = { src: string; caption: string };
 
